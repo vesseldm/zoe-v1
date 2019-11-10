@@ -1,0 +1,31 @@
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.page-content {
+  margin: auto;
+}
+.page-footer {
+  margin-top: auto;
+}
+.logo {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.list {
+  display: inline-block;
+  line-height: 1.5;
+  color: var(--ion-color-light);
+}
+.signup-button {
+  font-weight: bold;
+}
+.login-button {
+  text-align: center;
+  margin: 15px 0;
+  a {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--ion-color-light);
+  }
+}

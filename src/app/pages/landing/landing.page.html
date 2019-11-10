@@ -1,9 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>landing</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content class="auth-page">
+  <div class="page-wrapper ion-padding">
+    <div class="page-content">
+      <div class="logo">
+        <img src="/assets/img/logo.png" alt="logo">
+      </div>
+      <ul class="list">
+        <li>Start with a 14-day free trial.</li>
+        <li>Cancel anytime</li>
+        <li>Hundreds of hand crafted recipes</li>
+        <li>No credit card required</li>
+        <li>No charge until after your 14-day free trial</li>
+      </ul>
+    </div>
+    <div class="page-bottom">
+      <ion-button (click)="goSignup()" expand="block" color="warning" shape="round" size="large">
+        <ion-label color="dark" class="signup-button">Sign Up</ion-label>
+      </ion-button>
+      <div class="login-button">
+        <a (click)="goLogin()">Log in to my account</a>
+      </div>
+    </div>
+  </div>
 </ion-content>
