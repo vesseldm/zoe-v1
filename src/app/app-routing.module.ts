@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'landing', loadChildren: './pages/landing/landing.module#LandingPageModule' },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'signup', loadChildren: './pages/signup/signup.module#SignupPageModule' },
-  { path: 'forgot', loadChildren: './pages/forgot/forgot.module#ForgotPageModule' }
+  { path: 'forgot', loadChildren: './pages/forgot/forgot.module#ForgotPageModule' },
+  { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' }
 ];
 @NgModule({
   imports: [
