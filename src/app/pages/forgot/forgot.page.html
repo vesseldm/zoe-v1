@@ -1,9 +1,26 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>forgot</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content class="auth-page forgot">
+  <div class="page-wrapper ion-padding">
+    <div class="page-content">
+      <div class="logo ion-padding">
+        <img src="/assets/img/logo.png" alt="logo">
+      </div>
+      <h1 class="ion-text-center">Forgot Password</h1>
+      <ion-item lines="none">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="floating">Confirm Email</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+    </div>
+    <div class="page-bottom">
+      <ion-button (click)="goLogin()" expand="block" color="warning" shape="round" size="large">
+        <ion-label color="dark" class="signup-button">Reset Password</ion-label>
+      </ion-button>
+      <div class="login-button">
+        <a (click)="goLogin()">Log in to my account</a>
+      </div>
+    </div>
+  </div>
 </ion-content>

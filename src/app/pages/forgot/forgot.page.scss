@@ -1,0 +1,56 @@
+.forgot {
+  --background: url('/assets/img/bg-2.jpg') no-repeat center/cover;
+}
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.page-content {
+  margin-bottom: auto;
+}
+.logo {
+  text-align: center;
+  img {
+    width: 127px;
+  }
+}
+h1 {
+  font-size: 36px;
+  font-weight: 400;
+}
+ion-item {
+  --background: transparent;
+  --background-activated: transparent;
+  --background-focused: transparent;
+  --border-width: 0 0 2px 0;
+  --border-color: #fff;
+  --color: #fff;
+  --padding-start: 0;
+}
+.page-footer {
+  margin-top: auto;
+}
+.logo {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.list {
+  display: inline-block;
+  line-height: 1.5;
+}
+ion-button {
+  height: 54px;
+}
+.signup-button {
+  font-size: 18px;
+  font-weight: bold;
+}
+.login-button {
+  text-align: center;
+  margin: 15px 0;
+  a {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--ion-color-light);
+  }
+}
