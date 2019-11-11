@@ -34,7 +34,7 @@ ion-content {
   background-color: #fff;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 .section-header {
   display: flex;
@@ -78,4 +78,30 @@ ion-list {
 }
 ion-list-header {
   padding-left: 0;
+}
+
+.congratulation {
+  background: #9be61a;
+  border: 1px solid #eee;
+  font-weight: 300;
+  border-radius: 7px;
+  margin-bottom: 30px;
+  ion-icon {
+    vertical-align: middle;
+    margin-right: 10px;;
+  }
+}
+.card-labels {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.review-buttons {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.emoji {
+  font-size: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
