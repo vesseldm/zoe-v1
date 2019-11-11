@@ -1,9 +1,168 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Tab Three
-    </ion-title>
-  </ion-toolbar>
+  <ion-segment (ionChange)="segmentChanged($event)" color="medium">
+    <ion-segment-button value="breakfast">
+      <ion-icon name="pizza"></ion-icon>
+      <ion-label>Breakfast</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="lunch">
+      <ion-icon name="pizza"></ion-icon>
+      <ion-label>Lunch</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="dinner">
+      <ion-icon name="pizza"></ion-icon>
+      <ion-label>Dinner</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="dessert">
+      <ion-icon name="pizza"></ion-icon>
+      <ion-label>Dessert</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="drinks">
+      <ion-icon name="beer"></ion-icon>
+      <ion-label>Drinks</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <div class="searchbar-container">
+    <ion-searchbar color="light"></ion-searchbar>
+  </div>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <div class="alert-container ion-padding">
+    <div class="alert">
+      <ion-icon name="alert"></ion-icon>
+      <ion-label>Complete Profile</ion-label>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-header ion-padding">
+      <h2>Breakfast</h2>
+      <ion-icon name="create" color="warning"></ion-icon>
+    </div>
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide>
+        <ion-card class="welcome-card">
+          <img src="/assets/img/item.jpg" alt="" />
+          <ion-card-header>
+            <ion-card-subtitle>Breakfast</ion-card-subtitle>
+            <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card class="welcome-card">
+          <img src="/assets/img/item.jpg" alt="" />
+          <ion-card-header>
+            <ion-card-subtitle>Breakfast</ion-card-subtitle>
+            <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card class="welcome-card">
+          <img src="/assets/img/item.jpg" alt="" />
+          <ion-card-header>
+            <ion-card-subtitle>Breakfast</ion-card-subtitle>
+            <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card class="welcome-card">
+          <img src="/assets/img/item.jpg" alt="" />
+          <ion-card-header>
+            <ion-card-subtitle>Breakfast</ion-card-subtitle>
+            <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <div class="section">
+    <div class="section-header ion-padding">
+      <h2>Lunch</h2>
+      <ion-icon name="create" color="warning"></ion-icon>
+    </div>
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide>
+        <ion-card class="welcome-card">
+          <img src="/assets/img/item.jpg" alt="" />
+          <ion-card-header>
+            <ion-card-subtitle>Breakfast</ion-card-subtitle>
+            <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card class="welcome-card">
+          <img src="/assets/img/item.jpg" alt="" />
+          <ion-card-header>
+            <ion-card-subtitle>Breakfast</ion-card-subtitle>
+            <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card class="welcome-card">
+          <img src="/assets/img/item.jpg" alt="" />
+          <ion-card-header>
+            <ion-card-subtitle>Breakfast</ion-card-subtitle>
+            <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card class="welcome-card">
+          <img src="/assets/img/item.jpg" alt="" />
+          <ion-card-header>
+            <ion-card-subtitle>Breakfast</ion-card-subtitle>
+            <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <div class="section">
+    <div class="section-header ion-padding">
+      <h2>Dinner</h2>
+      <ion-icon name="create" color="warning"></ion-icon>
+    </div>
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide>
+        <ion-card class="welcome-card">
+          <img src="/assets/img/item.jpg" alt="" />
+          <ion-card-header>
+            <ion-card-subtitle>Breakfast</ion-card-subtitle>
+            <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card class="welcome-card">
+          <img src="/assets/img/item.jpg" alt="" />
+          <ion-card-header>
+            <ion-card-subtitle>Breakfast</ion-card-subtitle>
+            <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card class="welcome-card">
+          <img src="/assets/img/item.jpg" alt="" />
+          <ion-card-header>
+            <ion-card-subtitle>Breakfast</ion-card-subtitle>
+            <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card class="welcome-card">
+          <img src="/assets/img/item.jpg" alt="" />
+          <ion-card-header>
+            <ion-card-subtitle>Breakfast</ion-card-subtitle>
+            <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>
