@@ -1,0 +1,54 @@
+.signup {
+  --background: url('/assets/img/bg-2.jpg') no-repeat center/cover;
+}
+.logo {
+  text-align: center;
+  img {
+    width: 127px;
+  }
+}
+h1 {
+  font-size: 36px;
+  font-weight: 400;
+}
+ion-item {
+  --background: transparent;
+  --background-activated: transparent;
+  --background-focused: transparent;
+  --border-width: 0 0 2px 0;
+  --border-color: #fff;
+  --color: #fff;
+  --padding-start: 0;
+}
+.checkbox-container {
+  --border-width: 0;
+  margin-top: 7px;
+}
+ion-checkbox {
+  --background: transparent;
+  --border-color: #fff;
+}
+.form-buttons {
+  margin-top: 20px;
+}
+ion-button {
+  height: 54px;
+  --background: #f8e71c;
+}
+.signup-button {
+  font-size: 18px;
+  font-weight: bold;
+}
+a {
+  font-size: 18px;
+  color: var(--ion-color-light);
+}
+.form-divider {
+  border: 2px solid #f8e71c;
+  height: 0;
+  max-width: 130px;
+  margin: 50px auto;
+}
+.social-buttons ion-button {
+  margin-bottom: 15px;
+}
