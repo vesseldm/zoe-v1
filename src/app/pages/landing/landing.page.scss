@@ -15,9 +15,12 @@
 .list {
   display: inline-block;
   line-height: 1.5;
-  color: var(--ion-color-light);
+}
+ion-button {
+  height: 54px;
 }
 .signup-button {
+  font-size: 18px;
   font-weight: bold;
 }
 .login-button {
