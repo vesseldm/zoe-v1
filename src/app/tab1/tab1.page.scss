@@ -34,6 +34,7 @@ ion-content {
   background-color: #fff;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
+  margin-bottom: 50px;
 }
 .section-header {
   display: flex;
@@ -63,4 +64,18 @@ ion-card {
     font-size: 18px;
     font-weight: 400;
   }
+}
+ion-segment {
+  width: 126px;
+}
+ion-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+ion-list {
+  margin-bottom: 5px;
+}
+ion-list-header {
+  padding-left: 0;
 }
