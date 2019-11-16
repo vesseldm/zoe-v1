@@ -1,25 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ForgotPage } from './forgot.page';
+import { ForgotPageRoutingModule } from './forgot-routing.module';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: ForgotPage
-  }
-];
+import { ForgotPage } from './forgot.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    ForgotPageRoutingModule
   ],
   declarations: [ForgotPage]
 })

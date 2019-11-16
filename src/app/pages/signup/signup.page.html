@@ -1,43 +1,37 @@
-<ion-content class="auth-page signup">
-  <div class="page-wrapper ion-padding">
-    <div class="logo ion-padding">
-      <img src="/assets/img/logo.png" alt="logo">
-    </div>
-    <div class="signup-form">
-      <h1 class="ion-text-center">Sign Up</h1>
-      <ion-item lines="none">
+<ion-content class="ion-padding">
+  <img class="logo" src="/assets/img/logo.png" alt="Zoë">
+  <div class="form">
+    <h1 class="form-title">Sign Up</h1>
+    <div class="form-content">
+      <ion-item color="transparent">
         <ion-label position="floating">Full Name</ion-label>
         <ion-input></ion-input>
       </ion-item>
-      <ion-item lines="none">
+      <ion-item color="transparent">
         <ion-label position="floating">Email Address</ion-label>
         <ion-input></ion-input>
       </ion-item>
-      <ion-item lines="none">
+      <ion-item color="transparent">
         <ion-label position="floating">Choose Password</ion-label>
         <ion-input></ion-input>
       </ion-item>
-      <ion-item class="checkbox-container" lines="none">
-        <ion-checkbox color="light"></ion-checkbox> Send me a welcome email, blogs & more
+      <ion-item class="checkbox" color="transparent" lines="none">
+        <ion-label>Send me a welcome email, blogs & more</ion-label>
+        <ion-checkbox slot="start"></ion-checkbox>
       </ion-item>
-      <div class="form-buttons">
-        <ion-button (click)="goHome()" expand="block" color="warning" shape="round" size="large">
-          <ion-label color="dark" class="signup-button">Create My Account</ion-label>
-        </ion-button>
-        <div class="login-button">
-          <a (click)="goLogin()">Log in to my account</a>
-        </div>
-      </div>
     </div>
-    <hr class="form-divider">
-    <div class="social-buttons">
-      <ion-button (click)="goHome()" expand="block" color="danger" size="large">Sign Up with Google</ion-button>
-      <ion-button (click)="goHome()" expand="block" color="primary" size="large">Sign Up with Facebook</ion-button>
-      <ion-button (click)="goHome()" expand="block" color="secondary" size="large">Sign Up with Twitter</ion-button>
+    <div class="form-actions">
+      <ion-button (click)="goHome()" class="btn-basic" color="basic" expand="block" shape="round">Create My Account</ion-button>
+      <a (click)="goLogin()" class="btn-basic">Log in to my account</a>
     </div>
-    <div class="bottom-info">
-      By creating an account, I accept the 
-      <a (click)="openPolicyModal()">ATP Privacy Policy and Terms & Conditions</a>
-    </div>
+  </div>
+  <hr />
+  <div class="social-buttons">
+    <ion-button (click)="goHome()" class="btn-basic" color="red" expand="block">Sign Up with Google</ion-button>
+    <ion-button (click)="goHome()" class="btn-basic" color="blue" expand="block">Sign Up with Facebook</ion-button>
+    <ion-button (click)="goHome()" class="btn-basic" color="sky" expand="block">Sign Up with Twitter</ion-button>
+  </div>
+  <div class="policy">
+    By creating an account, I accept the <a>ATP Privacy Policy</a> and <a>Terms & Conditions</a>
   </div>
 </ion-content>

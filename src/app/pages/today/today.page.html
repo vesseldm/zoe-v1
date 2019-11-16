@@ -1,13 +1,124 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>today</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <ion-tabs>
-    <ion-tab [root]="tab1Root"></ion-tab>
-    <ion-tab [root]="tab2Root"></ion-tab>
-    <ion-tab [root]="tab3Root"></ion-tab>
-  </ion-tabs>
+  <div class="day-picker">
+    <ion-button color="medium">M</ion-button>
+    <ion-button color="medium">T</ion-button>
+    <ion-button color="light" class="active">W</ion-button>
+    <ion-button color="light">T</ion-button>
+    <ion-button color="light">F</ion-button>
+    <ion-button color="light">S</ion-button>
+    <ion-button color="light">S</ion-button>
+  </div>
+  <div class="block">
+    <ion-button class="alert" color="basic" expand="block" size="large">
+      <ion-icon slot="start" name="alert"></ion-icon>
+      <ion-label>Complete Profile</ion-label>
+    </ion-button>
+  </div>
+  <div class="section recipes">
+    <div class="section-header">
+      <h2>My Recipes</h2>
+      <ion-icon name="create" color="basic"></ion-icon>
+    </div>
+    <div class="section-content">
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let index of [0, 1, 2, 3]">
+          <ion-card class="recipe">
+            <img src="/assets/img/item.jpg" alt="recipe" />
+            <ion-card-header>
+              <ion-card-subtitle>Breakfast</ion-card-subtitle>
+              <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-header">
+      <h2>Nutritional Averages</h2>
+    </div>
+    <div class="section-content">
+      <ion-list class="progress">
+        <ion-list-header>
+          <ion-label>Calories</ion-label>
+          <ion-label>2184</ion-label>
+        </ion-list-header>
+        <ion-progress-bar color="basic" value="0.9"></ion-progress-bar>
+      </ion-list>
+      <ion-list class="progress">
+        <ion-list-header>
+          <ion-label>Protein</ion-label>
+          <ion-label>51g</ion-label>
+        </ion-list-header>
+        <ion-progress-bar color="basic" value="0.83"></ion-progress-bar>
+      </ion-list>
+      <ion-list class="progress">
+        <ion-list-header>
+          <ion-label>Carbs</ion-label>
+          <ion-label>492g</ion-label>
+        </ion-list-header>
+        <ion-progress-bar color="basic" value="0.48"></ion-progress-bar>
+      </ion-list>
+      <ion-list class="progress">
+        <ion-list-header>
+          <ion-label>Fats</ion-label>
+          <ion-label>39g</ion-label>
+        </ion-list-header>
+        <ion-progress-bar color="basic" value="0.6"></ion-progress-bar>
+      </ion-list>
+    </div>
+  </div>
+  <div class="congratulations">
+    <div class="header">
+      <ion-icon name="ribbon"></ion-icon>
+      <h2>Congratulations!</h2>
+    </div>
+    <p>
+      Lorem ipsum dolor sit amet, <br />
+      consectetur adipiscing elit. Nulla quis lectus dolor. 
+      Sed et dolor eu elit viverra vestibulum eu vitae velit.
+    </p>
+  </div>
+  <div class="section">
+    <div class="section-header">
+      <h2>Featured Recipe</h2>
+    </div>
+    <div class="section-content">
+      <ion-card class="recipe featured-recipe">
+        <img src="/assets/img/item.jpg" alt="recipe" />
+        <ion-card-header>
+          <ion-card-subtitle>Breakfast</ion-card-subtitle>
+          <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-label>
+            <ion-icon name="timer"></ion-icon>
+            15 Minutes
+          </ion-label>
+          <ion-label>
+            <ion-icon name="options"></ion-icon>
+            Medium
+          </ion-label>
+          <ion-label>
+            <ion-icon name="restaurant"></ion-icon>
+            1 Bowl
+          </ion-label>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-header">
+      <h2>How are you feeling today?</h2>
+    </div>
+    <div class="section-content">
+      <div class="review-buttons">
+        <span>😁</span>
+        <span>😄</span>
+        <span>😊</span>
+        <span>😕</span>
+        <span>😞</span>
+      </div>
+    </div>
+  </div>
 </ion-content>

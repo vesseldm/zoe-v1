@@ -1,10 +1,9 @@
-<ion-content class="auth-page">
+<ion-content>
   <div class="page-wrapper ion-padding">
     <div class="page-content">
-      <div class="logo">
-        <img src="/assets/img/logo.png" alt="logo">
-      </div>
-      <ul class="list">
+      <img src="/assets/img/logo.png" alt="logo">
+      <br>
+      <ul>
         <li>Start with a 14-day free trial.</li>
         <li>Cancel anytime</li>
         <li>Hundreds of hand crafted recipes</li>
@@ -13,12 +12,8 @@
       </ul>
     </div>
     <div class="page-bottom">
-      <ion-button (click)="goSignup()" expand="block" shape="round">
-        <ion-label color="dark" class="signup-button">Sign Up</ion-label>
-      </ion-button>
-      <div class="login-button">
-        <a (click)="goLogin()">Log in to my account</a>
-      </div>
+      <ion-button (click)="goSignup()" class="btn-basic" color="basic" expand="block" shape="round">Sign Up</ion-button>
+      <a (click)="goLogin()" class="btn-basic">Log in to my account</a>
     </div>
   </div>
 </ion-content>

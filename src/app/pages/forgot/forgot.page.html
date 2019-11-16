@@ -1,26 +1,24 @@
-<ion-content class="auth-page forgot">
+<ion-content>
   <div class="page-wrapper ion-padding">
     <div class="page-content">
-      <div class="logo ion-padding">
-        <img src="/assets/img/logo.png" alt="logo">
+      <img class="logo" src="/assets/img/logo.png" alt="Zoë">
+      <div class="form">
+        <h1 class="form-title">Forgot Password</h1>
+        <div class="form-content">
+          <ion-item color="transparent">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input></ion-input>
+          </ion-item>
+          <ion-item color="transparent">
+            <ion-label position="floating">Confirm Email</ion-label>
+            <ion-input></ion-input>
+          </ion-item>
+        </div>
       </div>
-      <h1 class="ion-text-center">Forgot Password</h1>
-      <ion-item lines="none">
-        <ion-label position="floating">Email</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label position="floating">Confirm Email</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
     </div>
     <div class="page-bottom">
-      <ion-button (click)="goLogin()" expand="block" color="warning" shape="round" size="large">
-        <ion-label color="dark" class="signup-button">Reset Password</ion-label>
-      </ion-button>
-      <div class="login-button">
-        <a (click)="goLogin()">Log in to my account</a>
-      </div>
+      <ion-button (click)="goLogin()" class="btn-basic" color="basic" expand="block" shape="round">Reset Password</ion-button>
+      <a (click)="goLogin()" class="btn-basic">Log in to my account</a>
     </div>
   </div>
 </ion-content>

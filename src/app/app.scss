@@ -1,10 +1,7 @@
-.auth-page {
-  --background: url('/assets/img/bg-1.jpg') no-repeat center/cover;
-  .page-wrapper {
-    background-color: rgba(0, 0, 0, .4);
-    height: 100%;
-    color: #fff;
-  }
+.btn-basic {
+  height: 54px;
+  font-size: 18px;
+  font-weight: 700;
 }
 ion-button {
   text-transform: none;

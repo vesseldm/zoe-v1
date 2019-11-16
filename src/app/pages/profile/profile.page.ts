@@ -16,7 +16,7 @@ export class ProfilePage implements OnInit {
   }
 
   logout() {
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('/');
   }
 
 }

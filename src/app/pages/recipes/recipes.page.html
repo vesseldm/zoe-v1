@@ -1,0 +1,109 @@
+<ion-content>
+  <ion-segment color="medium">
+    <ion-segment-button value="breakfast">
+      <ion-icon name="alarm"></ion-icon>
+      <ion-label>Breakfast</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="lunch">
+      <ion-icon name="basket"></ion-icon>
+      <ion-label>Lunch</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="dinner">
+      <ion-icon name="cafe"></ion-icon>
+      <ion-label>Dinner</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="dessert">
+      <ion-icon name="pizza"></ion-icon>
+      <ion-label>Dessert</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="drinks">
+      <ion-icon name="beer"></ion-icon>
+      <ion-label>Drinks</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <div class="searchbar">
+    <ion-searchbar color="light" placeholder=""></ion-searchbar>
+  </div>
+  <div class="block">
+    <ion-button class="alert" color="basic" expand="block" size="large">
+      <ion-icon slot="start" name="alert"></ion-icon>
+      <ion-label>Complete Profile</ion-label>
+    </ion-button>
+  </div>
+  <div class="section recipes">
+    <div class="section-header">
+      <h2>Breakfast</h2>
+      <a>SEE ALL (44)</a>
+    </div>
+    <div class="section-content">
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let index of [0, 1, 2, 3]">
+          <ion-card class="recipe">
+            <img src="/assets/img/item.jpg" alt="recipe" />
+            <ion-card-header>
+              <ion-card-subtitle>Breakfast</ion-card-subtitle>
+              <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </div>
+  <div class="section recipes">
+    <div class="section-header">
+      <h2>Dinner</h2>
+      <a>SEE ALL (72)</a>
+    </div>
+    <div class="section-content">
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let index of [0, 1, 2, 3]">
+          <ion-card class="recipe">
+            <img src="/assets/img/item.jpg" alt="recipe" />
+            <ion-card-header>
+              <ion-card-subtitle>Breakfast</ion-card-subtitle>
+              <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </div>
+  <div class="section recipes">
+    <div class="section-header">
+      <h2>Snacks & Desserts</h2>
+      <a>SEE ALL (18)</a>
+    </div>
+    <div class="section-content">
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let index of [0, 1, 2, 3]">
+          <ion-card class="recipe">
+            <img src="/assets/img/item.jpg" alt="recipe" />
+            <ion-card-header>
+              <ion-card-subtitle>Breakfast</ion-card-subtitle>
+              <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </div>
+  <div class="section recipes">
+    <div class="section-header">
+      <h2>Drinks</h2>
+      <a>SEE ALL (9)</a>
+    </div>
+    <div class="section-content">
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let index of [0, 1, 2, 3]">
+          <ion-card class="recipe">
+            <img src="/assets/img/item.jpg" alt="recipe" />
+            <ion-card-header>
+              <ion-card-subtitle>Breakfast</ion-card-subtitle>
+              <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </div>
+</ion-content>

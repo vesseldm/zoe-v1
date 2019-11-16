@@ -7,12 +7,6 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  slideOpts = {
-    slidesPerView: 1.8,
-    centeredSlides: true,
-    loop: true
-  };
-
   constructor() {}
 
 }

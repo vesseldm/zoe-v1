@@ -14,7 +14,7 @@ export class LandingPage implements OnInit {
 
   ngOnInit() {
   }
-
+  
   goSignup() {
     this.router.navigateByUrl('/signup');
   }

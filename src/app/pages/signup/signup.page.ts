@@ -15,12 +15,12 @@ export class SignupPage implements OnInit {
   ngOnInit() {
   }
 
-  goHome() {
-    this.router.navigateByUrl('/home');
-  }
-
   goLogin() {
     this.router.navigateByUrl('/login');
+  }
+
+  goHome() {
+    this.router.navigateByUrl('/home');
   }
 
 }

@@ -15,12 +15,12 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  goForgot() {
-    this.router.navigateByUrl('/forgot');
-  }
-
   goSignup() {
     this.router.navigateByUrl('/signup');
+  }
+
+  goForgot() {
+    this.router.navigateByUrl('/forgot');
   }
 
   goHome() {

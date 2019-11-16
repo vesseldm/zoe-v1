@@ -2,17 +2,46 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+  // {
+  //   path: '',
+  //   loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  // },
+  {
+    path: '',
+    loadChildren: () => import('./pages/landing/landing.module').then( m => m.LandingPageModule)
+  },
+  {
+    path: 'signup',
+    loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'forgot',
+    loadChildren: () => import('./pages/forgot/forgot.module').then( m => m.ForgotPageModule)
+  },
   {
     path: 'home',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
-  { path: '', loadChildren: './pages/landing/landing.module#LandingPageModule' },
-  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
-  { path: 'signup', loadChildren: './pages/signup/signup.module#SignupPageModule' },
-  { path: 'forgot', loadChildren: './pages/forgot/forgot.module#ForgotPageModule' },
-  { path: 'today', loadChildren: './pages/today/today.module#TodayPageModule' },
-  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
-  // { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' }
+  {
+    path: 'today',
+    loadChildren: () => import('./pages/today/today.module').then( m => m.TodayPageModule)
+  },
+  {
+    path: 'mylist',
+    loadChildren: () => import('./pages/mylist/mylist.module').then( m => m.MylistPageModule)
+  },
+  {
+    path: 'recipes',
+    loadChildren: () => import('./pages/recipes/recipes.module').then( m => m.RecipesPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  }
 ];
 @NgModule({
   imports: [

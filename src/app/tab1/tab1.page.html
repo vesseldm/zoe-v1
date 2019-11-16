@@ -1,162 +1,41 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button size="small">M</ion-button>
-    <ion-button size="small">T</ion-button>
-    <ion-button size="small" class="active">W</ion-button>
-    <ion-button size="small" class="active">T</ion-button>
-    <ion-button size="small" class="active">F</ion-button>
-    <ion-button size="small" class="active">S</ion-button>
-    <ion-button size="small" class="active">S</ion-button>
+    <ion-title>
+      Tab One
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="alert-container ion-padding">
-    <div class="alert">
-      <ion-icon name="alert"></ion-icon>
-      <ion-label>Complete Profile</ion-label>
-    </div>
-  </div>
-  <div class="section">
-    <div class="section-header ion-padding">
-      <h2>My Recipes</h2>
-      <ion-icon name="create" color="warning"></ion-icon>
-    </div>
-    <ion-slides pager="true" [options]="slideOpts">
-      <ion-slide>
-        <ion-card class="welcome-card">
-          <img src="/assets/img/item.jpg" alt="" />
-          <ion-card-header>
-            <ion-card-subtitle>Breakfast</ion-card-subtitle>
-            <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-slide>
-      <ion-slide>
-        <ion-card class="welcome-card">
-          <img src="/assets/img/item.jpg" alt="" />
-          <ion-card-header>
-            <ion-card-subtitle>Breakfast</ion-card-subtitle>
-            <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-slide>
-      <ion-slide>
-        <ion-card class="welcome-card">
-          <img src="/assets/img/item.jpg" alt="" />
-          <ion-card-header>
-            <ion-card-subtitle>Breakfast</ion-card-subtitle>
-            <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-slide>
-      <ion-slide>
-        <ion-card class="welcome-card">
-          <img src="/assets/img/item.jpg" alt="" />
-          <ion-card-header>
-            <ion-card-subtitle>Breakfast</ion-card-subtitle>
-            <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-slide>
-    </ion-slides>
-  </div>
-  <div class="section">
-    <div class="section-header ion-padding">
-      <h2>Nutritional Averages</h2>
-      <ion-segment color="warning">
-        <ion-segment-button value="day" checked>
-          <ion-label>D</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="week">
-          <ion-label>W</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="month">
-          <ion-label>M</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="year">
-          <ion-label>Y</ion-label>
-        </ion-segment-button>
-      </ion-segment>
-    </div>
-    <div class="ion-padding">
-      <ion-list>
-        <ion-list-header>
-          <ion-label>Calories</ion-label>
-          <ion-label>2184</ion-label>
-        </ion-list-header>
-        <ion-progress-bar color="warning" value="0.5"></ion-progress-bar>
-      </ion-list>
-      <ion-list>
-        <ion-list-header>
-          <ion-label>Protein</ion-label>
-          <ion-label>51g</ion-label>
-        </ion-list-header>
-        <ion-progress-bar color="warning" value="0.9"></ion-progress-bar>
-      </ion-list>
-      <ion-list>
-        <ion-list-header>
-          <ion-label>Carbs</ion-label>
-          <ion-label>492g</ion-label>
-        </ion-list-header>
-        <ion-progress-bar color="warning" value="0.7"></ion-progress-bar>
-      </ion-list>
-      <ion-list>
-        <ion-list-header>
-          <ion-label>Fats</ion-label>
-          <ion-label>39g</ion-label>
-        </ion-list-header>
-        <ion-progress-bar color="warning" value="0.8"></ion-progress-bar>
-      </ion-list>
-    </div>
-  </div>
-  <div class="ion-padding">
-    <div class="congratulation ion-padding">
-      <h3>
-        <ion-icon name="ribbon"></ion-icon>
-        Congratulations!
-      </h3>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis lectus dolor. Sed et dolor eu elit viverra vestibulum eu vitae velit.
-      </p>
-    </div>
-  </div>
-  <div class="section">
-    <div class="section-header ion-padding">
-      <h2>Featured Recipe</h2>
-    </div>
     <ion-card class="welcome-card">
-      <img src="/assets/img/item.jpg" alt="" />
+      <img src="/assets/shapes.svg" alt="" />
       <ion-card-header>
-        <ion-card-subtitle>Breakfast</ion-card-subtitle>
-        <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+        <ion-card-subtitle>Get Started</ion-card-subtitle>
+        <ion-card-title>Welcome to Ionic</ion-card-title>
       </ion-card-header>
-      <ion-card-content class="card-labels">
-        <ion-label>
-          <ion-icon name="timer"></ion-icon>
-          15 Minutes
-        </ion-label>
-        <ion-label>
-          <ion-icon name="options"></ion-icon>
-          Medium
-        </ion-label>
-        <ion-label>
-          <ion-icon name="restaurant"></ion-icon>
-          1 Bowl
-        </ion-label>
+      <ion-card-content>
+        <p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>
       </ion-card-content>
     </ion-card>
-  </div>
-  <div class="section">
-    <div class="section-header ion-padding">
-      <h2>How are you feeling today?</h2>
-    </div>
-    <div class="review-buttons">
-      <span class="emoji">😄</span>
-      <span class="emoji">😁</span>
-      <span class="emoji">😊</span>
-      <span class="emoji">😕</span>
-      <span class="emoji">️😕</span>
-    </div>
-  </div>
+    <ion-list lines="none">
+      <ion-list-header>
+        <ion-label>Resources</ion-label>
+      </ion-list-header>
+      <ion-item href="https://ionicframework.com/docs/">
+        <ion-icon slot="start" color="medium" name="book"></ion-icon>
+        <ion-label>Ionic Documentation</ion-label>
+      </ion-item>
+      <ion-item href="https://ionicframework.com/docs/building/scaffolding">
+        <ion-icon slot="start" color="medium" name="build"></ion-icon>
+        <ion-label>Scaffold Out Your App</ion-label>
+      </ion-item>
+      <ion-item href="https://ionicframework.com/docs/layout/structure">
+        <ion-icon slot="start" color="medium" name="grid"></ion-icon>
+        <ion-label>Change Your App Layout</ion-label>
+      </ion-item>
+      <ion-item href="https://ionicframework.com/docs/theming/basics">
+        <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
+        <ion-label>Theme Your App</ion-label>
+      </ion-item>
+    </ion-list>
 </ion-content>

@@ -38,25 +38,15 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'profile',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../pages/profile/profile.module').then(m => m.ProfilePageModule)
-          }
-        ]
-      },
-      {
         path: '',
-        redirectTo: 'tab1',
+        redirectTo: '/tabs/tab1',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: 'tabs',
+    redirectTo: '/tabs/tab1',
     pathMatch: 'full'
   }
 ];

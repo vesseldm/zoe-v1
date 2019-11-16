@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Tab1Page } from '../../tab1/tab1.page';
 
 @Component({
   selector: 'app-today',
@@ -8,9 +7,11 @@ import { Tab1Page } from '../../tab1/tab1.page';
 })
 export class TodayPage implements OnInit {
 
-  tab1Root = Tab1Page;
-  tab2Root = Tab1Page;
-  tab3Root = Tab1Page;
+  slideOpts = {
+    slidesPerView: 1.7,
+    centeredSlides: true,
+    loop: true
+  };
 
   constructor() { }
 
