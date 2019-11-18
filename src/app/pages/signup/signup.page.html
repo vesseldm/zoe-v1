@@ -9,11 +9,11 @@
       </ion-item>
       <ion-item color="transparent">
         <ion-label position="floating">Email Address</ion-label>
-        <ion-input></ion-input>
+        <ion-input [(ngModel)]="user.email"></ion-input>
       </ion-item>
       <ion-item color="transparent">
         <ion-label position="floating">Choose Password</ion-label>
-        <ion-input></ion-input>
+        <ion-input [(ngModel)]="user.password" type="password"></ion-input>
       </ion-item>
       <ion-item class="checkbox" color="transparent" lines="none">
         <ion-label>Send me a welcome email, blogs & more</ion-label>
@@ -21,7 +21,7 @@
       </ion-item>
     </div>
     <div class="form-actions">
-      <ion-button (click)="goHome()" class="btn-basic" color="basic" expand="block" shape="round">Create My Account</ion-button>
+      <ion-button (click)="register()" class="btn-basic" color="basic" expand="block" shape="round">Create My Account</ion-button>
       <a (click)="goLogin()" class="btn-basic">Log in to my account</a>
     </div>
   </div>
