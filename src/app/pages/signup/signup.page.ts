@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from 'angularfire2/auth';
+
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 export class User {
   email: string;
@@ -16,12 +18,21 @@ export class SignupPage implements OnInit {
 
   public user:User = new User();
 
+  registerForm: FormGroup;
+  errorMessage: string = '';
+  successMessage: string = '';
+
   constructor(
     public router: Router,
-    public fAuth: AngularFireAuth
+    public formBuilder: FormBuilder,
+    public authService: AuthService
   ) { }
 
   ngOnInit() {
+    this.registerForm = this.formBuilder.group({
+      email: new FormControl(),
+      password: new FormControl()
+    });
   }
 
   goLogin() {
@@ -32,20 +43,17 @@ export class SignupPage implements OnInit {
     this.router.navigateByUrl('/home');
   }
 
-  async register() {
-    try {
-      var r = await this.fAuth.auth.createUserWithEmailAndPassword(
-        this.user.email,
-        this.user.password
-      );
-      if (r) {
-        console.log("Successfully registered!");
-        this.router.navigateByUrl('/login');
-      }
-
-    } catch (err) {
-      console.error(err);
-    }
+  tryRegister(value){
+    this.authService.doRegister(value)
+     .then(res => {
+       console.log(res);
+       this.errorMessage = "";
+       this.successMessage = "Your account has been created. Please log in.";
+     }, err => {
+       console.log(err);
+       this.errorMessage = err.message;
+       this.successMessage = "";
+     })
   }
 
 }

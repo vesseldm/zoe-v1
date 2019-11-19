@@ -1,6 +1,6 @@
 <ion-content class="ion-padding">
   <img class="logo" src="/assets/img/logo.png" alt="Zoë">
-  <div class="form">
+  <form class="form" [formGroup]="registerForm" (ngSubmit)="tryRegister(registerForm.value)">
     <h1 class="form-title">Sign Up</h1>
     <div class="form-content">
       <ion-item color="transparent">
@@ -9,11 +9,11 @@
       </ion-item>
       <ion-item color="transparent">
         <ion-label position="floating">Email Address</ion-label>
-        <ion-input [(ngModel)]="user.email"></ion-input>
+        <ion-input formControlName="email"></ion-input>
       </ion-item>
       <ion-item color="transparent">
         <ion-label position="floating">Choose Password</ion-label>
-        <ion-input [(ngModel)]="user.password" type="password"></ion-input>
+        <ion-input formControlName="password" type="password"></ion-input>
       </ion-item>
       <ion-item class="checkbox" color="transparent" lines="none">
         <ion-label>Send me a welcome email, blogs & more</ion-label>
@@ -21,10 +21,14 @@
       </ion-item>
     </div>
     <div class="form-actions">
-      <ion-button (click)="register()" class="btn-basic" color="basic" expand="block" shape="round">Create My Account</ion-button>
+      <ion-button class="btn-basic" color="basic" type="submit" expand="block" shape="round">Create My Account</ion-button>
       <a (click)="goLogin()" class="btn-basic">Log in to my account</a>
     </div>
-  </div>
+    <div style="margin-top: 20px;">
+      <label class="error-message">{{ errorMessage }}</label>
+      <label class="success-message">{{ successMessage }}</label>
+    </div>
+  </form>
   <hr />
   <div class="social-buttons">
     <ion-button (click)="goHome()" class="btn-basic" color="red" expand="block">Sign Up with Google</ion-button>

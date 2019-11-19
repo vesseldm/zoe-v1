@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(
+    public afAuth: AngularFireAuth
+  ) { }
 
   doRegister(value){
     return new Promise<any>((resolve, reject) => {
