@@ -29,10 +29,10 @@ export class AppComponent {
         if (user) {
           this.router.navigate(["/home"]);
         } else {
-          this.router.navigate(["/login"]);
+          this.router.navigate(["/"]);
         }
       }, err => {
-        this.router.navigate(["/login"]);
+        this.router.navigate(["/"]);
       }, () => {
         this.splashScreen.hide();
       })
