@@ -23,6 +23,7 @@ export class SignupPage implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
+      name: new FormControl(),
       email: new FormControl(),
       password: new FormControl()
     });

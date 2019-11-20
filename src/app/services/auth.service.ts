@@ -30,6 +30,7 @@ export class AuthService {
         res => {
           this.firestore.collection('users').doc(res.user.uid).set({
             id: res.user.uid,
+            name: value.name,
             email: value.email
           });
           resolve(res);
