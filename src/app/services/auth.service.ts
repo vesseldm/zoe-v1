@@ -39,6 +39,18 @@ export class AuthService {
     })
   }
 
+  doLogout(){
+    return new Promise((resolve, reject) => {
+      if(firebase.auth().currentUser){
+        this.afAuth.auth.signOut()
+        resolve();
+      }
+      else {
+        reject();
+      }
+    });
+  }
+
   doFacebookLogin(){
     return new Promise<FirebaseUserModel>((resolve, reject) => {
       if (this.platform.is('cordova')) {
