@@ -49,4 +49,13 @@ export class SignupPage implements OnInit {
     })
   }
 
+  tryFacebookLogin(){
+    this.authService.doFacebookLogin()
+    .then((res) => {
+      this.router.navigateByUrl('/home');
+    }, (err) => {
+      this.errorMessage = err.message;
+    });
+  }
+
 }
