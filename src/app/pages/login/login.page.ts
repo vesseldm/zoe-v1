@@ -50,4 +50,31 @@ export class LoginPage implements OnInit {
     })
   }
 
+  tryFacebookLogin(){
+    this.authService.doFacebookLogin()
+    .then((res) => {
+      this.router.navigateByUrl('/home');
+    }, (err) => {
+      this.errorMessage = err.message;
+    });
+  }
+
+  tryGoogleLogin(){
+    this.authService.doGoogleLogin()
+    .then((res) => {
+      this.router.navigateByUrl('/home');
+    }, (err) => {
+      this.errorMessage = err.message;
+    });
+  }
+
+  tryTwitterLogin(){
+    this.authService.doTwitterLogin()
+    .then((res) => {
+      this.router.navigateByUrl('/home');
+    }, (err) => {
+      this.errorMessage = err.message;
+    });
+  }
+
 }
