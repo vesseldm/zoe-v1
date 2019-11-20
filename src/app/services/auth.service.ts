@@ -7,6 +7,7 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { TwitterConnect } from '@ionic-native/twitter-connect/ngx';
 import { FirebaseUserModel } from '../models/user.model';
 import { environment } from '../../environments/environment';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +19,21 @@ export class AuthService {
     public fb: Facebook,
     public googlePlus: GooglePlus,
     public tw : TwitterConnect,
-    public platform: Platform
+    public platform: Platform,
+    private firestore: AngularFirestore
   ) { }
 
   doRegister(value){
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
       .then(
-        res => resolve(res),
+        res => {
+          this.firestore.collection('users').doc(res.user.uid).set({
+            id: res.user.uid,
+            email: value.email
+          });
+          resolve(res);
+        },
         err => reject(err))
     })
   }
