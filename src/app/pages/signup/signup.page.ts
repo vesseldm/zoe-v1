@@ -67,4 +67,13 @@ export class SignupPage implements OnInit {
     });
   }
 
+  tryTwitterLogin(){
+    this.authService.doTwitterLogin()
+    .then((res) => {
+      this.router.navigateByUrl('/home');
+    }, (err) => {
+      this.errorMessage = err.message;
+    });
+  }
+
 }
