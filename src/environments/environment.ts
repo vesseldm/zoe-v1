@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  googleWebClientId: '905702830729-dfoj89ufoc6btdfi87gqsal10p968vdc.apps.googleusercontent.com',
   firebaseConfig: {
     apiKey: "AIzaSyAr7D2JbkzG4nmuQysQdeyAsqLvgxXWY8U",
     authDomain: "zoe-v1-19ba3.firebaseapp.com",
