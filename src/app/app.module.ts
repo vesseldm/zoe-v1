@@ -15,6 +15,7 @@ import { environment } from '../environments/environment';
 
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { TwitterConnect } from '@ionic-native/twitter-connect/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +32,7 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
     SplashScreen,
     Facebook,
     GooglePlus,
+    TwitterConnect,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

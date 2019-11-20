@@ -4,6 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { TwitterConnect } from '@ionic-native/twitter-connect/ngx';
 import { FirebaseUserModel } from '../models/user.model';
 import { environment } from '../../environments/environment';
 
@@ -16,6 +17,7 @@ export class AuthService {
     public afAuth: AngularFireAuth,
     public fb: Facebook,
     public googlePlus: GooglePlus,
+    public tw : TwitterConnect,
     public platform: Platform
   ) { }
 
@@ -95,6 +97,47 @@ export class AuthService {
         },(err) => {
          reject(err);
        })
+      }
+    })
+  }
+
+  doTwitterLogin(){
+    return new Promise<FirebaseUserModel>((resolve, reject) => {
+      // if we are in a mobile device we use the twitter native plugin
+
+      if (this.platform.is('cordova')) {
+        this.tw.login()
+          .then((response) => {
+            const twitterCredential = firebase.auth.TwitterAuthProvider.credential(response.token, response.secret);
+            firebase.auth().signInWithCredential(twitterCredential)
+            .then(
+              user => resolve(),
+              error => reject(error)
+            );
+          },
+          err => {
+            console.log(err);
+            reject(err);
+          }
+        );
+      }
+      else {
+        this.afAuth.auth
+        .signInWithPopup(new firebase.auth.TwitterAuthProvider())
+        .then(result => {
+          //Default twitter img is just 48x48px and we need a bigger image https://developer.twitter.com/en/docs/accounts-and-users/user-profile-images-and-banners
+          var bigImgUrl = (result.user.photoURL).replace('_normal', '_400x400');
+
+          // update profile to save the big tw profile img.
+          firebase.auth().currentUser.updateProfile({
+            displayName: result.user.displayName,
+            photoURL: bigImgUrl
+          }).then(res => resolve(),(err) => {
+            reject(err);
+          });
+        },(err) => {
+          reject(err);
+        })
       }
     })
   }
