@@ -58,4 +58,13 @@ export class SignupPage implements OnInit {
     });
   }
 
+  tryGoogleLogin(){
+    this.authService.doGoogleLogin()
+    .then((res) => {
+      this.router.navigateByUrl('/home');
+    }, (err) => {
+      this.errorMessage = err.message;
+    });
+  }
+
 }
