@@ -9,7 +9,7 @@
     <ion-button color="light">S</ion-button>
   </div>
   <div class="block">
-    <ion-button class="alert" color="basic" expand="block" size="large">
+    <ion-button (click)="goProfile()" class="alert" color="basic" expand="block" size="large">
       <ion-icon slot="start" name="alert"></ion-icon>
       <ion-label>Complete Profile</ion-label>
     </ion-button>
@@ -75,7 +75,7 @@
     </div>
     <p>
       Lorem ipsum dolor sit amet, <br />
-      consectetur adipiscing elit. Nulla quis lectus dolor. 
+      consectetur adipiscing elit. Nulla quis lectus dolor.
       Sed et dolor eu elit viverra vestibulum eu vitae velit.
     </p>
   </div>
