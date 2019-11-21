@@ -97,3 +97,12 @@ ion-card {
     font-weight: 400;
   }
 }
+.recipe {
+  img {
+    height: 200px;
+    object-fit: cover;
+  }
+  ion-card-header {
+    min-height: 122px;
+  }
+}
