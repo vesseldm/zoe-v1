@@ -33,16 +33,35 @@
   <div class="section recipes">
     <div class="section-header">
       <h2>Breakfast</h2>
-      <a>SEE ALL (44)</a>
+      <a *ngIf="recipes_drinks">SEE ALL ({{recipes_breakfasts.length}})</a>
     </div>
-    <div class="section-content">
+    <div *ngIf="recipes_breakfasts" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
-        <ion-slide *ngFor="let index of [0, 1, 2, 3]">
-          <ion-card class="recipe">
-            <img src="/assets/img/item.jpg" alt="recipe" />
+        <ion-slide *ngFor="let item of recipes_breakfasts">
+          <ion-card class="recipe" (click)="goRecipePage(item.id)">
+            <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
-              <ion-card-subtitle>Breakfast</ion-card-subtitle>
-              <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+              <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
+              <ion-card-title>{{item.title}}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </div>
+  <div class="section recipes">
+    <div class="section-header">
+      <h2>Lunch</h2>
+      <a *ngIf="recipes_lunchs">SEE ALL ({{recipes_lunchs.length}})</a>
+    </div>
+    <div *ngIf="recipes_lunchs" class="section-content">
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let item of recipes_lunchs">
+          <ion-card class="recipe" (click)="goRecipePage(item.id)">
+            <img src="{{item.photo}}" alt="recipe" />
+            <ion-card-header>
+              <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
+              <ion-card-title>{{item.title}}</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-slide>
@@ -52,16 +71,16 @@
   <div class="section recipes">
     <div class="section-header">
       <h2>Dinner</h2>
-      <a>SEE ALL (72)</a>
+      <a *ngIf="recipes_drinks">SEE ALL ({{recipes_dinners.length}})</a>
     </div>
-    <div class="section-content">
+    <div *ngIf="recipes_dinners" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
-        <ion-slide *ngFor="let index of [0, 1, 2, 3]">
-          <ion-card class="recipe">
-            <img src="/assets/img/item.jpg" alt="recipe" />
+        <ion-slide *ngFor="let item of recipes_dinners">
+          <ion-card class="recipe" (click)="goRecipePage(item.id)">
+            <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
-              <ion-card-subtitle>Breakfast</ion-card-subtitle>
-              <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+              <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
+              <ion-card-title>{{item.title}}</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-slide>
@@ -71,35 +90,35 @@
   <div class="section recipes">
     <div class="section-header">
       <h2>Snacks & Desserts</h2>
-      <a>SEE ALL (18)</a>
+      <a *ngIf="recipes_drinks">SEE ALL ({{recipes_snacks.length}})</a>
     </div>
-    <div class="section-content">
+    <div *ngIf="recipes_snacks" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
-        <ion-slide *ngFor="let index of [0, 1, 2, 3]">
-          <ion-card class="recipe">
-            <img src="/assets/img/item.jpg" alt="recipe" />
+        <ion-slide *ngFor="let item of recipes_snacks">
+          <ion-card class="recipe" (click)="goRecipePage(item.id)">
+            <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
-              <ion-card-subtitle>Breakfast</ion-card-subtitle>
-              <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+              <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
+              <ion-card-title>{{item.title}}</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-slide>
       </ion-slides>
     </div>
   </div>
-  <div class="section recipes">
+  <div class="section recipes" id="breakfast">
     <div class="section-header">
       <h2>Drinks</h2>
-      <a>SEE ALL (9)</a>
+      <a *ngIf="recipes_drinks">SEE ALL ({{recipes_drinks.length}})</a>
     </div>
-    <div class="section-content">
+    <div *ngIf="recipes_drinks" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
-        <ion-slide *ngFor="let index of [0, 1, 2, 3]">
-          <ion-card class="recipe">
-            <img src="/assets/img/item.jpg" alt="recipe" />
+        <ion-slide *ngFor="let item of recipes_drinks">
+          <ion-card class="recipe" (click)="goRecipePage(item.id)">
+            <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
-              <ion-card-subtitle>Breakfast</ion-card-subtitle>
-              <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+              <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
+              <ion-card-title>{{item.title}}</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-slide>
