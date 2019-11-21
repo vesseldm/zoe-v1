@@ -35,7 +35,7 @@
       <h2>Breakfast</h2>
       <a *ngIf="recipes_drinks">SEE ALL ({{recipes_breakfasts.length}})</a>
     </div>
-    <div class="section-content">
+    <div *ngIf="recipes_breakfasts" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let item of recipes_breakfasts">
           <ion-card class="recipe">
@@ -54,7 +54,7 @@
       <h2>Lunch</h2>
       <a *ngIf="recipes_lunchs">SEE ALL ({{recipes_lunchs.length}})</a>
     </div>
-    <div class="section-content">
+    <div *ngIf="recipes_lunchs" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let item of recipes_lunchs">
           <ion-card class="recipe">
@@ -73,7 +73,7 @@
       <h2>Dinner</h2>
       <a *ngIf="recipes_drinks">SEE ALL ({{recipes_dinners.length}})</a>
     </div>
-    <div class="section-content">
+    <div *ngIf="recipes_dinners" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let item of recipes_dinners">
           <ion-card class="recipe">
@@ -92,7 +92,7 @@
       <h2>Snacks & Desserts</h2>
       <a *ngIf="recipes_drinks">SEE ALL ({{recipes_snacks.length}})</a>
     </div>
-    <div class="section-content">
+    <div *ngIf="recipes_snacks" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let item of recipes_snacks">
           <ion-card class="recipe">
@@ -111,7 +111,7 @@
       <h2>Drinks</h2>
       <a *ngIf="recipes_drinks">SEE ALL ({{recipes_drinks.length}})</a>
     </div>
-    <div class="section-content">
+    <div *ngIf="recipes_drinks" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let item of recipes_drinks">
           <ion-card class="recipe">
