@@ -41,6 +41,10 @@ const routes: Routes = [
   {
     path: 'myweek',
     loadChildren: () => import('./pages/myweek/myweek.module').then( m => m.MyweekPageModule)
+  },
+  {
+    path: 'recipe',
+    loadChildren: () => import('./pages/recipe/recipe.module').then( m => m.RecipePageModule)
   }
 ];
 @NgModule({

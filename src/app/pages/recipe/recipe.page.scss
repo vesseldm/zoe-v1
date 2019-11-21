@@ -1,0 +1,129 @@
+ion-content {
+  --background: var(--ion-color-background);
+}
+.section {
+  background-color: var(--ion-color-white);
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  padding: 24px 16px;
+  margin-bottom: 24px;
+  &:first-child {
+    margin-top: 24px;
+  }
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    h2 {
+      margin: 0;
+      font-weight: 400;
+    }
+    ion-icon {
+      font-size: 24px;
+    }
+  }
+}
+.page-header {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
+    url('/assets/img/item.jpg') no-repeat center/cover;
+  min-height: 200px;
+  padding: 12px 24px;
+  color: #fff;
+  ion-icon {
+    font-size: 28px;
+    margin-bottom: 5px;
+  }
+  h1 {
+    font-size: 36px;
+    text-shadow: 1px 1px 0 #000000;
+    margin: 0;
+  }
+}
+ion-col {
+  border-right: 1px solid #dddddd;
+  &:last-child {
+    border-right: 0;
+  }
+}
+.action-button {
+  font-size: 30px;
+  padding: 5px;
+  text-align: center;
+  line-height: 0;
+}
+ion-list {
+  margin-bottom: 0;
+}
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}
+ion-label {
+  margin: 0;
+}
+.label {
+  font-weight: 300;
+  color: #575859;
+}
+.value {
+  color: #313233;
+  font-weight: 300;
+  text-align: right;
+}
+ion-button {
+  margin: 24px 16px;
+}
+p {
+  color: #222222;
+  line-height: 21px;
+}
+.progress {
+  margin-bottom: 8px;
+  ion-list-header {
+    padding-left: 0;
+    min-height: 30px;
+  }
+  ion-label {
+    text-transform: none;
+    color: #222;
+    font-weight: 300;
+  }
+  ion-progress-bar {
+    height: 5px;
+  }
+}
+.ingredients {
+  ion-list {
+    margin-bottom: 0;
+  }
+  ion-checkbox {
+    --background-checked: var(--ion-color-white);
+    --border-color-checked: var(--ion-color-dark);
+    --checkmark-color: #000;
+    --size: 20px;
+    margin-right: 8px;
+  }
+  ion-label {
+    margin: 0;
+  }
+  ion-item {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 21px;
+    color: #222;
+    --min-height: 35px;
+  }
+}
+.instructions {
+  font-weight: 300;
+  line-height: 21px;
+  color: #222222;
+  ol {
+    padding-left: 17px;
+  }
+  li {
+    padding-left: 10px;
+    margin-bottom: 5px;
+  }
+}
