@@ -58,4 +58,18 @@ export class UserService {
         )
       );
   }
+
+  getAllIngredients(): Observable<any> {
+    return this.afs
+      .collection<any>('ingredients')
+      .snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => {
+            const data = a.payload.doc.data();
+            return { ...data };
+          })
+        )
+      );
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-today',
@@ -17,10 +18,18 @@ export class TodayPage implements OnInit {
   recipes: any;
   weekDays: any = [];
   currentDay: any;
+  nutritional: any;
+  ingredients: any;
 
   constructor(public router: Router, public userService: UserService) {}
 
   ngOnInit() {
+    this.nutritional = {
+      calories: 0,
+      protein: 0,
+      carbs: 0,
+      fats: 0
+    };
     this.weekDays = [];
     let curr = new Date();
     this.currentDay = new Date();
@@ -35,9 +44,38 @@ export class TodayPage implements OnInit {
       if (user && user.id) {
         this.userService.getUserPlans(user.id, this.currentDay.toString()).subscribe(plans => {
           const recipeIds = plans.map(plan => plan.recipeId);
-          this.userService.getPlanedRecipes(recipeIds).subscribe(recipes => {
-            this.recipes = recipes;
-          });
+          combineLatest([this.userService.getPlanedRecipes(recipeIds), this.userService.getAllIngredients()]).subscribe(
+            data => {
+              const [recipes, ingredients] = data;
+              this.recipes = recipes;
+              this.ingredients = ingredients;
+              if (recipes) {
+                this.initNutritional(recipes);
+              }
+            }
+          );
+        });
+      }
+    });
+  }
+
+  initNutritional(recipes) {
+    this.nutritional = {
+      calories: 0,
+      protein: 0,
+      carbs: 0,
+      fats: 0
+    };
+    recipes.forEach(recipe => {
+      if (recipe.ingredients) {
+        recipe.ingredients.forEach(ri => {
+          let ing = this.ingredients.find(i => i.id == ri.id);
+          if (ing && ing.average) {
+            this.nutritional.calories += ri.amount * parseInt(ing.average.calories);
+            this.nutritional.protein += ri.amount * parseInt(ing.average.protein);
+            this.nutritional.carbs += ri.amount * parseInt(ing.average.carbs);
+            this.nutritional.fats += ri.amount * parseInt(ing.average.fats);
+          }
         });
       }
     });
