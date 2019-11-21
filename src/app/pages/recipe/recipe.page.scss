@@ -115,3 +115,15 @@ p {
     --min-height: 35px;
   }
 }
+.instructions {
+  font-weight: 300;
+  line-height: 21px;
+  color: #222222;
+  ol {
+    padding-left: 17px;
+  }
+  li {
+    padding-left: 10px;
+    margin-bottom: 5px;
+  }
+}
