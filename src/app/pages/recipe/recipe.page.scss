@@ -93,3 +93,25 @@ p {
     height: 5px;
   }
 }
+.ingredients {
+  ion-list {
+    margin-bottom: 0;
+  }
+  ion-checkbox {
+    --background-checked: var(--ion-color-white);
+    --border-color-checked: var(--ion-color-dark);
+    --checkmark-color: #000;
+    --size: 20px;
+    margin-right: 8px;
+  }
+  ion-label {
+    margin: 0;
+  }
+  ion-item {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 21px;
+    color: #222;
+    --min-height: 35px;
+  }
+}
