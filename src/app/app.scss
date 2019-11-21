@@ -6,6 +6,11 @@
 ion-button {
   text-transform: none;
 }
-h1, h2 {
-  font-family: "Oswald";
+h1,
+h2 {
+  font-family: 'Oswald';
+}
+
+.swiper-pagination-bullet {
+  opacity: 1;
 }
