@@ -1,11 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { RecipeService } from "../../services/recipe.service";
 
 @Component({
-  selector: 'app-recipes',
-  templateUrl: './recipes.page.html',
-  styleUrls: ['./recipes.page.scss'],
+  selector: "app-recipes",
+  templateUrl: "./recipes.page.html",
+  styleUrls: ["./recipes.page.scss"]
 })
 export class RecipesPage implements OnInit {
+  recipes: any;
+  recipes_breakfasts: any;
+  recipes_lunchs: any;
+  recipes_dinners: any;
+  recipes_snacks: any;
+  recipes_drinks: any;
 
   slideOpts = {
     slidesPerView: 1.7,
@@ -13,9 +20,52 @@ export class RecipesPage implements OnInit {
     loop: true
   };
 
-  constructor() { }
+  constructor(public recipeService: RecipeService) {}
 
   ngOnInit() {
-  }
+    this.recipeService.recipes$.subscribe(recipes => {
+      this.recipes = recipes;
+      console.log(recipes);
+      this.recipes_breakfasts = [];
+      this.recipes_lunchs = [];
+      this.recipes_dinners = [];
+      this.recipes_drinks = [];
+      this.recipes_snacks = [];
 
+      recipes.forEach(item => {
+        switch (item.type) {
+          case "Breakfast":
+            this.recipes_breakfasts.push(item);
+            break;
+
+          case "Lunch":
+            this.recipes_lunchs.push(item);
+            break;
+
+          case "Dinner":
+            this.recipes_dinners.push(item);
+            break;
+
+          case "Drinks":
+            this.recipes_drinks.push(item);
+            break;
+
+          case "Snacks":
+            this.recipes_snacks.push(item);
+            break;
+
+          default:
+            break;
+        }
+      });
+
+      console.log(
+        this.recipes_breakfasts,
+        this.recipes_dinners,
+        this.recipes_drinks,
+        this.recipes_lunchs,
+        this.recipes_snacks
+      );
+    });
+  }
 }
