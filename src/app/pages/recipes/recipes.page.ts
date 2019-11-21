@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { RecipeService } from "../../services/recipe.service";
 
 @Component({
@@ -20,12 +21,11 @@ export class RecipesPage implements OnInit {
     loop: true
   };
 
-  constructor(public recipeService: RecipeService) {}
+  constructor(public router: Router, public recipeService: RecipeService) {}
 
   ngOnInit() {
     this.recipeService.recipes$.subscribe(recipes => {
       this.recipes = recipes;
-      console.log(recipes);
       this.recipes_breakfasts = [];
       this.recipes_lunchs = [];
       this.recipes_dinners = [];
@@ -58,14 +58,10 @@ export class RecipesPage implements OnInit {
             break;
         }
       });
-
-      console.log(
-        this.recipes_breakfasts,
-        this.recipes_dinners,
-        this.recipes_drinks,
-        this.recipes_lunchs,
-        this.recipes_snacks
-      );
     });
+  }
+
+  goRecipePage(id) {
+    this.router.navigate(["/recipe", id]);
   }
 }

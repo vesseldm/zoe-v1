@@ -1,214 +1,229 @@
 <ion-content>
-  <div class="page-header">
-    <ion-icon (click)="goBack()" name="arrow-back"></ion-icon>
-    <h1>Banana Walnut Overnight Oatmeal</h1>
-  </div>
-  <ion-row>
-    <ion-col>
-      <div class="action-button">
-        <ion-icon name="remove-circle" color="danger"></ion-icon>
+  <div *ngIf="recipe">
+    <div class="page-header">
+      <div class="title">
+        <ion-icon (click)="goBack()" name="arrow-back"></ion-icon>
+        <h1>{{recipe.title}}</h1>
       </div>
-    </ion-col>
-    <ion-col size="4">
-      <div class="action-button">
-        <ion-icon name="thumbs-down"></ion-icon>
+
+      <img src="{{recipe.photo}}" />
+    </div>
+    <ion-row>
+      <ion-col>
+        <div class="action-button">
+          <ion-icon name="remove-circle" color="danger"></ion-icon>
+        </div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="action-button">
+          <ion-icon name="thumbs-down"></ion-icon>
+        </div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="action-button">
+          <ion-icon name="thumbs-up"></ion-icon>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="action-button">
+          <ion-icon name="heart-empty"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+    <div class="section">
+      <div class="section-header">
+        <h2>Details</h2>
       </div>
-    </ion-col>
-    <ion-col size="4">
-      <div class="action-button">
-        <ion-icon name="thumbs-up"></ion-icon>
+      <div class="section-content">
+        <ion-list>
+          <ion-item>
+            <ion-label class="label">Prep Time</ion-label>
+            <ion-label class="value">{{recipe.prepTime}} Minutes</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label">Cook Time</ion-label>
+            <ion-label class="value">{{recipe.cookTime/60}} Hours</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label">Serving Size</ion-label>
+            <ion-label class="value">{{recipe.servingSize}} Bowl</ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="label">Servings</ion-label>
+            <ion-select class="value" placeholder="1" value="1">
+              <ion-select-option value="1">1</ion-select-option>
+              <ion-select-option value="2">2</ion-select-option>
+              <ion-select-option value="3">3</ion-select-option>
+              <ion-select-option value="4">4</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
       </div>
-    </ion-col>
-    <ion-col>
-      <div class="action-button">
-        <ion-icon name="heart-empty"></ion-icon>
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <h2>Description</h2>
       </div>
-    </ion-col>
-  </ion-row>
-  <div class="section">
-    <div class="section-header">
-      <h2>Details</h2>
+      <div class="section-content">
+        <p>
+          {{recipe.description}}
+        </p>
+      </div>
     </div>
-    <div class="section-content">
-      <ion-list>
-        <ion-item>
-          <ion-label class="label">Prep Time</ion-label>
-          <ion-label class="value">15 Minutes</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label class="label">Cook Time</ion-label>
-          <ion-label class="value">7 Hours</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label class="label">Serving Size</ion-label>
-          <ion-label class="value">1 Bowl</ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="label">Servings</ion-label>
-          <ion-select class="value" placeholder="1" value="1">
-            <ion-select-option value="1">1</ion-select-option>
-            <ion-select-option value="2">2</ion-select-option>
-            <ion-select-option value="3">3</ion-select-option>
-            <ion-select-option value="4">4</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
+    <div class="section">
+      <div class="section-header">
+        <h2>Nutrition</h2>
+      </div>
+      <div class="section-content">
+        <ion-list class="progress">
+          <ion-list-header>
+            <ion-label>{{calories}} Calories</ion-label>
+          </ion-list-header>
+          <ion-progress-bar
+            color="basic"
+            value="{{calories/1000}}"
+          ></ion-progress-bar>
+        </ion-list>
+        <ion-list class="progress">
+          <ion-list-header>
+            <ion-label>Protein: {{protein}}g</ion-label>
+          </ion-list-header>
+          <ion-progress-bar
+            color="basic"
+            value="{{protein/1000}}"
+          ></ion-progress-bar>
+        </ion-list>
+        <ion-list class="progress">
+          <ion-list-header>
+            <ion-label>Carbs: {{carbs}}g</ion-label>
+          </ion-list-header>
+          <ion-progress-bar
+            color="basic"
+            value="{{carbs/1000}}"
+          ></ion-progress-bar>
+        </ion-list>
+        <ion-list class="progress">
+          <ion-list-header>
+            <ion-label>Fats: {{fats}}g</ion-label>
+          </ion-list-header>
+          <ion-progress-bar
+            color="basic"
+            value="{{fats/1000}}"
+          ></ion-progress-bar>
+        </ion-list>
+      </div>
     </div>
-  </div>
-  <div class="section">
-    <div class="section-header">
-      <h2>Description</h2>
+    <div class="section ingredients">
+      <div class="section-header">
+        <h2>Ingredients</h2>
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </div>
+      <div class="section-content">
+        <ion-list lines="none">
+          <ion-item-sliding>
+            <ion-item>
+              <ion-label>Rolled Oats</ion-label>
+              <ion-checkbox color="dark" slot="start" checked></ion-checkbox>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option>Remove</ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+          <ion-item-sliding>
+            <ion-item>
+              <ion-label>Low-Fat Milk</ion-label>
+              <ion-checkbox slot="start" checked></ion-checkbox>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option>Remove</ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+          <ion-item-sliding>
+            <ion-item>
+              <ion-label>Honey</ion-label>
+              <ion-checkbox slot="start" checked></ion-checkbox>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option>Remove</ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+          <ion-item-sliding>
+            <ion-item>
+              <ion-label>Banana</ion-label>
+              <ion-checkbox slot="start"></ion-checkbox>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option>Remove</ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+          <ion-item-sliding>
+            <ion-item>
+              <ion-label>Vanilla Extract</ion-label>
+              <ion-checkbox slot="start"></ion-checkbox>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option>Remove</ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+          <ion-item-sliding>
+            <ion-item>
+              <ion-label>Ground Cinnamon</ion-label>
+              <ion-checkbox slot="start"></ion-checkbox>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option>Remove</ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+          <ion-item-sliding>
+            <ion-item>
+              <ion-label>Cumin</ion-label>
+              <ion-checkbox slot="start"></ion-checkbox>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option>Remove</ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+          <ion-item-sliding>
+            <ion-item>
+              <ion-label>Flour</ion-label>
+              <ion-checkbox slot="start"></ion-checkbox>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option>Remove</ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+          <ion-item-sliding>
+            <ion-item>
+              <ion-label>Salt</ion-label>
+              <ion-checkbox slot="start"></ion-checkbox>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option>Remove</ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+          <ion-item-sliding>
+            <ion-item>
+              <ion-label>Thyme</ion-label>
+              <ion-checkbox slot="start"></ion-checkbox>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option>Remove</ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </div>
     </div>
-    <div class="section-content">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        Aliquam euismod lectus non enim imperdiet fringilla. 
-        Suspendisse vitae magna maximus felis malesuada facilisis. 
-        In efficitur libero non enim egestas fringilla sed vulputate est.
-      </p>
-    </div>
-  </div>
-  <div class="section">
-    <div class="section-header">
-      <h2>Nutrition</h2>
-    </div>
-    <div class="section-content">
-      <ion-list class="progress">
-        <ion-list-header>
-          <ion-label>252 Calories</ion-label>
-        </ion-list-header>
-        <ion-progress-bar color="basic" value="0.15"></ion-progress-bar>
-      </ion-list>
-      <ion-list class="progress">
-        <ion-list-header>
-          <ion-label>Protein: 8g</ion-label>
-        </ion-list-header>
-        <ion-progress-bar color="basic" value="0.2"></ion-progress-bar>
-      </ion-list>
-      <ion-list class="progress">
-        <ion-list-header>
-          <ion-label>Carbs: 36g</ion-label>
-        </ion-list-header>
-        <ion-progress-bar color="basic" value="0.6"></ion-progress-bar>
-      </ion-list>
-      <ion-list class="progress">
-        <ion-list-header>
-          <ion-label>Fats: 9g</ion-label>
-        </ion-list-header>
-        <ion-progress-bar color="basic" value="0.3"></ion-progress-bar>
-      </ion-list>
-    </div>
-  </div>
-  <div class="section ingredients">
-    <div class="section-header">
-      <h2>Ingredients</h2>
-      <ion-icon name="add-circle-outline"></ion-icon>
-    </div>
-    <div class="section-content">
-      <ion-list lines="none">
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Rolled Oats</ion-label>
-            <ion-checkbox color="dark" slot="start" checked></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Low-Fat Milk</ion-label>
-            <ion-checkbox slot="start" checked></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Honey</ion-label>
-            <ion-checkbox slot="start" checked></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Banana</ion-label>
-            <ion-checkbox slot="start"></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Vanilla Extract</ion-label>
-            <ion-checkbox slot="start"></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Ground Cinnamon</ion-label>
-            <ion-checkbox slot="start"></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Cumin</ion-label>
-            <ion-checkbox slot="start"></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Flour</ion-label>
-            <ion-checkbox slot="start"></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Salt</ion-label>
-            <ion-checkbox slot="start"></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Thyme</ion-label>
-            <ion-checkbox slot="start"></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-list>
-    </div>
-  </div>
-  <div class="section instructions">
-    <div class="section-header">
-      <h2>Instructions</h2>
-    </div>
-    <div class="section-content">
-      <ol>
-        <li class="checked">Add all of the ingredients to two bowls or jars, cover, and stir to combine. Refrigerate for 6-8 hours.</li>
-        <li>When ready to serve, heat the oats in microwave or enjoy chilled.</li>
-        <li>When ready to serve, heat the oats in microwave or enjoy chilled.</li>
-      </ol> 
+    <div class="section instructions">
+      <div class="section-header">
+        <h2>Instructions</h2>
+      </div>
+      <div class="section-content">
+        <ol>
+          <li class="checked" *ngFor="let item of recipe.instructions">
+            {{item}}
+          </li>
+        </ol>
+      </div>
     </div>
   </div>
 </ion-content>

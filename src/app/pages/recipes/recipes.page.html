@@ -38,7 +38,7 @@
     <div *ngIf="recipes_breakfasts" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let item of recipes_breakfasts">
-          <ion-card class="recipe">
+          <ion-card class="recipe" (click)="goRecipePage(item.id)">
             <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
               <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
@@ -57,7 +57,7 @@
     <div *ngIf="recipes_lunchs" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let item of recipes_lunchs">
-          <ion-card class="recipe">
+          <ion-card class="recipe" (click)="goRecipePage(item.id)">
             <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
               <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
@@ -76,7 +76,7 @@
     <div *ngIf="recipes_dinners" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let item of recipes_dinners">
-          <ion-card class="recipe">
+          <ion-card class="recipe" (click)="goRecipePage(item.id)">
             <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
               <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
@@ -95,7 +95,7 @@
     <div *ngIf="recipes_snacks" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let item of recipes_snacks">
-          <ion-card class="recipe">
+          <ion-card class="recipe" (click)="goRecipePage(item.id)">
             <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
               <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
@@ -114,7 +114,7 @@
     <div *ngIf="recipes_drinks" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let item of recipes_drinks">
-          <ion-card class="recipe">
+          <ion-card class="recipe" (click)="goRecipePage(item.id)">
             <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
               <ion-card-subtitle>{{item.type}}</ion-card-subtitle>

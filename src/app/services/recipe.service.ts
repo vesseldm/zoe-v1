@@ -20,4 +20,18 @@ export class RecipeService {
       })
     );
   }
+
+  getRecipe(recipeId) {
+    return this.afs
+      .collection("recipes")
+      .doc(recipeId)
+      .valueChanges();
+  }
+
+  getIngredient(ingredientId) {
+    return this.afs
+      .collection("ingredients")
+      .doc(ingredientId)
+      .valueChanges();
+  }
 }
