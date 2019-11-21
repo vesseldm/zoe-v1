@@ -74,3 +74,22 @@ ion-label {
 ion-button {
   margin: 24px 16px;
 }
+p {
+  color: #222222;
+  line-height: 21px;
+}
+.progress {
+  margin-bottom: 8px;
+  ion-list-header {
+    padding-left: 0;
+    min-height: 30px;
+  }
+  ion-label {
+    text-transform: none;
+    color: #222;
+    font-weight: 300;
+  }
+  ion-progress-bar {
+    height: 5px;
+  }
+}
