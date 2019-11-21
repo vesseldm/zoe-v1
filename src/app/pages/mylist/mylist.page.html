@@ -12,97 +12,18 @@
     </div>
     <div class="section-content">
       <ion-list lines="none">
-        <ion-item-sliding>
+        <ion-item-sliding *ngFor="let food of foods">
           <ion-item>
-            <ion-label>Rolled Oats</ion-label>
-            <ion-checkbox color="dark" slot="start" checked></ion-checkbox>
+            <ion-label>{{food.name}}</ion-label>
+            <div class="line" *ngIf="food.checked"></div>
+            <ion-checkbox color="dark" slot="start" [(ngModel)]="food.checked" (ionChange)="checked(food, $event)"></ion-checkbox>
           </ion-item>
           <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Low-Fat Milk</ion-label>
-            <ion-checkbox slot="start" checked></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Honey</ion-label>
-            <ion-checkbox slot="start" checked></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Banana</ion-label>
-            <ion-checkbox slot="start"></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Vanilla Extract</ion-label>
-            <ion-checkbox slot="start"></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Ground Cinnamon</ion-label>
-            <ion-checkbox slot="start"></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Cumin</ion-label>
-            <ion-checkbox slot="start"></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Flour</ion-label>
-            <ion-checkbox slot="start"></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Salt</ion-label>
-            <ion-checkbox slot="start"></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-label>Thyme</ion-label>
-            <ion-checkbox slot="start"></ion-checkbox>
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>Remove</ion-item-option>
+            <ion-item-option (click)="remove(food)">Remove</ion-item-option>
           </ion-item-options>
         </ion-item-sliding>
       </ion-list>
+      <ion-button class="btn-basic" color="basic" shape="round" (click)="done(food)">Done</ion-button>
     </div>
   </div>
 </ion-content>

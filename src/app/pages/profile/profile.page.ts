@@ -19,7 +19,8 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
     this.userService.user$.subscribe(user => {
-      this.user = user;
+      if(user)
+        this.user = user;
     });
   }
 
@@ -30,7 +31,5 @@ export class ProfilePage implements OnInit {
     }, (error) => {
       console.log("Logout error", error);
     });
-  }
-
-  
+  }  
 }

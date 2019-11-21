@@ -21,7 +21,15 @@ ion-content {
   }
   .section-content {
     padding-bottom: 24px;
+    text-align: center;
   }
+}
+.line{
+  width: 100px;
+    background: gray;
+    height: 2px;
+    left: 0px;
+    position: absolute;
 }
 .alert {
   --border-color: #b9ad14;
