@@ -9,23 +9,18 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-
   user: any;
 
   constructor(
     public router: Router,
     public authService: AuthService,
     public userService: UserService
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.getUser();
-  }
-
-  getUser() {
-    if (this.userService.getUser()) {
-      this.user = this.userService.getUser();
-    }
+    this.userService.user$.subscribe(user => {
+      this.user = user;
+    });
   }
 
   logout(){
