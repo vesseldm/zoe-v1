@@ -52,3 +52,25 @@ ion-col {
   text-align: center;
   line-height: 0;
 }
+ion-list {
+  margin-bottom: 0;
+}
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}
+ion-label {
+  margin: 0;
+}
+.label {
+  font-weight: 300;
+  color: #575859;
+}
+.value {
+  color: #313233;
+  font-weight: 300;
+  text-align: right;
+}
+ion-button {
+  margin: 24px 16px;
+}
