@@ -15,15 +15,15 @@
         </ion-item>
         <ion-item>
           <ion-label class="label">Last Name</ion-label>
-          <ion-label class="value">Arilotta</ion-label>
+          <ion-label class="value">{{ user?.lastName }}</ion-label>
         </ion-item>
         <ion-item href>
           <ion-label class="label">Measurements</ion-label>
-          <ion-label class="value">Metrics</ion-label>
+          <ion-label class="value">{{ user?.measurements }}</ion-label>
         </ion-item>
         <ion-item lines="none">
           <ion-label class="label">Mobile</ion-label>
-          <ion-label class="value">(585) 204-0421</ion-label>
+          <ion-label class="value">{{ user?.mobile }}</ion-label>
         </ion-item>
       </ion-list>
     </div>
@@ -36,19 +36,19 @@
       <ion-list>
         <ion-item>
           <ion-label class="label">Height</ion-label>
-          <ion-label class="value">5’ 11”</ion-label>
+          <ion-label class="value">{{ user?.height }}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label class="label">Weight</ion-label>
-          <ion-label class="value">165 lbs</ion-label>
+          <ion-label class="value">{{ user?.weight }}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label class="label">Sex</ion-label>
-          <ion-label class="value">Male</ion-label>
+          <ion-label class="value">{{ user?.sex }}</ion-label>
         </ion-item>
         <ion-item href>
           <ion-label class="label">Meal Plan Type</ion-label>
-          <ion-label class="value">Regular</ion-label>
+          <ion-label class="value">{{ user?.meal_plan }}</ion-label>
         </ion-item>
         <ion-item href>
           <ion-label class="label">Food Preferences</ion-label>
@@ -73,11 +73,11 @@
         </ion-item>
         <ion-item>
           <ion-label class="label">Weekly Plan</ion-label>
-          <ion-label class="value">Sundays @ 7:00am</ion-label>
+          <ion-label class="value">{{ user?.weekly_plan }}</ion-label>
         </ion-item>
         <ion-item lines="none">
           <ion-label class="label">Meal Review</ion-label>
-          <ion-toggle color="success" checked></ion-toggle>
+          <ion-toggle *ngIf="user" color="success" [(ngModel)]="user.review"></ion-toggle>
         </ion-item>
       </ion-list>
     </div>
@@ -90,11 +90,11 @@
       <ion-list>
         <ion-item>
           <ion-label class="label">Newsletters</ion-label>
-          <ion-toggle color="success" checked></ion-toggle>
+          <ion-toggle *ngIf="user" color="success" [(ngModel)]="user.newsletters"></ion-toggle>
         </ion-item>
         <ion-item lines="none">
           <ion-label class="label">Updates</ion-label>
-          <ion-toggle color="success"></ion-toggle>
+          <ion-toggle *ngIf="user" color="success" [(ngModel)]="user.updates"></ion-toggle>
         </ion-item>
       </ion-list>
     </div>

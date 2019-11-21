@@ -16,8 +16,7 @@
           <ion-item>
             <ion-label>{{food.name}}</ion-label>
             <div class="line" *ngIf="food.checked"></div>
-            <ion-checkbox color="dark" slot="start" *ngIf="food.checked" checked (ionChange)="checked(food, $event)"></ion-checkbox>
-            <ion-checkbox color="dark" slot="start" *ngIf="!food.checked" unchecked (ionChange)="checked(food, $event)"></ion-checkbox>
+            <ion-checkbox color="dark" slot="start" [(ngModel)]="food.checked" (ionChange)="checked(food, $event)"></ion-checkbox>
           </ion-item>
           <ion-item-options>
             <ion-item-option (click)="remove(food)">Remove</ion-item-option>
