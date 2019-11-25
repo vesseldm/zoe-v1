@@ -25,23 +25,23 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.afAuth.user.subscribe(
-        user => {
-          if (user) {
-            this.router.navigate(['/home']);
-          } else {
-            this.router.navigate(['/']);
-          }
-        },
-        err => {
-          this.router.navigate(['/']);
-        },
-        () => {
-          this.splashScreen.hide();
-        }
-      );
+      // this.afAuth.user.subscribe(
+      //   user => {
+      //     if (user) {
+      //       this.router.navigate(['/home']);
+      //     } else {
+      //       this.router.navigate(['/']);
+      //     }
+      //   },
+      //   err => {
+      //     this.router.navigate(['/']);
+      //   },
+      //   () => {
+      //     this.splashScreen.hide();
+      //   }
+      // );
       this.statusBar.styleDefault();
-      // this.splashScreen.hide();
+      this.splashScreen.hide();
     });
   }
 }
