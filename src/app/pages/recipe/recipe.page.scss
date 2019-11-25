@@ -127,12 +127,22 @@ p {
   font-weight: 300;
   line-height: 21px;
   color: #222222;
+  position: relative;
   ol {
     padding-left: 17px;
   }
   li {
     padding-left: 10px;
     margin-bottom: 5px;
+  }
+  ion-button {
+    position: absolute;
+    bottom: -20px;
+    right: 20px;
+    --border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 0;
   }
 }
 

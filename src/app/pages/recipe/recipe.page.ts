@@ -50,4 +50,8 @@ export class RecipePage implements OnInit {
   goBack() {
     this.router.navigateByUrl("/home/recipes");
   }
+
+  addRecipe() {
+    console.log('add recipe function');
+  }
 }
