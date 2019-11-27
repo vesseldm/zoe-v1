@@ -34,4 +34,8 @@ export class RecipeService {
       .doc(ingredientId)
       .valueChanges();
   }
+
+  addRecipe(recipeId) {
+    console.log(recipeId);
+  }
 }

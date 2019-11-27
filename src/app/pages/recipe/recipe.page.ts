@@ -52,6 +52,6 @@ export class RecipePage implements OnInit {
   }
 
   addRecipe() {
-    console.log('add recipe function');
+    this.recipeService.addRecipe(this.recipeId);
   }
 }
