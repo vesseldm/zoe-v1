@@ -21,6 +21,8 @@ export class TodayPage implements OnInit {
   nutritional: any;
   ingredients: any;
 
+  notification: any;
+
   constructor(public router: Router, public userService: UserService) {}
 
   ngOnInit() {
@@ -57,6 +59,8 @@ export class TodayPage implements OnInit {
         });
       }
     });
+
+    this.notification = "Lorem ipsum dolor sit amet, <br /> consectetur adipiscing elit. Nulla quis lectus dolor. Sed et dolor eu elit viverra vestibulum eu vitae velit.";
   }
 
   initNutritional(recipes) {
