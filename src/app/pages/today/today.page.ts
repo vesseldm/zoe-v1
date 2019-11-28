@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { combineLatest } from 'rxjs';
+import { RecipeService } from "../../services/recipe.service";
 
 @Component({
   selector: 'app-today',
@@ -23,7 +24,11 @@ export class TodayPage implements OnInit {
 
   notification: any;
 
-  constructor(public router: Router, public userService: UserService) {}
+  constructor(
+    public router: Router, 
+    public userService: UserService,
+    public recipeService: RecipeService
+  ) {}
 
   ngOnInit() {
     this.nutritional = {
@@ -50,6 +55,9 @@ export class TodayPage implements OnInit {
             data => {
               const [recipes, ingredients] = data;
               this.recipes = recipes;
+              this.recipeService.recipes$.subscribe(recipes => {
+                this.recipes = recipes;
+              });
               this.ingredients = ingredients;
               if (recipes) {
                 this.initNutritional(recipes);
