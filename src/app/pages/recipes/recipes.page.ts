@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { RecipeService } from "../../services/recipe.service";
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: "app-recipes",
@@ -14,6 +15,7 @@ export class RecipesPage implements OnInit {
   recipes_dinners: any;
   recipes_snacks: any;
   recipes_drinks: any;
+  user: any;
 
   slideOpts = {
     slidesPerView: 1.7,
@@ -21,7 +23,7 @@ export class RecipesPage implements OnInit {
     loop: true
   };
 
-  constructor(public router: Router, public recipeService: RecipeService) {}
+  constructor(public router: Router, public recipeService: RecipeService, public userService: UserService) { }
 
   ngOnInit() {
     this.recipeService.recipes$.subscribe(recipes => {
@@ -58,6 +60,10 @@ export class RecipesPage implements OnInit {
             break;
         }
       });
+    });
+
+    this.userService.user$.subscribe(user => {
+      if (user) this.user = user;
     });
   }
 

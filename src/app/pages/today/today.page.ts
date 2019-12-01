@@ -21,14 +21,14 @@ export class TodayPage implements OnInit {
   currentDay: any;
   nutritional: any;
   ingredients: any;
-
+  user: any;
   notification: any;
 
   constructor(
-    public router: Router, 
+    public router: Router,
     public userService: UserService,
     public recipeService: RecipeService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.nutritional = {
@@ -66,6 +66,10 @@ export class TodayPage implements OnInit {
           );
         });
       }
+
+      this.userService.user$.subscribe(user => {
+        if (user) this.user = user;
+      });
     });
 
     this.notification = "Lorem ipsum dolor sit amet, <br /> consectetur adipiscing elit. Nulla quis lectus dolor. Sed et dolor eu elit viverra vestibulum eu vitae velit.";
