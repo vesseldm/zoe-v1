@@ -62,6 +62,7 @@ export class TodayPage implements OnInit {
               if (recipes) {
                 this.initNutritional(recipes);
               }
+              this.initRecipes();
             }
           );
         });
@@ -94,6 +95,12 @@ export class TodayPage implements OnInit {
           }
         });
       }
+    });
+  }
+
+  initRecipes() {
+    this.recipeService.initRecipes(this.user.id).then(res => {
+      console.log(res);
     });
   }
 

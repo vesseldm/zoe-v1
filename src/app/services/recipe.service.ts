@@ -38,4 +38,11 @@ export class RecipeService {
   addRecipe(recipeId) {
     console.log(recipeId);
   }
+
+  initRecipes(userID) {
+    return this.afs.collection("mealPlan").add({
+      userID: userID,
+      recipeID: "recipe id"
+    });
+  }
 }
