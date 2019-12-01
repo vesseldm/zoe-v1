@@ -41,12 +41,28 @@ export class UserService {
     let curr = new Date(date);
     let startDate = new Date(curr.getFullYear(), curr.getMonth(), curr.getDate());
     let endDate = new Date(curr.getFullYear(), curr.getMonth(), curr.getDate() + 1);
+    // return this.afs
+    //   .collection<any>('recipesplan', ref =>
+    //     ref
+    //       .where('userId', '==', userId)
+    //       .where('time', '>=', startDate)
+    //       .where('time', '<', endDate)
+    //   )
+    //   .snapshotChanges()
+    //   .pipe(
+    //     map(actions =>
+    //       actions.map(a => {
+    //         const data = a.payload.doc.data();
+    //         return { ...data };
+    //       })
+    //     )
+    //   );
     return this.afs
-      .collection<any>('recipesplan', ref =>
+      .collection<any>('mealPlan', ref =>
         ref
-          .where('userId', '==', userId)
-          .where('time', '>=', startDate)
-          .where('time', '<', endDate)
+          .where('userID', '==', userId)
+          .where('date', '>=', startDate)
+          .where('date', '<', endDate)
       )
       .snapshotChanges()
       .pipe(

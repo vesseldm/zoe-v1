@@ -50,14 +50,14 @@ export class TodayPage implements OnInit {
     this.userService.user$.subscribe(user => {
       if (user && user.id) {
         this.userService.getUserPlans(user.id, this.currentDay.toString()).subscribe(plans => {
-          const recipeIds = plans.map(plan => plan.recipeId);
+          const recipeIds = plans.map(plan => plan.recipeID);
           combineLatest([this.userService.getPlanedRecipes(recipeIds), this.userService.getAllIngredients()]).subscribe(
             data => {
               const [recipes, ingredients] = data;
               this.recipes = recipes;
-              this.recipeService.recipes$.subscribe(recipes => {
-                this.recipes = recipes;
-              });
+              // this.recipeService.recipes$.subscribe(recipes => {
+              //   this.recipes = recipes;
+              // });
               this.ingredients = ingredients;
               if (recipes) {
                 this.initNutritional(recipes);
