@@ -64,6 +64,26 @@ const routes: Routes = [
     loadChildren: () =>
       import("./pages/recipe/recipe.module").then(m => m.RecipePageModule),
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./admin/dashboard/dashboard.module').then(m => m.DashboardPageModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('./admin/users/users.module').then( m => m.UsersPageModule)
+  },
+  {
+    path: 'analytics',
+    loadChildren: () => import('./admin/analytics/analytics.module').then( m => m.AnalyticsPageModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./admin/settings/settings.module').then( m => m.SettingsPageModule)
   }
 ];
 @NgModule({
@@ -72,4 +92,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

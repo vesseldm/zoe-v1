@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <img class="logo" src="/assets/img/logo.png" alt="Zoë">
+    <div class="company-detail">
+      <ion-label>Admin</ion-label>
+      <img class="avatar" src="/assets/img/logo.png" alt="Zoë">
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="top">
+      <ion-tab-button tab="dashboard" class="menu">
+        <ion-label>Dashboard</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="users">
+        <ion-label>Users</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="analytics">
+        <ion-label>Analytics</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="settings">
+        <ion-label>Settings</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="logout" style="margin-left: auto;" (click)="logout()">
+        <ion-label>Logout</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>
