@@ -7,23 +7,23 @@
       <ion-list>
         <ion-item>
           <ion-label class="label">Email</ion-label>
-          <ion-label class="value">{{ user?.email }}</ion-label>
+          <ion-input [(ngModel)]="user && user.email" type="email"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label class="label">First Name</ion-label>
-          <ion-label class="value">{{ user?.firstName }}</ion-label>
+          <ion-input [(ngModel)]="user && user.firstName"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label class="label">Last Name</ion-label>
-          <ion-label class="value">{{ user?.lastName }}</ion-label>
+          <ion-input [(ngModel)]="user && user.lastName"></ion-input>
         </ion-item>
         <ion-item href>
           <ion-label class="label">Measurements</ion-label>
-          <ion-label class="value">{{ user?.measurements }}</ion-label>
+          <ion-input [(ngModel)]="user && user.measurements"></ion-input>
         </ion-item>
         <ion-item lines="none">
-          <ion-label class="label">Mobile</ion-label>
-          <ion-label class="value">{{ user?.mobile }}</ion-label>
+          <ion-label class="label" type="tel">Mobile</ion-label>
+          <ion-input [(ngModel)]="user && user.mobile"></ion-input>
         </ion-item>
       </ion-list>
     </div>
@@ -36,19 +36,27 @@
       <ion-list>
         <ion-item>
           <ion-label class="label">Height</ion-label>
-          <ion-label class="value">{{ user?.height }}</ion-label>
+          <ion-input [(ngModel)]="user && user.height"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label class="label">Weight</ion-label>
-          <ion-label class="value">{{ user?.weight }}</ion-label>
+          <ion-input [(ngModel)]="user && user.weight"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label class="label">Sex</ion-label>
-          <ion-label class="value">{{ user?.sex }}</ion-label>
+          <!-- <ion-input [(ngModel)]="user && user.sex"></ion-input> -->
+          <ion-select placeholder="Select One">
+            <ion-select-option value="m">Male</ion-select-option>
+            <ion-select-option value="f">Female</ion-select-option>
+          </ion-select>
         </ion-item>
-        <ion-item href>
+        <ion-item>
           <ion-label class="label">Meal Plan Type</ion-label>
-          <ion-label class="value">{{ user?.meal_plan }}</ion-label>
+          <!-- <ion-input [(ngModel)]="user && user.meal_plan"></ion-input> -->
+          <ion-select placeholder="Select One">
+            <ion-select-option value="m">Regular</ion-select-option>
+            <ion-select-option value="f">Normal</ion-select-option>
+          </ion-select>
         </ion-item>
         <ion-item href>
           <ion-label class="label">Food Preferences</ion-label>
