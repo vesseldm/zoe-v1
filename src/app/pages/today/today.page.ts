@@ -40,7 +40,7 @@ export class TodayPage implements OnInit {
     this.weekDays = [];
     let curr = new Date();
     this.currentDay = new Date();
-    let first_day = curr.getDate() - curr.getDay() + 1;
+    let first_day = curr.getDate() - curr.getDay();
     for (let i = 0; i < 7; i++) {
       let next = first_day + i;
       let next_day = new Date(curr.setDate(next));
