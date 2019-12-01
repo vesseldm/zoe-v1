@@ -4,9 +4,6 @@ ion-header {
 ion-toolbar {
     height: 100px;
     --background: transparent;
-    padding: 20px 30px !important;
-    max-width: 1200px;
-    margin: auto;
 
     .logo {
         width: 127px;
@@ -22,9 +19,6 @@ ion-toolbar {
 ion-tab-bar {
     justify-content: left;
     --background: transparent;
-    padding: 20px 30px !important;
-    max-width: 1200px;
-    margin: auto;
 }
 
 ion-tab-button {
