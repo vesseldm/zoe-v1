@@ -19,6 +19,36 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'users',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../users/users.module').then(m => m.UsersPageModule)
+          }
+        ]
+      },
+      {
+        path: 'analytics',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../analytics/analytics.module').then(m => m.AnalyticsPageModule)
+          }
+        ]
+      },
+      {
+        path: 'settings',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../settings/settings.module').then(m => m.SettingsPageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full'

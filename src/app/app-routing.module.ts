@@ -72,6 +72,18 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./admin/tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('./admin/users/users.module').then( m => m.UsersPageModule)
+  },
+  {
+    path: 'analytics',
+    loadChildren: () => import('./admin/analytics/analytics.module').then( m => m.AnalyticsPageModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./admin/settings/settings.module').then( m => m.SettingsPageModule)
   }
 ];
 @NgModule({
