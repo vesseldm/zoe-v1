@@ -12,66 +12,68 @@ export class MylistPage implements OnInit {
 
   foods: any[] = [];
   userInfo: any;
+  user: any;
 
   constructor(
     public afAuth: AngularFireAuth,
     public afs: AngularFirestore,
     public userService: UserService
-  ) 
-  { 
+  ) {
     let _this = this;
 
     this.userService.user$.subscribe(user => {
       this.userInfo = user;
       let docRef = _this.afs.collection("users").doc(user.id);
 
-      docRef.get().subscribe(querySnapshot =>{
-        if(querySnapshot.data().checkedFoods)
+      docRef.get().subscribe(querySnapshot => {
+        if (querySnapshot.data().checkedFoods)
           _this.foods = querySnapshot.data().checkedFoods;
-        else{
-          this.afs.collection('ingredients').get().subscribe( querySnapshot => {
+        else {
+          this.afs.collection('ingredients').get().subscribe(querySnapshot => {
             let data = [];
-            querySnapshot.forEach(function(doc) {
+            querySnapshot.forEach(function (doc) {
               // doc.data() is never undefined for query doc snapshots
               data.push(doc.data());
             });
-      
+
             _this.foods = data;
             _this.foods.forEach((item, index) => {
-              item.checked = true;  
+              item.checked = true;
             });
-          });    
+          });
         }
       });
+    });
+
+    this.userService.user$.subscribe(user => {
+      if (user) this.user = user;
     });
   }
 
   ngOnInit() {
-    
+
   }
 
-  checked(food, e){
+  checked(food, e) {
     this.foods.forEach((item, index) => {
-      if(item.id == food.id)
-      {
-        if(e.detail.checked)
+      if (item.id == food.id) {
+        if (e.detail.checked)
           item.checked = true;
         else
           item.checked = false;
-      }          
+      }
     });
   }
 
-  remove(food){
+  remove(food) {
     this.foods.forEach((item, index) => {
-      if(item.id == food.id)
-      {
+      if (item.id == food.id) {
         this.foods.splice(index, 1);
-      }          
+      }
     });
   }
 
-  done(){
+  done() {
     let Ref = this.afs.collection("users");
     Ref.doc(this.userInfo.id).update({
       checkedFoods: this.foods

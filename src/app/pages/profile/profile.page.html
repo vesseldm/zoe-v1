@@ -7,23 +7,25 @@
       <ion-list>
         <ion-item>
           <ion-label class="label">Email</ion-label>
-          <ion-label class="value">{{ user?.email }}</ion-label>
+          <ion-input [(ngModel)]="user && user.email" type="email"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label class="label">First Name</ion-label>
-          <ion-label class="value">{{ user?.firstName }}</ion-label>
+          <ion-input [(ngModel)]="user && user.firstName"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label class="label">Last Name</ion-label>
-          <ion-label class="value">{{ user?.lastName }}</ion-label>
+          <ion-input [(ngModel)]="user && user.lastName"></ion-input>
         </ion-item>
-        <ion-item href>
+        <ion-item>
           <ion-label class="label">Measurements</ion-label>
-          <ion-label class="value">{{ user?.measurements }}</ion-label>
+          <ion-select [(ngModel)]="user && user.measurements">
+            <ion-select-option value="{{item}}" *ngFor="let item of measurements">{{item}}</ion-select-option>
+          </ion-select>
         </ion-item>
         <ion-item lines="none">
-          <ion-label class="label">Mobile</ion-label>
-          <ion-label class="value">{{ user?.mobile }}</ion-label>
+          <ion-label class="label" type="tel">Mobile</ion-label>
+          <ion-input [(ngModel)]="user && user.mobile"></ion-input>
         </ion-item>
       </ion-list>
     </div>
@@ -36,28 +38,45 @@
       <ion-list>
         <ion-item>
           <ion-label class="label">Height</ion-label>
-          <ion-label class="value">{{ user?.height }}</ion-label>
+          <ion-select [(ngModel)]="user && user.height">
+            <ion-select-option value="{{item}}" *ngFor="let item of height">{{item}}</ion-select-option>
+          </ion-select>
         </ion-item>
         <ion-item>
           <ion-label class="label">Weight</ion-label>
-          <ion-label class="value">{{ user?.weight }}</ion-label>
+          <ion-select [(ngModel)]="user && user.weight">
+            <ion-select-option value="{{item}}" *ngFor="let item of weight">{{item}}</ion-select-option>
+          </ion-select>
         </ion-item>
         <ion-item>
           <ion-label class="label">Sex</ion-label>
-          <ion-label class="value">{{ user?.sex }}</ion-label>
+          <ion-select [(ngModel)]="user && user.sex">
+            <ion-select-option value="{{item}}" *ngFor="let item of sex">{{item}}</ion-select-option>
+          </ion-select>
         </ion-item>
-        <ion-item href>
+        <ion-item>
           <ion-label class="label">Meal Plan Type</ion-label>
-          <ion-label class="value">{{ user?.meal_plan }}</ion-label>
+          <ion-select [(ngModel)]="user && user.meal_plan">
+            <ion-select-option value="{{item}}" *ngFor="let item of meal_plan">{{item}}</ion-select-option>
+          </ion-select>
         </ion-item>
-        <ion-item href>
+        <ion-item>
           <ion-label class="label">Food Preferences</ion-label>
+          <ion-select [(ngModel)]="user && user.food_reference">
+            <ion-select-option value="{{item}}" *ngFor="let item of food_reference">{{item}}</ion-select-option>
+          </ion-select>
         </ion-item>
-        <ion-item href>
+        <ion-item>
           <ion-label class="label">Allergies</ion-label>
+          <ion-select [(ngModel)]="user && user.allergies">
+            <ion-select-option value="{{item}}" *ngFor="let item of allergies">{{item}}</ion-select-option>
+          </ion-select>
         </ion-item>
-        <ion-item href lines="none">
+        <ion-item lines="none">
           <ion-label class="label">Medical History</ion-label>
+          <ion-select [(ngModel)]="user && user.medical_history">
+            <ion-select-option value="{{item}}" *ngFor="let item of medical_history">{{item}}</ion-select-option>
+          </ion-select>
         </ion-item>
       </ion-list>
     </div>
@@ -68,8 +87,11 @@
     </div>
     <div class="section-content">
       <ion-list>
-        <ion-item href>
+        <ion-item>
           <ion-label class="label">Meal Times</ion-label>
+          <ion-select [(ngModel)]="user && user.meal_times">
+            <ion-select-option value="{{item}}" *ngFor="let item of meal_times">{{item}}</ion-select-option>
+          </ion-select>
         </ion-item>
         <ion-item>
           <ion-label class="label">Weekly Plan</ion-label>
@@ -117,5 +139,6 @@
       </ion-list>
     </div>
   </div>
+  <ion-button (click)="save()" class="btn-basic" color="basic" expand="block" shape="round">Save</ion-button>
   <ion-button (click)="logout()" class="btn-basic" color="basic" expand="block" shape="round">Log Out</ion-button>
 </ion-content>
