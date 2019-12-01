@@ -100,4 +100,8 @@ export class TodayPage implements OnInit {
   goProfile() {
     this.router.navigateByUrl('/home/profile');
   }
+
+  editRecipes() {
+    this.router.navigateByUrl('/home/recipes');
+  }
 }
