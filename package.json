@@ -30,6 +30,7 @@
     "cordova-plugin-googleplus": "^8.2.0",
     "core-js": "^2.5.4",
     "firebase": "^7.4.0",
+    "ng-zorro-antd-mobile": "^1.0.1",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "twitter-connect-plugin": "^0.6.0",

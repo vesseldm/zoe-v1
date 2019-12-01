@@ -18,39 +18,46 @@ export class AuthService {
     public afAuth: AngularFireAuth,
     public fb: Facebook,
     public googlePlus: GooglePlus,
-    public tw : TwitterConnect,
+    public tw: TwitterConnect,
     public platform: Platform,
     private firestore: AngularFirestore
   ) { }
 
-  doRegister(value){
+  doRegister(value) {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
-      .then(
-        res => {
-          this.firestore.collection('users').doc(res.user.uid).set({
-            id: res.user.uid,
-            name: value.name,
-            email: value.email
-          });
-          resolve(res);
-        },
-        err => reject(err))
-    })
-  }
- 
-   doLogin(value){
-    return new Promise<any>((resolve, reject) => {
-      firebase.auth().signInWithEmailAndPassword(value.email, value.password)
-      .then(
-        res => resolve(res),
-        err => reject(err))
+        .then(
+          res => {
+            this.firestore.collection('users').doc(res.user.uid).set({
+              id: res.user.uid,
+              name: value.name,
+              email: value.email
+            });
+            resolve(res);
+          },
+          err => reject(err))
     })
   }
 
-  doLogout(){
+  doUpdateUser(user) {
+    return new Promise<any>((resolve, reject) => {
+      this.firestore.collection('users').doc(user.id).update(user);
+      resolve(user);
+    })
+  }
+
+  doLogin(value) {
+    return new Promise<any>((resolve, reject) => {
+      firebase.auth().signInWithEmailAndPassword(value.email, value.password)
+        .then(
+          res => resolve(res),
+          err => reject(err))
+    })
+  }
+
+  doLogout() {
     return new Promise((resolve, reject) => {
-      if(firebase.auth().currentUser){
+      if (firebase.auth().currentUser) {
         this.afAuth.auth.signOut()
         resolve();
       }
@@ -60,40 +67,40 @@ export class AuthService {
     });
   }
 
-  doFacebookLogin(){
+  doFacebookLogin() {
     return new Promise<FirebaseUserModel>((resolve, reject) => {
       if (this.platform.is('cordova')) {
         //["public_profile"] is the array of permissions, you can add more if you need
         this.fb.login(["public_profile"])
-        .then((response) => {
-          const facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
-          firebase.auth().signInWithCredential(facebookCredential)
-            .then(user => resolve());
-        }, err => reject(err)
-        );
+          .then((response) => {
+            const facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
+            firebase.auth().signInWithCredential(facebookCredential)
+              .then(user => resolve());
+          }, err => reject(err)
+          );
       }
       else {
         this.afAuth.auth
-        .signInWithPopup(new firebase.auth.FacebookAuthProvider())
-        .then(result => {
-          //Default facebook img is too small and we need a bigger image
-          var bigImgUrl = "https://graph.facebook.com/" + result.additionalUserInfo.profile + "/picture?height=500";
-          // update profile to save the big fb profile img.
-          firebase.auth().currentUser.updateProfile({
-            displayName: result.user.displayName,
-            photoURL: bigImgUrl
-          }).then(res => resolve()
-          ,(err) => {
+          .signInWithPopup(new firebase.auth.FacebookAuthProvider())
+          .then(result => {
+            //Default facebook img is too small and we need a bigger image
+            var bigImgUrl = "https://graph.facebook.com/" + result.additionalUserInfo.profile + "/picture?height=500";
+            // update profile to save the big fb profile img.
+            firebase.auth().currentUser.updateProfile({
+              displayName: result.user.displayName,
+              photoURL: bigImgUrl
+            }).then(res => resolve()
+              , (err) => {
+                reject(err);
+              });
+          }, (err) => {
             reject(err);
-          });
-        },(err) => {
-          reject(err);
-        })
+          })
       }
     })
   }
 
-  doGoogleLogin(){
+  doGoogleLogin() {
     return new Promise<FirebaseUserModel>((resolve, reject) => {
       if (this.platform.is('cordova')) {
         this.googlePlus.login({
@@ -103,26 +110,26 @@ export class AuthService {
         }).then((response) => {
           const googleCredential = firebase.auth.GoogleAuthProvider.credential(response.idToken);
           firebase.auth().signInWithCredential(googleCredential)
-          .then((user) => {
-            resolve();
-          });
-        },(err) => {
+            .then((user) => {
+              resolve();
+            });
+        }, (err) => {
           reject(err);
         });
       }
-      else{
+      else {
         this.afAuth.auth
-        .signInWithPopup(new firebase.auth.GoogleAuthProvider())
-        .then((user) => {
-           resolve()
-        },(err) => {
-         reject(err);
-       })
+          .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+          .then((user) => {
+            resolve()
+          }, (err) => {
+            reject(err);
+          })
       }
     })
   }
 
-  doTwitterLogin(){
+  doTwitterLogin() {
     return new Promise<FirebaseUserModel>((resolve, reject) => {
       // if we are in a mobile device we use the twitter native plugin
 
@@ -131,34 +138,34 @@ export class AuthService {
           .then((response) => {
             const twitterCredential = firebase.auth.TwitterAuthProvider.credential(response.token, response.secret);
             firebase.auth().signInWithCredential(twitterCredential)
-            .then(
-              user => resolve(),
-              error => reject(error)
-            );
+              .then(
+                user => resolve(),
+                error => reject(error)
+              );
           },
-          err => {
-            console.log(err);
-            reject(err);
-          }
-        );
+            err => {
+              console.log(err);
+              reject(err);
+            }
+          );
       }
       else {
         this.afAuth.auth
-        .signInWithPopup(new firebase.auth.TwitterAuthProvider())
-        .then(result => {
-          //Default twitter img is just 48x48px and we need a bigger image https://developer.twitter.com/en/docs/accounts-and-users/user-profile-images-and-banners
-          var bigImgUrl = (result.user.photoURL).replace('_normal', '_400x400');
+          .signInWithPopup(new firebase.auth.TwitterAuthProvider())
+          .then(result => {
+            //Default twitter img is just 48x48px and we need a bigger image https://developer.twitter.com/en/docs/accounts-and-users/user-profile-images-and-banners
+            var bigImgUrl = (result.user.photoURL).replace('_normal', '_400x400');
 
-          // update profile to save the big tw profile img.
-          firebase.auth().currentUser.updateProfile({
-            displayName: result.user.displayName,
-            photoURL: bigImgUrl
-          }).then(res => resolve(),(err) => {
+            // update profile to save the big tw profile img.
+            firebase.auth().currentUser.updateProfile({
+              displayName: result.user.displayName,
+              photoURL: bigImgUrl
+            }).then(res => resolve(), (err) => {
+              reject(err);
+            });
+          }, (err) => {
             reject(err);
-          });
-        },(err) => {
-          reject(err);
-        })
+          })
       }
     })
   }
