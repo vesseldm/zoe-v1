@@ -66,11 +66,17 @@
             <ion-select-option value="{{item}}" *ngFor="let item of food_reference">{{item}}</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item href>
+        <ion-item>
           <ion-label class="label">Allergies</ion-label>
+          <ion-select [(ngModel)]="user && user.allergies">
+            <ion-select-option value="{{item}}" *ngFor="let item of allergies">{{item}}</ion-select-option>
+          </ion-select>
         </ion-item>
-        <ion-item href lines="none">
+        <ion-item lines="none">
           <ion-label class="label">Medical History</ion-label>
+          <ion-select [(ngModel)]="user && user.medical_history">
+            <ion-select-option value="{{item}}" *ngFor="let item of medical_history">{{item}}</ion-select-option>
+          </ion-select>
         </ion-item>
       </ion-list>
     </div>
@@ -81,8 +87,11 @@
     </div>
     <div class="section-content">
       <ion-list>
-        <ion-item href>
+        <ion-item>
           <ion-label class="label">Meal Times</ion-label>
+          <ion-select [(ngModel)]="user && user.meal_times">
+            <ion-select-option value="{{item}}" *ngFor="let item of meal_times">{{item}}</ion-select-option>
+          </ion-select>
         </ion-item>
         <ion-item>
           <ion-label class="label">Weekly Plan</ion-label>
