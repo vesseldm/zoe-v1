@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login',
@@ -17,10 +18,17 @@ export class LoginPage implements OnInit {
   constructor(
     public router: Router,
     public formBuilder: FormBuilder,
-    public authService: AuthService
+    public authService: AuthService,
+    public afAuth: AngularFireAuth
   ) { }
 
   ngOnInit() {
+    this.afAuth.user.subscribe(user => {
+      if (user) {
+        this.goHome();
+      }
+    });
+    
     this.loginForm = this.formBuilder.group({
       email: new FormControl(),
       password: new FormControl(),
