@@ -1,0 +1,39 @@
+ion-header {
+    background: #4c586f;
+}
+ion-toolbar {
+    height: 100px;
+    --background: transparent;
+    padding: 20px 30px !important;
+    max-width: 1200px;
+    margin: auto;
+
+    .logo {
+        width: 127px;
+        resize: contain;
+    }
+    .avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 18px;
+    }
+}
+
+ion-tab-bar {
+    justify-content: left;
+    --background: transparent;
+    padding: 20px 30px !important;
+    max-width: 1200px;
+    margin: auto;
+}
+
+ion-tab-button {
+    max-width: 100px;
+
+    .menu {
+        width: 100px !important;
+    }
+}
+.company-detail {
+    float: right;
+}

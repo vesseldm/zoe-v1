@@ -67,7 +67,11 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: () => import('./admin/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+    loadChildren: () => import('./admin/dashboard/dashboard.module').then(m => m.DashboardPageModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/tabs/tabs.module').then(m => m.TabsPageModule)
   }
 ];
 @NgModule({
@@ -76,4 +80,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
