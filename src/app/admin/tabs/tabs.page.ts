@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-tabs',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    public router: Router,
+    public authService: AuthService,
+  ) { }
 
   ngOnInit() {
+  }
+
+  logout(){
+    this.authService.doLogout()
+    .then((res) => {
+      this.router.navigateByUrl('/');
+    }, (error) => {
+      console.log("Logout error", error);
+    });
   }
 
 }
