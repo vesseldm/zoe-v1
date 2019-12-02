@@ -25,6 +25,16 @@ const routes: Routes = [
             path: '',
             loadChildren: () =>
               import('../users/users.module').then(m => m.UsersPageModule)
+          },
+          {
+            path: 'group',
+            loadChildren: () =>
+              import('../group/group.module').then(m => m.GroupPageModule)
+          },
+          {
+            path: 'user', // --> :id
+            loadChildren: () =>
+              import('../user/user.module').then(m => m.UserPageModule)
           }
         ]
       },
