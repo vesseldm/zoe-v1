@@ -5,6 +5,9 @@ ion-avatar {
     width: 36px;
     height: 36px;
 }
+ion-input, ion-toggle {
+    text-align: right;
+}
 .section {
     border-radius: 10px;
     border: 1px solid #dddddd;
@@ -41,7 +44,7 @@ ion-avatar {
         }
     }
     .section-content {
-        padding: 0px 16px;
+        padding: 12px 16px;
         .count {
             font-size: 36px;
             font-weight: 300;
@@ -70,4 +73,7 @@ ion-avatar {
     font-size: 16px;
     font-weight: 300;
     line-height: 21px;
+}
+.no-padding {
+    padding-top: 0px !important;
 }
