@@ -1,9 +1,152 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>analytics</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-grid>
+    <ion-row class="top-margin">
+      <ion-col>
+        <div class="section">
+          <div class="section-header">
+            <div class="section-label">Total Users</div>
+            <div class="section-header-right">
+              <ion-icon name="arrow-round-down" class="down"></ion-icon>
+              <ion-label class="up">-12% </ion-label>
+            </div>
+          </div>
+          <div class="section-content">
+            <div class="count">{{users && users.length}}</div>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="section">
+          <div class="section-header">
+            <div class="section-label">Silver Users</div>
+            <div class="section-header-right">
+              <ion-icon name="arrow-round-up" class="up"></ion-icon>
+              <ion-label class="up">+10% </ion-label>
+            </div>
+          </div>
+          <div class="section-content">
+            <div class="count">{{silver_users && silver_users.length}}</div>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="section">
+          <div class="section-header">
+            <div class="section-label">Gold Users</div>
+            <div class="section-header-right">
+              <ion-icon name="arrow-round-up" class="up"></ion-icon>
+              <ion-label class="up">+4% </ion-label>
+            </div>
+          </div>
+          <div class="section-content">
+            <div class="count">{{gold_users && gold_users.length}}</div>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="section">
+          <div class="section-header">
+            <div class="section-label">Platinum Users</div>
+            <div class="section-header-right">
+              <ion-icon name="arrow-round-down" class="down"></ion-icon>
+              <ion-label class="up">-1% </ion-label>
+            </div>
+          </div>
+          <div class="section-content">
+            <div class="count">{{platinum_users && platinum_users.length}}</div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="8">
+        <ion-row>
+          <ion-col>
+            <div class="section">
+              <div class="section-header bottom-border content">
+                <div class="section-label">Nutritional Averages</div>
+                <div class="section-header-right">
 
+                </div>
+              </div>
+              <div class="section-content">
+                <ion-list>
+                  <ion-item>
+                    <ion-label class="label">Calories</ion-label>
+                    <ion-label class="right">
+                      2,183
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label class="label">Proteins</ion-label>
+                    <ion-label class="right">
+                      72g
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label class="label">Carbs</ion-label>
+                    <ion-label class="right">
+                      428g
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label class="label">Fats</ion-label>
+                    <ion-label class="right">
+                      16g
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="section">
+              <div class="section-header bottom-border content">
+                <div class="section-label">Usage Stats</div>
+                <div class="section-header-right">
+
+                </div>
+              </div>
+              <div class="section-content">
+                <ion-list>
+                  <ion-item>
+                    <ion-label class="label">Meals Made</ion-label>
+                    <ion-label class="right">
+                      172
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label class="label">Time in App</ion-label>
+                    <ion-label class="right">
+                      12h 8m
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label class="label">Most Active Recipe</ion-label>
+                    <ion-label class="right">
+                      Banana Walnut Ov…
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label class="label">Lorem Ipsum</ion-label>
+                    <ion-label class="right">
+                      Sit Amet
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            asdad
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="4">
+        sdfs
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
