@@ -55,7 +55,7 @@ export class TodayPage implements OnInit {
           // const recipeIds = plans.map(plan => plan.recipeID);
           let recipeIDs = [];
           for (let i = 0; i < plans.length; i++) {
-            for (let j = 0; j < plans.length; j++) {
+            for (let j = 0; j < plans[i].recipeIDs.length; j++) {
               recipeIDs.push(plans[i].recipeIDs[j]);
             }
           }
