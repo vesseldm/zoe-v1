@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { combineLatest } from 'rxjs';
 import { RecipeService } from "../../services/recipe.service";
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 
 @Component({
   selector: 'app-today',
@@ -31,6 +32,7 @@ export class TodayPage implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.nutritional = {
       calories: 0,
       protein: 0,
@@ -50,8 +52,14 @@ export class TodayPage implements OnInit {
     this.userService.user$.subscribe(user => {
       if (user && user.id) {
         this.userService.getUserPlans(user.id, this.currentDay.toString()).subscribe(plans => {
-          const recipeIds = plans.map(plan => plan.recipeID);
-          combineLatest([this.userService.getPlanedRecipes(recipeIds), this.userService.getAllIngredients()]).subscribe(
+          // const recipeIds = plans.map(plan => plan.recipeID);
+          let recipeIDs = [];
+          for (let i = 0; i < plans.length; i++) {
+            for (let j = 0; j < plans[i].recipeIDs.length; j++) {
+              recipeIDs.push(plans[i].recipeIDs[j]);
+            }
+          }
+          combineLatest([this.userService.getPlanedRecipes(recipeIDs), this.userService.getAllIngredients()]).subscribe(
             data => {
               const [recipes, ingredients] = data;
               this.recipes = recipes;
@@ -62,14 +70,16 @@ export class TodayPage implements OnInit {
               if (recipes) {
                 this.initNutritional(recipes);
               }
-              this.initRecipes();
             }
           );
         });
       }
 
       this.userService.user$.subscribe(user => {
-        if (user) this.user = user;
+        if (user) {
+          this.user = user;
+          this.initRecipes();
+        }
       });
     });
 
@@ -99,9 +109,7 @@ export class TodayPage implements OnInit {
   }
 
   initRecipes() {
-    this.recipeService.initRecipes(this.user.id).then(res => {
-      console.log(res);
-    });
+    this.recipeService.initRecipes(this.user.id);
   }
 
   goProfile() {
@@ -110,5 +118,9 @@ export class TodayPage implements OnInit {
 
   editRecipes() {
     this.router.navigateByUrl('/home/recipes');
+  }
+
+  goRecipePage(id) {
+    this.router.navigate(["/recipe", id]);
   }
 }
