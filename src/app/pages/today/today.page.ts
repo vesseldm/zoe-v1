@@ -40,7 +40,7 @@ export class TodayPage implements OnInit {
     this.weekDays = [];
     let curr = new Date();
     this.currentDay = new Date();
-    let first_day = curr.getDate() - curr.getDay() + 1;
+    let first_day = curr.getDate() - curr.getDay();
     for (let i = 0; i < 7; i++) {
       let next = first_day + i;
       let next_day = new Date(curr.setDate(next));
@@ -50,18 +50,19 @@ export class TodayPage implements OnInit {
     this.userService.user$.subscribe(user => {
       if (user && user.id) {
         this.userService.getUserPlans(user.id, this.currentDay.toString()).subscribe(plans => {
-          const recipeIds = plans.map(plan => plan.recipeId);
+          const recipeIds = plans.map(plan => plan.recipeID);
           combineLatest([this.userService.getPlanedRecipes(recipeIds), this.userService.getAllIngredients()]).subscribe(
             data => {
               const [recipes, ingredients] = data;
               this.recipes = recipes;
-              this.recipeService.recipes$.subscribe(recipes => {
-                this.recipes = recipes;
-              });
+              // this.recipeService.recipes$.subscribe(recipes => {
+              //   this.recipes = recipes;
+              // });
               this.ingredients = ingredients;
               if (recipes) {
                 this.initNutritional(recipes);
               }
+              this.initRecipes();
             }
           );
         });
@@ -97,7 +98,17 @@ export class TodayPage implements OnInit {
     });
   }
 
+  initRecipes() {
+    this.recipeService.initRecipes(this.user.id).then(res => {
+      console.log(res);
+    });
+  }
+
   goProfile() {
     this.router.navigateByUrl('/home/profile');
+  }
+
+  editRecipes() {
+    this.router.navigateByUrl('/home/recipes');
   }
 }

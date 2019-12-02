@@ -15,7 +15,7 @@
   <div class="section recipes">
     <div class="section-header">
       <h2>My Recipes</h2>
-      <ion-icon name="create" color="basic"></ion-icon>
+      <ion-icon (click)="editRecipes()" name="create" color="basic"></ion-icon>
     </div>
     <div *ngIf="recipes" class="section-content">
       <ion-slides #slider pager="true" [options]="slideOpts">
