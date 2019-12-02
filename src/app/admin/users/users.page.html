@@ -1,9 +1,127 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>users</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <ion-grid>
+    <ion-row class="top-margin">
+      <ion-col>
+        <div class="section">
+          <div class="section-header">
+            <div class="section-label">Total Users</div>
+            <div class="section-header-right">
+              <ion-icon name="arrow-round-down" class="down"></ion-icon>
+              <ion-label class="up">-12% </ion-label>
+            </div>
+          </div>
+          <div class="section-content">
+            <div class="count">{{users && users.length}}</div>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="section">
+          <div class="section-header">
+            <div class="section-label">Silver Users</div>
+            <div class="section-header-right">
+              <ion-icon name="arrow-round-up" class="up"></ion-icon>
+              <ion-label class="up">+10% </ion-label>
+            </div>
+          </div>
+          <div class="section-content">
+            <div class="count">{{silver_users && silver_users.length}}</div>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="section">
+          <div class="section-header">
+            <div class="section-label">Gold Users</div>
+            <div class="section-header-right">
+              <ion-icon name="arrow-round-up" class="up"></ion-icon>
+              <ion-label class="up">+4% </ion-label>
+            </div>
+          </div>
+          <div class="section-content">
+            <div class="count">{{gold_users && gold_users.length}}</div>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="section">
+          <div class="section-header">
+            <div class="section-label">Platinum Users</div>
+            <div class="section-header-right">
+              <ion-icon name="arrow-round-down" class="down"></ion-icon>
+              <ion-label class="up">-1% </ion-label>
+            </div>
+          </div>
+          <div class="section-content">
+            <div class="count">{{platinum_users && platinum_users.length}}</div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="section">
+          <div class="section-header bottom-border content">
+            <div class="section-label">Top Silver Users</div>
+            <div class="section-header-right">
+            </div>
+          </div>
+          <div class="section-content">
+            <ion-list>
+              <ion-item href *ngFor="let item of silver_users">
+                <ion-avatar slot="start">
+                  <img src="{{item.photoUrl}}" />
+                </ion-avatar>
+                <ion-label class="name">
+                  <p>{{item.firstName + " " + item.lastName}}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="section">
+          <div class="section-header bottom-border content">
+            <div class="section-label">Top Gold Users</div>
+            <div class="section-header-right">
+            </div>
+          </div>
+          <div class="section-content">
+            <ion-list>
+              <ion-item href *ngFor="let item of gold_users">
+                <ion-avatar slot="start">
+                  <img src="{{item.photoUrl}}" />
+                </ion-avatar>
+                <ion-label class="name">
+                  <p>{{item.firstName + " " + item.lastName}}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="section">
+          <div class="section-header bottom-border content">
+            <div class="section-label">Top Platinum Users</div>
+            <div class="section-header-right">
+            </div>
+          </div>
+          <div class="section-content">
+            <ion-list>
+              <ion-item href *ngFor="let item of platinum_users">
+                <ion-avatar slot="start">
+                  <img src="{{item.photoUrl}}" />
+                </ion-avatar>
+                <ion-label class="name">
+                  <p>{{item.firstName + " " + item.lastName}}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
