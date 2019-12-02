@@ -2,7 +2,7 @@
   <ion-grid>
     <ion-row class="top-margin">
       <ion-col>
-        <div class="section">
+        <div class="section" (click)="goGroupUsers('Total')">
           <div class="section-header">
             <div class="section-label">Total Users</div>
             <div class="section-header-right">
@@ -16,7 +16,7 @@
         </div>
       </ion-col>
       <ion-col>
-        <div class="section">
+        <div class="section" (click)="goGroupUsers('Silver')">
           <div class="section-header">
             <div class="section-label">Silver Users</div>
             <div class="section-header-right">
@@ -30,7 +30,7 @@
         </div>
       </ion-col>
       <ion-col>
-        <div class="section">
+        <div class="section" (click)="goGroupUsers('Gold')">
           <div class="section-header">
             <div class="section-label">Gold Users</div>
             <div class="section-header-right">
@@ -44,7 +44,7 @@
         </div>
       </ion-col>
       <ion-col>
-        <div class="section">
+        <div class="section" (click)="goGroupUsers('Platinum')">
           <div class="section-header">
             <div class="section-label">Platinum Users</div>
             <div class="section-header-right">

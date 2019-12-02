@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from "../../services/user.service";
 import { AuthService } from "../../services/auth.service";
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -17,7 +17,8 @@ export class DashboardPage implements OnInit {
   gold_users: any;
   platinum_users: any;
 
-  constructor(public userService: UserService, public authService: AuthService) { }
+
+  constructor(public userService: UserService, public authService: AuthService, public router: Router) { }
 
   ngOnInit() {
     this.userBillingEditable = false;
@@ -77,5 +78,13 @@ export class DashboardPage implements OnInit {
 
   dorewardsEdit() {
     this.rewardsEditable = false
+  }
+
+  goGroupUsers(type: String) {
+    this.router.navigateByUrl(`/admin/users/group/${type}`);
+  }
+
+  goUserDetail(user: any) {
+    this.router.navigateByUrl(`/admin/users/${user.id}`);
   }
 }

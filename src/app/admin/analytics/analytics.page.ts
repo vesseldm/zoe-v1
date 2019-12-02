@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from "../../services/user.service";
 import { AuthService } from "../../services/auth.service";
 
@@ -18,7 +19,7 @@ export class AnalyticsPage implements OnInit {
   gold_users: any;
   platinum_users: any;
 
-  constructor(public userService: UserService, public authService: AuthService) { }
+  constructor(public userService: UserService, public authService: AuthService, public router: Router) { }
 
   ngOnInit() {
     this.userService.user$.subscribe(user => {
@@ -53,5 +54,9 @@ export class AnalyticsPage implements OnInit {
         }
       });
     });
+  }
+
+  goGroupUsers(type: String) {
+    this.router.navigateByUrl(`/admin/users/group/${type}`);
   }
 }

@@ -1,9 +1,33 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>group</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <ion-grid>
+    <ion-row class="top-margin">
+      <ion-col>
+        <div class="section">
+          <div class="section-header bottom-border content">
+            <div class="section-label">{{pageType}} Users</div>
+            <div class="section-header-right">
+              <ion-icon name="arrow-round-up" class="up"></ion-icon>
+              <ion-label class="up">+10% </ion-label>
+            </div>
+          </div>
+          <div class="section-content">
+            <ion-list>
+              <ion-row>
+                <ion-col size="4" *ngFor="let item of users">
+                  <ion-item (click)="goUserDetail(item)">
+                    <ion-avatar slot="start">
+                      <img src="{{item.photoUrl}}" />
+                    </ion-avatar>
+                    <ion-label class="name">
+                      <p>{{item.firstName + " " + item.lastName}}</p>
+                    </ion-label>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-list>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

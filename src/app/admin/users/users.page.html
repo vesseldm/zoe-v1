@@ -2,7 +2,7 @@
   <ion-grid>
     <ion-row class="top-margin">
       <ion-col>
-        <div class="section">
+        <div class="section" (click)="goGroupUsers('Total')">
           <div class="section-header">
             <div class="section-label">Total Users</div>
             <div class="section-header-right">
@@ -16,7 +16,7 @@
         </div>
       </ion-col>
       <ion-col>
-        <div class="section">
+        <div class="section" (click)="goGroupUsers('Silver')">
           <div class="section-header">
             <div class="section-label">Silver Users</div>
             <div class="section-header-right">
@@ -30,7 +30,7 @@
         </div>
       </ion-col>
       <ion-col>
-        <div class="section">
+        <div class="section" (click)="goGroupUsers('Gold')">
           <div class="section-header">
             <div class="section-label">Gold Users</div>
             <div class="section-header-right">
@@ -44,7 +44,7 @@
         </div>
       </ion-col>
       <ion-col>
-        <div class="section">
+        <div class="section" (click)="goGroupUsers('Platinum')">
           <div class="section-header">
             <div class="section-label">Platinum Users</div>
             <div class="section-header-right">
@@ -68,7 +68,7 @@
           </div>
           <div class="section-content">
             <ion-list>
-              <ion-item href *ngFor="let item of silver_users">
+              <ion-item href *ngFor="let item of silver_users" (click)="goUserDetail(item)">
                 <ion-avatar slot="start">
                   <img src="{{item.photoUrl}}" />
                 </ion-avatar>
@@ -89,7 +89,7 @@
           </div>
           <div class="section-content">
             <ion-list>
-              <ion-item href *ngFor="let item of gold_users">
+              <ion-item href *ngFor="let item of gold_users" (click)="goUserDetail(item)">
                 <ion-avatar slot="start">
                   <img src="{{item.photoUrl}}" />
                 </ion-avatar>
@@ -110,7 +110,7 @@
           </div>
           <div class="section-content">
             <ion-list>
-              <ion-item href *ngFor="let item of platinum_users">
+              <ion-item href *ngFor="let item of platinum_users" (click)="goUserDetail(item)">
                 <ion-avatar slot="start">
                   <img src="{{item.photoUrl}}" />
                 </ion-avatar>

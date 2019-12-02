@@ -27,12 +27,12 @@ const routes: Routes = [
               import('../users/users.module').then(m => m.UsersPageModule)
           },
           {
-            path: 'group',
+            path: 'group/:type',
             loadChildren: () =>
               import('../group/group.module').then(m => m.GroupPageModule)
           },
           {
-            path: 'user', // --> :id
+            path: ':id', // --> :id
             loadChildren: () =>
               import('../user/user.module').then(m => m.UserPageModule)
           }
