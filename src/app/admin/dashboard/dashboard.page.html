@@ -11,7 +11,7 @@
                         </div>
                     </div>
                     <div class="section-content">
-                        <div class="count">142</div>
+                        <div class="count">{{users && users.length}}</div>
                     </div>
                 </div>
             </ion-col>
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="section-content">
-                        <div class="count">87</div>
+                        <div class="count">{{silver_users && silver_users.length}}</div>
                     </div>
                 </div>
             </ion-col>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="section-content">
-                        <div class="count">23</div>
+                        <div class="count">{{gold_users && gold_users.length}}</div>
                     </div>
                 </div>
             </ion-col>
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <div class="section-content">
-                        <div class="count">32</div>
+                        <div class="count">{{platinum_users && platinum_users.length}}</div>
                     </div>
                 </div>
             </ion-col>
@@ -64,25 +64,17 @@
                     <div class="section-header bottom-border content">
                         <div class="section-label">June Rewards</div>
                         <div class="section-header-right">
-                            <ion-button fill="clear">Edit</ion-button>
+                            <ion-button fill="clear" *ngIf="!rewardsEditable" (click)="doRewardsEditEnable()">Edit
+                            </ion-button>
+                            <ion-button fill="clear" *ngIf="rewardsEditable" (click)="dorewardsEdit()">Done
+                            </ion-button>
                         </div>
                     </div>
                     <div class="section-content">
                         <ion-list>
-                            <ion-item>
-                                <ion-label>Pokémon Yellow</ion-label>
-                            </ion-item>
-                            <ion-item>
-                                <ion-label>Mega Man X</ion-label>
-                            </ion-item>
-                            <ion-item>
-                                <ion-label>The Legend of Zelda</ion-label>
-                            </ion-item>
-                            <ion-item>
-                                <ion-label>Pac-Man</ion-label>
-                            </ion-item>
-                            <ion-item lines="none">
-                                <ion-label>Super Mario World</ion-label>
+                            <ion-item *ngFor="let item of rewards">
+                                <ion-label *ngIf="!rewardsEditable">{{item}}</ion-label>
+                                <ion-input *ngIf="rewardsEditable" [(ngModel)]="item"></ion-input>
                             </ion-item>
                         </ion-list>
                     </div>
@@ -93,25 +85,16 @@
                     <div class="section-header bottom-border content">
                         <div class="section-label">Top Users</div>
                         <div class="section-header-right">
-
                         </div>
                     </div>
                     <div class="section-content">
                         <ion-list>
-                            <ion-item href>
+                            <ion-item href *ngFor="let item of users">
                                 <ion-avatar slot="start">
-                                    <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50">
+                                    <img src="{{item.photoUrl}}" />
                                 </ion-avatar>
                                 <ion-label class="name">
-                                    <p>Listen, I've had a pretty </p>
-                                </ion-label>
-                            </ion-item>
-                            <ion-item lines="none">
-                                <ion-avatar slot="start">
-                                    <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50">
-                                </ion-avatar>
-                                <ion-label class="name">
-                                    <p>Listen, I've had a pretty.</p>
+                                    <p>{{item.firstName + " " + item.lastName}}</p>
                                 </ion-label>
                             </ion-item>
                         </ion-list>
@@ -123,9 +106,11 @@
                     <div class="section-header bottom-border content">
                         <div class="section-label">Billing</div>
                         <div class="section-header-right">
-                            <ion-button fill="clear" *ngIf="!userBillingEdit" (click)="doUserBillingEditEnable()">Edit
+                            <ion-button fill="clear" *ngIf="!userBillingEditable" (click)="doUserBillingEditEnable()">
+                                Edit
                             </ion-button>
-                            <ion-button fill="clear" *ngIf="userBillingEdit" (click)="doUpdateUserBillingInfo()">Done
+                            <ion-button fill="clear" *ngIf="userBillingEditable" (click)="doUpdateUserBillingInfo()">
+                                Done
                             </ion-button>
                         </div>
                     </div>
@@ -133,36 +118,43 @@
                         <ion-list>
                             <ion-item>
                                 <ion-label class="label">Card Number</ion-label>
-                                <ion-input *ngIf="userBillingEdit"
-                                    [(ngModel)]="user && user.card && user.card.cardNumber">
+                                <ion-input class="right" *ngIf="userBillingEditable"
+                                    [(ngModel)]="user &&  user.cardNumber">
                                 </ion-input>
-                                <ion-label *ngIf="!userBillingEdit">{{user && user.card && user.card.cardNumber}}
+                                <ion-label class="right" *ngIf="!userBillingEditable">
+                                    {{user &&  user.cardNumber}}
                                 </ion-label>
                             </ion-item>
                             <ion-item>
                                 <ion-label class="label">Expires</ion-label>
-                                <ion-input *ngIf="userBillingEdit" [(ngModel)]="user && user.card && user.card.expire">
+                                <ion-input class="right" *ngIf="userBillingEditable"
+                                    [(ngModel)]="user &&  user.cardExpire">
                                 </ion-input>
-                                <ion-label *ngIf="!userBillingEdit">{{user && user.card && user.card.expire}}
+                                <ion-label class="right" *ngIf="!userBillingEditable">
+                                    {{user &&  user.cardExpire}}
                                 </ion-label>
                             </ion-item>
                             <ion-item>
                                 <ion-label class="label">CVV</ion-label>
-                                <ion-input *ngIf="userBillingEdit" [(ngModel)]="user && user.card && user.card.cvv">
+                                <ion-input class="right" *ngIf="userBillingEditable"
+                                    [(ngModel)]="user &&  user.cardCvv">
                                 </ion-input>
-                                <ion-label *ngIf="!userBillingEdit">{{user && user.card && user.card.cvv}}
+                                <ion-label class="right" *ngIf="!userBillingEditable">
+                                    {{user &&  user.cardCvv}}
                                 </ion-label>
                             </ion-item>
                             <ion-item>
                                 <ion-label class="label">Billing Address</ion-label>
-                                <ion-input *ngIf="userBillingEdit" [(ngModel)]="user && user.card && user.card.address">
+                                <ion-input class="right" *ngIf="userBillingEditable"
+                                    [(ngModel)]="user &&  user.cardAddress">
                                 </ion-input>
-                                <ion-label *ngIf="!userBillingEdit">{{user && user.card && user.card.address}}
+                                <ion-label class="right" *ngIf="!userBillingEditable">
+                                    {{user &&  user.cardAddress}}
                                 </ion-label>
                             </ion-item>
                             <ion-item lines="none">
                                 <ion-label class="label">Auto Renew</ion-label>
-                                <ion-toggle *ngIf="user" color="success" [(ngModel)]="user.card_renew">
+                                <ion-toggle class="right" *ngIf="user" color="success" [(ngModel)]="user.card_renew">
                                 </ion-toggle>
                             </ion-item>
                         </ion-list>

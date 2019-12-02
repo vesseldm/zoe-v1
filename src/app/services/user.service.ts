@@ -9,12 +9,22 @@ import { switchMap, map } from 'rxjs/operators';
 })
 export class UserService {
   user$: Observable<any>;
+  users$: Observable<any>;
 
   constructor(public afAuth: AngularFireAuth, public afs: AngularFirestore) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
           return this.afs.doc(`users/${user.uid}`).valueChanges();
+        } else {
+          return of(null);
+        }
+      })
+    );
+    this.users$ = this.afAuth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.afs.collection(`users`).valueChanges();
         } else {
           return of(null);
         }

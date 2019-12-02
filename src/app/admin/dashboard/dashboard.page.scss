@@ -5,8 +5,10 @@ ion-avatar {
     width: 36px;
     height: 36px;
 }
-ion-input, ion-toggle {
-    text-align: right;
+ion-input, ion-toggle, ion-label {
+    &.right{
+        text-align: right;
+    }
 }
 .section {
     border-radius: 10px;
