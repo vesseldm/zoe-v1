@@ -99,7 +99,7 @@ export class AnalyticsPage implements OnInit {
         datasets: [
           {
             data: [60, 65, 35, 70, 83, 15, 48, 60, 65, 35, 70, 83, 40, 48, 60, 65, 35, 70, 83, 15, 48],
-            backgroundColor: "#f8e71c",
+            backgroundColor: "transparent",
             borderColor: "#f8e71c",
             borderWidth: 1
           }
@@ -114,14 +114,7 @@ export class AnalyticsPage implements OnInit {
           xAxes: [
             {
               gridLines: {
-                display: true
-              }
-            },
-          ],
-          yAxes: [
-            {
-              gridLines: {
-                display: true
+                display: false
               }
             },
           ]
