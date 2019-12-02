@@ -20,7 +20,7 @@
     <div *ngIf="recipes" class="section-content">
       <ion-slides #slider pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let recipe of recipes">
-          <ion-card class="recipe">
+          <ion-card class="recipe" (click)="goRecipePage(recipe.id)">
             <img [src]="recipe.photo" alt="recipe" />
             <ion-card-header>
               <ion-card-subtitle>{{recipe.type}}</ion-card-subtitle>

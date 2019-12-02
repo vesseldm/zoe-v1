@@ -119,4 +119,8 @@ export class TodayPage implements OnInit {
   editRecipes() {
     this.router.navigateByUrl('/home/recipes');
   }
+
+  goRecipePage(id) {
+    this.router.navigate(["/recipe", id]);
+  }
 }
