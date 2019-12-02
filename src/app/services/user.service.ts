@@ -32,6 +32,10 @@ export class UserService {
     );
   }
 
+  getUserInfo(userId: String) {
+    return this.afs.doc(`users/${userId}`).valueChanges();
+  }
+
   getPlanedRecipes(recipeIds): Observable<any> {
     if (recipeIds.length == 0) return of(null);
     return this.afs

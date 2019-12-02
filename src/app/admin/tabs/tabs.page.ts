@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from "../../services/auth.service";
+import { UserService } from "../../services/user.service";
 
 @Component({
   selector: 'app-tabs',
@@ -8,22 +9,23 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./tabs.page.scss'],
 })
 export class TabsPage implements OnInit {
+  user: any;
 
-  constructor(
-    public router: Router,
-    public authService: AuthService,
-  ) { }
+  constructor(public authService: AuthService, public userService: UserService, private activatedRoute: ActivatedRoute, public router: Router) { }
 
   ngOnInit() {
+    this.userService.user$.subscribe(user => {
+      if (user) this.user = user;
+    });
   }
 
-  logout(){
+  logout() {
     this.authService.doLogout()
-    .then((res) => {
-      this.router.navigateByUrl('/');
-    }, (error) => {
-      console.log("Logout error", error);
-    });
+      .then((res) => {
+        this.router.navigateByUrl('/');
+      }, (error) => {
+        console.log("Logout error", error);
+      });
   }
 
 }

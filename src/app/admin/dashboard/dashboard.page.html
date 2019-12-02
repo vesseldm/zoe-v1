@@ -89,7 +89,7 @@
                     </div>
                     <div class="section-content">
                         <ion-list>
-                            <ion-item href *ngFor="let item of users" (click)="goUserDetail(item)">
+                            <ion-item *ngFor="let item of users" (click)="goUserDetail(item)">
                                 <ion-avatar slot="start">
                                     <img src="{{item.photoUrl}}" />
                                 </ion-avatar>

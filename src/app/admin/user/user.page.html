@@ -1,9 +1,107 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>user</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <ion-grid>
+    <ion-row class="top-margin">
+      <ion-col>
+        <div class="section">
+          <div class="section-header bottom-border content">
+            <div class="section-label">{{user && (user.firstName + " " + user.lastName)}}</div>
+            <div class="section-header-right">
+              <ion-button fill="clear" *ngIf="!userEditable" (click)="doUserEditEnable()">Edit
+              </ion-button>
+              <ion-button fill="clear" *ngIf="userEditable" (click)="doUserUpdate()">Done
+              </ion-button>
+            </div>
+          </div>
+          <div class="section-content">
+            <ion-row>
+              <ion-col size="4">
+                <ion-avatar *ngIf="user">
+                  <img src="{{user.photoUrl || 'https://picsum.photos/id/524/200/300'}}" />
+                </ion-avatar>
+              </ion-col>
+              <ion-col size="8">
+                <ion-list>
+                  <ion-item>
+                    <ion-label class="label">Level</ion-label>
+                    <ion-input class="right" *ngIf="userEditable" [(ngModel)]="user &&  user.type">
+                    </ion-input>
+                    <ion-label class="right" *ngIf="!userEditable">
+                      {{user &&  user.type}}
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label class="label">Email</ion-label>
+                    <ion-input class="right" *ngIf="userEditable" [(ngModel)]="user &&  user.email">
+                    </ion-input>
+                    <ion-label class="right" *ngIf="!userEditable">
+                      {{user &&  user.email}}
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label class="label">Phone</ion-label>
+                    <ion-input class="right" *ngIf="userEditable" [(ngModel)]="user &&  user.mobile">
+                    </ion-input>
+                    <ion-label class="right" *ngIf="!userEditable">
+                      {{user &&  user.mobile}}
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label class="label">Subscription Date</ion-label>
+                    <ion-input class="right" *ngIf="userEditable" [(ngModel)]="user &&  user.subscription_created">
+                    </ion-input>
+                    <ion-label class="right" *ngIf="!userEditable">
+                      {{user &&  user.subscription_created}}
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="section">
+          <div class="section-header bottom-border content">
+            <div class="section-label">Activity</div>
+            <div class="section-header-right">
+            </div>
+          </div>
+          <div class="section-content">
+            <table style="width:100%">
+              <tr>
+                <td>
+                  <p class="title">Last Access Date</p>
+                  <p class="content">02/24/2015</p>
+                </td>
+                <td>
+                  <p class="title">Last Access Time</p>
+                  <p class="content">7:28:44 am</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p class="title">Logins This Week</p>
+                  <p class="content">4</p>
+                </td>
+                <td>
+                  <p class="title">Logins This Month</p>
+                  <p class="content">18</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p class="title">Perfect Days</p>
+                  <p class="content">72</p>
+                </td>
+                <td>
+                  <p class="title">Meals Made</p>
+                  <p class="content">436</p>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
