@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { RecipeService } from "../../services/recipe.service";
+import { NavController } from "@ionic/angular";
 
 @Component({
   selector: "app-recipe",
@@ -20,7 +21,8 @@ export class RecipePage implements OnInit {
   constructor(
     public router: Router,
     private route: ActivatedRoute,
-    public recipeService: RecipeService
+    public recipeService: RecipeService,
+    private navCtrl: NavController
   ) {
     this.sub = this.route.params.subscribe(params => {
       this.recipeId = params["id"];
@@ -48,7 +50,8 @@ export class RecipePage implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl("/home/recipes");
+    // this.router.navigateByUrl("/home/recipes");
+    this.navCtrl.pop();
   }
 
   addRecipe() {
