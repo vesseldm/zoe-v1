@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from "../../services/user.service";
 import { AuthService } from "../../services/auth.service";
+import { Chart } from "chart.js";
 
 @Component({
   selector: 'app-analytics',
@@ -9,6 +10,12 @@ import { AuthService } from "../../services/auth.service";
   styleUrls: ['./analytics.page.scss'],
 })
 export class AnalyticsPage implements OnInit {
+
+  @ViewChild("barCanvas", { static: true }) barCanvas: ElementRef;
+  @ViewChild("lineCanvas", { static: true }) lineCanvas: ElementRef;
+
+  private barChart: Chart;
+  private lineChart: Chart;
 
   user: any;
   userBillingEditable: boolean;
@@ -53,6 +60,73 @@ export class AnalyticsPage implements OnInit {
             break;
         }
       });
+    });
+
+    this.barChart = new Chart(this.barCanvas.nativeElement, {
+      type: "bar",
+      data: {
+        labels: ["M", "Tu", "W", "Th", "F", "Sa", "Su"],
+        datasets: [
+          {
+            data: [60, 65, 35, 70, 83, 15, 48],
+            backgroundColor: "#f8e71c",
+            borderColor: "#f8e71c",
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        aspectRatio: 0.8,
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [
+            {
+              gridLines: {
+                display: false
+              }
+            },
+          ]
+        }
+      }
+    });
+
+    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+      type: "line",
+      data: {
+        labels: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T"],
+        datasets: [
+          {
+            data: [60, 65, 35, 70, 83, 15, 48, 60, 65, 35, 70, 83, 40, 48, 60, 65, 35, 70, 83, 15, 48],
+            backgroundColor: "#f8e71c",
+            borderColor: "#f8e71c",
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        aspectRatio: 4,
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [
+            {
+              gridLines: {
+                display: true
+              }
+            },
+          ],
+          yAxes: [
+            {
+              gridLines: {
+                display: true
+              }
+            },
+          ]
+        }
+      }
     });
   }
 
