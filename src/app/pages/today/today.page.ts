@@ -82,7 +82,7 @@ export class TodayPage implements OnInit {
       });
     });
 
-    this.notification = "Lorem ipsum dolor sit amet, <br /> consectetur adipiscing elit. Nulla quis lectus dolor. Sed et dolor eu elit viverra vestibulum eu vitae velit.";
+    this.notification = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis lectus dolor. Sed et dolor eu elit viverra vestibulum eu vitae velit.";
   }
 
   initNutritional(recipes) {
