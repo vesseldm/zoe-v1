@@ -84,6 +84,14 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => import('./admin/settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: 'group',
+    loadChildren: () => import('./admin/group/group.module').then( m => m.GroupPageModule)
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./admin/user/user.module').then( m => m.UserPageModule)
   }
 ];
 @NgModule({
