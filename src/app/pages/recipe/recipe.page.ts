@@ -62,7 +62,7 @@ export class RecipePage implements OnInit {
 
   goBack() {
     // this.router.navigateByUrl("/home/recipes");
-    this.navCtrl.pop();
+    this.navCtrl.back();
   }
 
   addRecipe() {
