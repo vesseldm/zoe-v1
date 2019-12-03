@@ -41,7 +41,8 @@ export class IngredientService {
 
     for( var i = 0; i < user.shoppingList.length; i++){ 
       if ( user.shoppingList[i] === ingredientId) {
-        user.shoppingList.splice(i, 1); 
+        user.shoppingList.splice(i, 1);
+        i--;
       }
     }
 
