@@ -3,13 +3,24 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Observable, of } from "rxjs";
 import { switchMap } from "rxjs/operators";
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: "root"
 })
 export class RecipeService {
   recipes$: Observable<any>;
+
+  public userId: any;
+  public user: any;
+
   constructor(public afAuth: AngularFireAuth, public afs: AngularFirestore) {
+
+    this.userId = firebase.auth().currentUser.uid;
+    this.afs.doc(`users/${this.userId}`).valueChanges().subscribe(user => {
+      this.user = user;
+    });
+
     this.recipes$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {

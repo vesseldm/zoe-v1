@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import { RecipeService } from "../../services/recipe.service";
 import { NavController } from "@ionic/angular";
+import { RecipeService } from "../../services/recipe.service";
+import { UserService } from '../../services/user.service';
+import { IngredientService } from "../../services/ingredient.service";
 
 @Component({
   selector: "app-recipe",
@@ -22,7 +24,9 @@ export class RecipePage implements OnInit {
     public router: Router,
     private route: ActivatedRoute,
     public recipeService: RecipeService,
-    private navCtrl: NavController
+    public ingredientService: IngredientService,
+    private navCtrl: NavController,
+    public userService: UserService
   ) {
     this.sub = this.route.params.subscribe(params => {
       this.recipeId = params["id"];
@@ -39,7 +43,14 @@ export class RecipePage implements OnInit {
         this.carbs = 0;
         this.fats = 0;
         this.recipeService.getIngredient(item.id).subscribe(ingredient => {
-          this.ingredients.push(ingredient);
+
+          this.ingredients.push({
+            id: ingredient['id'],
+            name: ingredient['name'],
+            checked: this.userService.user.shoppingList.includes(item.id)
+          });
+
+          // this.ingredients.push(ingredient);
           this.calories += ingredient["average"]["calories"];
           this.protein += ingredient["average"]["protein"];
           this.carbs += ingredient["average"]["carbs"];
@@ -56,5 +67,13 @@ export class RecipePage implements OnInit {
 
   addRecipe() {
     this.recipeService.addRecipe(this.recipeId);
+  }
+
+  shoppingList(ingredient, e) {
+    if (e.detail.checked) {
+      this.ingredientService.addToShoppingList(ingredient.id);
+    } else {
+      this.ingredientService.removeFromShoppingList(ingredient.id);
+    }
   }
 }

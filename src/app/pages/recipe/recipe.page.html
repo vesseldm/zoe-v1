@@ -120,7 +120,21 @@
       </div>
       <div class="section-content">
         <ion-list lines="none">
-          <ion-item-sliding>
+
+          <ion-item-sliding *ngFor="let ingredient of ingredients">
+            <ion-item>
+              <ion-checkbox color="dark" [(ngModel)]="ingredient.checked" (ionChange)="shoppingList(ingredient, $event)"></ion-checkbox>
+              <ion-label>{{ ingredient.name }}</ion-label>
+              <!-- <div class="line" *ngIf="food.checked"></div>
+              <ion-checkbox color="dark" slot="start" [(ngModel)]="food.checked" (ionChange)="checked(food, $event)">
+              </ion-checkbox> -->
+            </ion-item>
+            <!-- <ion-item-options>
+              <ion-item-option (click)="remove(food)">Remove</ion-item-option>
+            </ion-item-options> -->
+          </ion-item-sliding>
+
+          <!-- <ion-item-sliding>
             <ion-item>
               <ion-label>Rolled Oats</ion-label>
               <ion-checkbox color="dark" slot="start" checked></ion-checkbox>
@@ -209,7 +223,7 @@
             <ion-item-options>
               <ion-item-option>Remove</ion-item-option>
             </ion-item-options>
-          </ion-item-sliding>
+          </ion-item-sliding> -->
         </ion-list>
       </div>
     </div>

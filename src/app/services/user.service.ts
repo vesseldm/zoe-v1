@@ -115,4 +115,11 @@ export class UserService {
         )
       );
   }
+
+  updateUser(user) {
+    return new Promise<any>((resolve, reject) => {
+      this.afs.collection('users').doc(user.id).update(user);
+      resolve(user);
+    })
+  }
 }
