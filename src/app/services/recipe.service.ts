@@ -86,4 +86,8 @@ export class RecipeService {
       })
     }
   }
+
+  getFeaturedRecipe() {
+    console.log(this.userId);
+  }
 }

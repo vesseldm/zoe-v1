@@ -17,6 +17,7 @@ export class TodayPage implements OnInit {
     autoHeight: true
   };
   recipes: any;
+  featuredRecipe: any;
   weekDays: any = [];
   currentDay: any;
   nutritional: any;
@@ -80,6 +81,8 @@ export class TodayPage implements OnInit {
           this.initRecipes();
         }
       });
+
+      this.recipeService.getFeaturedRecipe();
     });
 
     this.notification = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis lectus dolor. Sed et dolor eu elit viverra vestibulum eu vitae velit.";
