@@ -102,6 +102,7 @@ export class TodayPage implements OnInit {
         let featuredRecipeId = recipeIDs[0];
         this.recipeService.getRecipe(featuredRecipeId).subscribe(res => {
           this.featuredRecipe = res;
+          console.log(this.featuredRecipe);
         });
       });
     });

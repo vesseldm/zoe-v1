@@ -80,16 +80,16 @@
       <h2>Featured Recipe</h2>
     </div>
     <div class="section-content">
-      <ion-card class="recipe featured-recipe">
-        <img src="/assets/img/item.jpg" alt="recipe" />
+      <ion-card class="recipe featured-recipe" *ngIf="featuredRecipe" (click)="goRecipePage(featuredRecipe.id)">
+        <img src="{{ featuredRecipe.photo }}" alt="recipe" />
         <ion-card-header>
-          <ion-card-subtitle>Breakfast</ion-card-subtitle>
-          <ion-card-title>Banana Walnut Overnight Oatmeal</ion-card-title>
+          <ion-card-subtitle>{{ featuredRecipe.type }}</ion-card-subtitle>
+          <ion-card-title>{{ featuredRecipe.title }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <ion-label>
             <ion-icon name="timer"></ion-icon>
-            15 Minutes
+            {{ featuredRecipe.cookTime }}
           </ion-label>
           <ion-label>
             <ion-icon name="options"></ion-icon>
@@ -97,7 +97,7 @@
           </ion-label>
           <ion-label>
             <ion-icon name="restaurant"></ion-icon>
-            1 Bowl
+            {{ featuredRecipe.servingSize }} Bowls
           </ion-label>
         </ion-card-content>
       </ion-card>

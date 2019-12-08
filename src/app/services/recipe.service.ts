@@ -102,7 +102,8 @@ export class RecipeService {
               recipeIds.push(recipeId);
             });
           });
-          console.log(recipeIds);
+          // console.log(recipeIds);
+
           const findDuplicates = (arr) => {
             let sorted_arr = arr.slice().sort(); // You can define the comparing function here. 
             // JS by default uses a crappy string compare.
