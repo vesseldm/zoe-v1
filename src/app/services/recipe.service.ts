@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Observable, of } from "rxjs";
-import { switchMap } from "rxjs/operators";
+import { switchMap, map } from 'rxjs/operators';
 import * as firebase from 'firebase/app';
 
 @Injectable({
@@ -88,6 +88,22 @@ export class RecipeService {
   }
 
   getFeaturedRecipe() {
-    console.log(this.userId);
+    return this.afs
+      .collection<any>('mealPlan', ref =>
+        ref.where('userID', '==', this.userId)
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          let recipeIds = [];
+          actions.forEach(action => {
+            let recipeIDs = action.payload.doc.data().recipeIDs;
+            recipeIDs.forEach(recipeId => {
+              recipeIds.push(recipeId);
+            });
+          });
+          console.log(recipeIds);
+        })
+      );
   }
 }

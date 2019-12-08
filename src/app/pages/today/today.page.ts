@@ -82,7 +82,9 @@ export class TodayPage implements OnInit {
         }
       });
 
-      this.recipeService.getFeaturedRecipe();
+      this.recipeService.getFeaturedRecipe().subscribe(res => {
+        console.log(res);
+      });
     });
 
     this.notification = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis lectus dolor. Sed et dolor eu elit viverra vestibulum eu vitae velit.";
