@@ -82,8 +82,27 @@ export class TodayPage implements OnInit {
         }
       });
 
-      this.recipeService.getFeaturedRecipe().subscribe(res => {
-        console.log(res);
+
+      /////////////////////////
+      // Get Featured Recipe //
+      /////////////////////////
+
+      // this.recipeService.getFeaturedRecipe().subscribe(res => {
+      //   console.log(res);
+      // });
+
+      let tomorrow = new Date(curr.getFullYear(), curr.getMonth(), curr.getDate() + 1);
+      this.userService.getUserPlans(user.id, tomorrow.toString()).subscribe(plans => {
+        let recipeIDs = [];
+        for (let i = 0; i < plans.length; i++) {
+          for (let j = 0; j < plans[i].recipeIDs.length; j++) {
+            recipeIDs.push(plans[i].recipeIDs[j]);
+          }
+        }
+        let featuredRecipeId = recipeIDs[0];
+        this.recipeService.getRecipe(featuredRecipeId).subscribe(res => {
+          this.featuredRecipe = res;
+        });
       });
     });
 
