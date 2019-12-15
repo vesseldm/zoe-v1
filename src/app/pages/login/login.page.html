@@ -7,10 +7,32 @@
         <ion-label position="floating">Email</ion-label>
         <ion-input formControlName="email"></ion-input>
       </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.email">
+          <div class="error-message" *ngIf="
+            loginForm.get('email').hasError(validation.type) && 
+            (loginForm.get('email').dirty || loginForm.get('email').touched)
+          ">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
       <ion-item color="transparent">
         <ion-label position="floating">Password</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.password">
+          <div class="error-message" *ngIf="
+            loginForm.get('password').hasError(validation.type) && 
+            (loginForm.get('password').dirty || loginForm.get('password').touched)
+          ">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
       <ion-item class="checkbox" color="transparent" lines="none">
         <ion-label>Remember me</ion-label>
         <ion-checkbox checked slot="start"></ion-checkbox>
