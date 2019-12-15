@@ -64,3 +64,13 @@ hr {
     text-decoration: underline;
   }
 }
+
+.error-message {
+  color: var(--ion-color-danger);
+  text-align: left;
+}
+
+.success-message {
+  color: var(--ion-color-success);
+  text-align: left;
+}

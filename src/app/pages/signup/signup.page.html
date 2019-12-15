@@ -7,14 +7,47 @@
         <ion-label position="floating">Full Name</ion-label>
         <ion-input formControlName="name"></ion-input>
       </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.name">
+          <div class="error-message" *ngIf="
+            registerForm.get('name').hasError(validation.type) && 
+            (registerForm.get('name').dirty || registerForm.get('name').touched)
+          ">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
       <ion-item color="transparent">
         <ion-label position="floating">Email Address</ion-label>
         <ion-input formControlName="email" type="email"></ion-input>
       </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.email">
+          <div class="error-message" *ngIf="
+            registerForm.get('email').hasError(validation.type) && 
+            (registerForm.get('email').dirty || registerForm.get('email').touched)
+          ">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
       <ion-item color="transparent">
         <ion-label position="floating">Choose Password</ion-label>
         <ion-input formControlName="password" type="password"></ion-input>
       </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.password">
+          <div class="error-message" *ngIf="
+            registerForm.get('password').hasError(validation.type) && 
+            (registerForm.get('password').dirty || registerForm.get('password').touched)
+          ">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
       <ion-item class="checkbox" color="transparent" lines="none">
         <ion-label>Send me a welcome email, blogs & more</ion-label>
         <ion-checkbox slot="start"></ion-checkbox>

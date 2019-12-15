@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 
@@ -15,6 +15,20 @@ export class SignupPage implements OnInit {
   registerForm: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
+
+  validation_messages = {
+    'name': [
+      { type: 'required', message: 'Name is required.' }
+    ],
+    'email': [
+      { type: 'required', message: 'Email is required.' },
+      { type: 'pattern', message: 'Enter a valid email.' }
+    ],
+    'password': [
+      { type: 'required', message: 'Password is required.' },
+      { type: 'minlength', message: 'Password must be at least 5 characters long.' }
+    ]
+  };
 
   constructor(
     public router: Router,
@@ -31,9 +45,17 @@ export class SignupPage implements OnInit {
     });
     
     this.registerForm = this.formBuilder.group({
-      name: new FormControl(),
-      email: new FormControl(),
-      password: new FormControl()
+      name: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])),
+      password: new FormControl('', Validators.compose([
+        Validators.minLength(5),
+        Validators.required
+      ])),
     });
   }
 
