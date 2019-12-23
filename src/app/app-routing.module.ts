@@ -92,6 +92,10 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () => import('./admin/user/user.module').then( m => m.UserPageModule)
+  },
+  {
+    path: 'modal',
+    loadChildren: () => import('./pages/modal/modal.module').then( m => m.ModalPageModule)
   }
 ];
 @NgModule({

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { ModalController } from '@ionic/angular';
+import { ModalPage } from '../modal/modal.page';
 
 @Component({
   selector: 'app-signup',
@@ -34,7 +35,8 @@ export class SignupPage implements OnInit {
     public router: Router,
     public formBuilder: FormBuilder,
     public authService: AuthService,
-    public afAuth: AngularFireAuth
+    public afAuth: AngularFireAuth,
+    public modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -105,6 +107,13 @@ export class SignupPage implements OnInit {
     }, (err) => {
       this.errorMessage = err.message;
     });
+  }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: ModalPage
+    });
+    return await modal.present();
   }
 
 }

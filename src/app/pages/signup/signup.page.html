@@ -69,6 +69,6 @@
     <ion-button (click)="tryTwitterLogin()" class="btn-basic" color="sky" expand="block">Sign Up with Twitter</ion-button>
   </div>
   <div class="policy">
-    By creating an account, I accept the <a>ATP Privacy Policy</a> and <a>Terms & Conditions</a>
+    By creating an account, I accept the <a (click)="presentModal()">ATP Privacy Policy</a> and <a (click)="presentModal()">Terms & Conditions</a>
   </div>
 </ion-content>
