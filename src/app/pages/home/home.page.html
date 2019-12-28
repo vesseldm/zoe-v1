@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Home</ion-title>
+    <ion-title>{{ page_title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-tabs>
+  <ion-tabs (ionTabsDidChange)="setTitle()">
     <ion-tab-bar slot="top">
       <ion-tab-button tab="today">
         <ion-icon name="calendar"></ion-icon>
