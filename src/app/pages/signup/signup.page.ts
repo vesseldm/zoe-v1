@@ -17,7 +17,7 @@ export class SignupPage implements OnInit {
   errorMessage: string = '';
   successMessage: string = '';
 
-  validation_messages = {
+  validationMessages = {
     'name': [
       { type: 'required', message: 'Name is required.' }
     ],
