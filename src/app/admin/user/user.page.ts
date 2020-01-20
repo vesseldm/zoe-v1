@@ -10,7 +10,7 @@ import { UserService } from "../../services/user.service";
 })
 export class UserPage implements OnInit {
   user: any;
-  userId: String;
+  userId: string;
   userEditable: any;
 
   constructor(public authService: AuthService, public userService: UserService, private activatedRoute: ActivatedRoute, public router: Router) { }
@@ -19,10 +19,10 @@ export class UserPage implements OnInit {
     this.userEditable = false;
     this.userId = this.activatedRoute.snapshot.paramMap.get('id');
 
-    this.userService.getUserInfo(this.userId).subscribe(user => {
-      if (user) this.user = user;
-      console.log(user)
-    });
+    // this.userService.getUserInfo(this.userId).subscribe(user => {
+    //   if (user) this.user = user;
+    //   console.log(user)
+    // });
   }
 
   doUserEditEnable() {

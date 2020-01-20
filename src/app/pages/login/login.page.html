@@ -8,7 +8,7 @@
         <ion-input formControlName="email"></ion-input>
       </ion-item>
       <div class="validation-errors">
-        <ng-container *ngFor="let validation of validation_messages.email">
+        <ng-container *ngFor="let validation of validationMessages.email">
           <div class="error-message" *ngIf="
             loginForm.get('email').hasError(validation.type) && 
             (loginForm.get('email').dirty || loginForm.get('email').touched)
@@ -23,7 +23,7 @@
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
       <div class="validation-errors">
-        <ng-container *ngFor="let validation of validation_messages.password">
+        <ng-container *ngFor="let validation of validationMessages.password">
           <div class="error-message" *ngIf="
             loginForm.get('password').hasError(validation.type) && 
             (loginForm.get('password').dirty || loginForm.get('password').touched)

@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
-import { AngularFireAuth } from "angularfire2/auth";
-import { AngularFirestore } from "@angular/fire/firestore";
-import { Observable, of } from "rxjs";
+import { Injectable } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable, of } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import * as firebase from 'firebase/app';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class RecipeService {
   recipes$: Observable<any>;
@@ -34,14 +34,14 @@ export class RecipeService {
 
   getRecipe(recipeId) {
     return this.afs
-      .collection("recipes")
+      .collection('recipes')
       .doc(recipeId)
       .valueChanges();
   }
 
   getIngredient(ingredientId) {
     return this.afs
-      .collection("ingredients")
+      .collection('ingredients')
       .doc(ingredientId)
       .valueChanges();
   }
@@ -51,22 +51,22 @@ export class RecipeService {
   }
 
   initRecipes(userID) {
-    let curr = new Date();
+    const curr = new Date();
     let first_day = curr.getDate() - curr.getDay();
     for (let i = 0; i < 14; i++) {
       this.recipes$.subscribe(recipeRes => {
-        let recipeIDs = [];
+        const recipeIDs = [];
 
         for (let j = 0; j < 3; j++) {
-          let ran = Math.floor(Math.random() * recipeRes.length);
+          const ran = Math.floor(Math.random() * recipeRes.length);
           recipeIDs.push(recipeRes[ran].id)
         }
 
-        let next = first_day + i;
+        const next = first_day + i;
         let next_day = new Date(curr.setDate(next));
 
-        let startDate = new Date(next_day.getFullYear(), next_day.getMonth(), next_day.getDate());
-        let endDate = new Date(next_day.getFullYear(), next_day.getMonth(), next_day.getDate() + 1);
+        const startDate = new Date(next_day.getFullYear(), next_day.getMonth(), next_day.getDate());
+        const endDate = new Date(next_day.getFullYear(), next_day.getMonth(), next_day.getDate() + 1);
         this.afs
           .collection<any>('mealPlan', ref =>
             ref
@@ -76,7 +76,7 @@ export class RecipeService {
           )
           .snapshotChanges().subscribe(res => {
             if (!res.length) {
-              this.afs.collection("mealPlan").add({
+              this.afs.collection('mealPlan').add({
                 userID: userID,
                 recipeIDs: recipeIDs,
                 date: next_day
@@ -95,9 +95,9 @@ export class RecipeService {
       .snapshotChanges()
       .pipe(
         map(actions => {
-          let recipeIds = [];
+          const recipeIds = [];
           actions.forEach(action => {
-            let recipeIDs = action.payload.doc.data().recipeIDs;
+            const recipeIDs = action.payload.doc.data(({serverTimestamps: 'none'})).recipeIDs;
             recipeIDs.forEach(recipeId => {
               recipeIds.push(recipeId);
             });
@@ -109,7 +109,7 @@ export class RecipeService {
             // JS by default uses a crappy string compare.
             // (we use slice to clone the array so the
             // original array won't be modified)
-            let results = [];
+            const results = [];
             for (let i = 0; i < sorted_arr.length - 1; i++) {
               if (sorted_arr[i + 1] == sorted_arr[i]) {
                 results.push(sorted_arr[i]);

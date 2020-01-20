@@ -13,14 +13,14 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class LoginPage implements OnInit {
 
   loginForm: FormGroup;
-  errorMessage: string = '';
+  errorMessage = '';
 
-  validation_messages = {
-    'email': [
+  validationMessages = {
+    email: [
       { type: 'required', message: 'Email is required.' },
       { type: 'pattern', message: 'Please enter a valid email.' }
     ],
-    'password': [
+    password: [
       { type: 'required', message: 'Password is required.' },
       { type: 'minlength', message: 'Password must be at least 5 characters long.' }
     ]
@@ -34,12 +34,20 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log('test');
+    console.log('this.afAuth.user = ');
+    console.log(this.afAuth.user);
     this.afAuth.user.subscribe(user => {
+      console.log('user = ');
+      console.log(user);
       if (user) {
         this.goHome();
       }
     });
-    
+    this.generateForm();
+  }
+
+  generateForm() {
     this.loginForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([
         Validators.required,
@@ -64,18 +72,18 @@ export class LoginPage implements OnInit {
     this.router.navigateByUrl('/home');
   }
 
-  tryLogin(value){
-    this.authService.doLogin(value)
+  tryLogin(value) {
+    this.authService.login(value)
     .then(res => {
       console.log(res);
       this.router.navigateByUrl('/home');
     }, err => {
       console.log(err);
       this.errorMessage = err.message;
-    })
+    });
   }
 
-  tryFacebookLogin(){
+  tryFacebookLogin() {
     this.authService.doFacebookLogin()
     .then((res) => {
       this.router.navigateByUrl('/home');
@@ -84,7 +92,7 @@ export class LoginPage implements OnInit {
     });
   }
 
-  tryGoogleLogin(){
+  tryGoogleLogin() {
     this.authService.doGoogleLogin()
     .then((res) => {
       this.router.navigateByUrl('/home');
@@ -93,7 +101,7 @@ export class LoginPage implements OnInit {
     });
   }
 
-  tryTwitterLogin(){
+  tryTwitterLogin() {
     this.authService.doTwitterLogin()
     .then((res) => {
       this.router.navigateByUrl('/home');

@@ -16,17 +16,21 @@ export class UserService {
   public user: any;
 
   constructor(
-    public afAuth: AngularFireAuth, 
+    public afAuth: AngularFireAuth,
     public afs: AngularFirestore
   ) {
 
     this.userId = firebase.auth().currentUser.uid;
+    console.log('this.userId = ');
+    console.log(this.userId);
     this.afs.doc(`users/${this.userId}`).valueChanges().subscribe(user => {
       this.user = user;
     });
 
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
+        console.log('user = ');
+        console.log(user);
         if (user) {
           return this.afs.doc(`users/${user.uid}`).valueChanges();
         } else {
@@ -45,11 +49,12 @@ export class UserService {
     );
   }
 
-  getUserInfo(userId: String) {
+  getUserInfo(userId: string) {
     return this.afs.doc(`users/${userId}`).valueChanges();
   }
 
   getPlanedRecipes(recipeIds): Observable<any> {
+    console.log('getPlanedRecipes called');
     if (recipeIds.length == 0) return of(null);
     return this.afs
       .collection<any>('recipes', ref => ref.where('id', 'in', recipeIds))
@@ -57,7 +62,9 @@ export class UserService {
       .pipe(
         map(actions =>
           actions.map(a => {
-            const data = a.payload.doc.data();
+            console.log('a = ');
+            console.log(a);
+            const data = a.payload.doc.data({serverTimestamps: 'none'});
             return { ...data };
           })
         )
@@ -95,7 +102,9 @@ export class UserService {
       .pipe(
         map(actions =>
           actions.map(a => {
-            const data = a.payload.doc.data();
+            console.log('a = ');
+            console.log(a);
+            const data = a.payload.doc.data({serverTimestamps: 'none'});
             return { ...data };
           })
         )
@@ -109,7 +118,7 @@ export class UserService {
       .pipe(
         map(actions =>
           actions.map(a => {
-            const data = a.payload.doc.data();
+            const data = a.payload.doc.data({serverTimestamps: 'none'});
             return { ...data };
           })
         )
@@ -118,8 +127,10 @@ export class UserService {
 
   updateUser(user) {
     return new Promise<any>((resolve, reject) => {
-      this.afs.collection('users').doc(user.id).update(user);
+      console.log('this.userId = ');
+      console.log(this.userId);
+      this.afs.collection('users').doc(this.userId).update(user);
       resolve(user);
-    })
+    });
   }
 }
