@@ -1,3 +1,4 @@
+import { User } from './../models/user';
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -23,11 +24,13 @@ export class AuthService {
     private firestore: AngularFirestore
   ) { }
 
-  doRegister(value) {
+  public registerUser(value: Partial<User>) {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.auth.createUserWithEmailAndPassword(value.email, value.password)
         .then(
           res => {
+            console.log('res = ');
+            console.log(res);
             this.firestore.collection('users').doc(res.user.uid).set({
               id: res.user.uid,
               name: value.name,
@@ -46,7 +49,7 @@ export class AuthService {
     });
   }
 
-  login(value) {
+  login(value: Partial<User>) {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.auth.signInWithEmailAndPassword(value.email, value.password)
         .then(
