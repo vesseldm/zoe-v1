@@ -14,18 +14,18 @@ import { ModalPage } from '../modal/modal.page';
 export class SignupPage implements OnInit {
 
   registerForm: FormGroup;
-  errorMessage: string = '';
-  successMessage: string = '';
+  errorMessage: string;
+  successMessage: string;
 
   validationMessages = {
-    'name': [
+    name: [
       { type: 'required', message: 'Name is required.' }
     ],
-    'email': [
+    email: [
       { type: 'required', message: 'Email is required.' },
       { type: 'pattern', message: 'Enter a valid email.' }
     ],
-    'password': [
+    password: [
       { type: 'required', message: 'Password is required.' },
       { type: 'minlength', message: 'Password must be at least 5 characters long.' }
     ]
@@ -45,7 +45,7 @@ export class SignupPage implements OnInit {
         this.goHome();
       }
     });
-    
+
     this.registerForm = this.formBuilder.group({
       name: new FormControl('', Validators.compose([
         Validators.required
@@ -69,20 +69,20 @@ export class SignupPage implements OnInit {
     this.router.navigateByUrl('/home');
   }
 
-  tryRegister(value){
-    this.authService.doRegister(value)
+  register(value) {
+    this.authService.registerUser(value)
     .then(res => {
       console.log(res);
-      this.errorMessage = "";
-      this.successMessage = "Your account has been created. Please log in.";
+      this.errorMessage = '';
+      this.successMessage = 'Your account has been created. Please log in.';
     }, err => {
       console.log(err);
       this.errorMessage = err.message;
-      this.successMessage = "";
-    })
+      this.successMessage = '';
+    });
   }
 
-  tryFacebookLogin(){
+  tryFacebookLogin() {
     this.authService.doFacebookLogin()
     .then((res) => {
       this.router.navigateByUrl('/home');
@@ -91,7 +91,7 @@ export class SignupPage implements OnInit {
     });
   }
 
-  tryGoogleLogin(){
+  tryGoogleLogin() {
     this.authService.doGoogleLogin()
     .then((res) => {
       this.router.navigateByUrl('/home');
@@ -100,7 +100,7 @@ export class SignupPage implements OnInit {
     });
   }
 
-  tryTwitterLogin(){
+  tryTwitterLogin() {
     this.authService.doTwitterLogin()
     .then((res) => {
       this.router.navigateByUrl('/home');
