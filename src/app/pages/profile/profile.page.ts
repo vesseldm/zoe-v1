@@ -381,7 +381,9 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
     this.userService.user$.subscribe(user => {
-      if (user) this.user = user;
+      if (user) {
+        this.user = user;
+      }
     });
   }
 

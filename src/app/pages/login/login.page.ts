@@ -34,12 +34,7 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('test');
-    console.log('this.afAuth.user = ');
-    console.log(this.afAuth.user);
     this.afAuth.user.subscribe(user => {
-      console.log('user = ');
-      console.log(user);
       if (user) {
         this.goHome();
       }
