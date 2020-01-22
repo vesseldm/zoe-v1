@@ -1,7 +1,13 @@
+import { UserState } from '../../state/user/user.state';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
+import { Select, Store } from '@ngxs/store';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { FormBuilder, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-profile',
@@ -9,21 +15,50 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./profile.page.scss']
 })
 export class ProfilePage implements OnInit {
+  @Select(UserState.loggedIn) loggedIn$: Observable<string>;
+  public ngDestroyed$ = new Subject();
+  public profileForm = this.formBuilder.group({
+    details: this.formBuilder.group({
+      email: ['', Validators.email],
+      name: [''],
+      measurements: [''],
+      mobile: [''],
+    }),
+      aboutMe: this.formBuilder.group({
+      height: [''],
+      weight: [''],
+      sex: [''],
+      mealPlanType: [''],
+      foodPreference: [''],
+      allergies: [''],
+      medicalHistory: [''],
+    }),
+    alerts: this.formBuilder.group({
+      mealTimes: [''],
+      mealReview: [''],
+    }),
+    emailPreferences: this.formBuilder.group({
+      newsLetters: [''],
+      updates: [''],
+    })
+  });
   user: any;
-  height: any;
   measurements: any;
+  height: any;
   weight: any;
   sex: any;
-  meal_plan: any;
-  food_reference: any;
+  mealPlan: any;
+  foodPreference: any;
   allergies: any;
-  medical_history: any;
-  meal_times: any;
+  medicalHistory: any;
+  mealTimes: any;
 
   constructor(
+    public store: Store,
     public router: Router,
     public authService: AuthService,
-    public userService: UserService
+    public userService: UserService,
+    public formBuilder: FormBuilder,
   ) {
     this.height = [
       `4' 8"`,
@@ -360,8 +395,8 @@ export class ProfilePage implements OnInit {
       '396 lbs'
     ];
     this.sex = ['Male', 'Female'];
-    this.meal_plan = ['Regular', 'Normal'];
-    this.food_reference = [
+    this.mealPlan = ['Regular', 'Normal'];
+    this.foodPreference = [
       'Butter',
       'Margarine',
       'Ketchup',
@@ -375,16 +410,19 @@ export class ProfilePage implements OnInit {
       'Nutella'
     ];
     this.allergies = ['Corn', 'Egg', 'Fish', 'Meat', 'Milk', 'Peanut', 'Shellfish', 'Soy'];
-    this.medical_history = ['History1', 'History2', 'History3'];
-    this.meal_times = ['6: 00 AM', '7: 00 AM', '8: 00 AM', '9: 00 AM', '10: 00 AM', '11: 00 AM', '12: 00 PM', '1: 00 PM', '2: 00 PM', '3: 00 PM', '4: 00 PM', '5: 00 PM', '6: 00 PM', '7: 00 PM', '8: 00 PM', '9: 00 PM', '10: 00 PM',];
+    this.medicalHistory = ['History1', 'History2', 'History3'];
+    this.mealTimes = ['6: 00 AM', '7: 00 AM', '8: 00 AM', '9: 00 AM', '10: 00 AM', '11: 00 AM', '12: 00 PM', '1: 00 PM', '2: 00 PM', '3: 00 PM', '4: 00 PM', '5: 00 PM', '6: 00 PM', '7: 00 PM', '8: 00 PM', '9: 00 PM', '10: 00 PM',];
   }
 
   ngOnInit() {
-    this.userService.user$.subscribe(user => {
-      if (user) {
-        this.user = user;
+    this.loggedIn$
+    .pipe(takeUntil(this.ngDestroyed$))
+    .subscribe(data => {
+      if (!data) {
+        this.router.navigateByUrl('/');
       }
     });
+    
   }
 
   save() {
