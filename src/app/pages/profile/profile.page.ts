@@ -39,7 +39,7 @@ export class ProfilePage implements OnInit {
     }),
     emailPreferences: this.formBuilder.group({
       newsLetters: [''],
-      updates: [''],
+      updates: ['']
     })
   });
   user: any;
