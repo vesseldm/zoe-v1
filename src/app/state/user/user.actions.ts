@@ -6,6 +6,11 @@ export class AddUser {
 }
 
 export class AddSocialUser {
-  static readonly type = '[User] Add  Socail user';
+  static readonly type = '[User] Add  Social user';
   constructor(public payload: string) { }
+}
+
+export class LoginUser {
+  static readonly type = '[User] Login User';
+  constructor(public payload: any) { }
 }

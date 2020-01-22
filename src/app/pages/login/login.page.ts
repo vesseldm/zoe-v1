@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { LoginUser } from './../../state/user/user.actions';
+import { UserState } from '../../state/user/user.state';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { Select, Store } from '@ngxs/store';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
-
+export class LoginPage implements OnInit, OnDestroy {
+  @Select(UserState.loggedIn) loggedIn$: Observable<any>;
+  public ngDestroyed$ = new Subject();
   loginForm: FormGroup;
   errorMessage = '';
-
   validationMessages = {
     email: [
       { type: 'required', message: 'Email is required.' },
@@ -29,13 +32,14 @@ export class LoginPage implements OnInit {
   constructor(
     public router: Router,
     public formBuilder: FormBuilder,
-    public authService: AuthService,
-    public afAuth: AngularFireAuth
+    public store: Store,
   ) { }
 
   ngOnInit() {
-    this.afAuth.user.subscribe(user => {
-      if (user) {
+    this.loggedIn$
+    .pipe(takeUntil(this.ngDestroyed$))
+    .subscribe(data => {
+      if (data) {
         this.goHome();
       }
     });
@@ -68,41 +72,37 @@ export class LoginPage implements OnInit {
   }
 
   tryLogin(value) {
-    this.authService.login(value)
-    .then(res => {
-      console.log(res);
-      this.router.navigateByUrl('/home');
-    }, err => {
-      console.log(err);
-      this.errorMessage = err.message;
-    });
+    this.store.dispatch(new LoginUser(value));
   }
 
   tryFacebookLogin() {
-    this.authService.doFacebookLogin()
-    .then((res) => {
-      this.router.navigateByUrl('/home');
-    }, (err) => {
-      this.errorMessage = err.message;
-    });
+    // this.authService.doFacebookLogin()
+    // .then((res) => {
+    //   this.router.navigateByUrl('/home');
+    // }, (err) => {
+    //   this.errorMessage = err.message;
+    // });
   }
 
   tryGoogleLogin() {
-    this.authService.doGoogleLogin()
-    .then((res) => {
-      this.router.navigateByUrl('/home');
-    }, (err) => {
-      this.errorMessage = err.message;
-    });
+    // this.authService.doGoogleLogin()
+    // .then((res) => {
+    //   this.router.navigateByUrl('/home');
+    // }, (err) => {
+    //   this.errorMessage = err.message;
+    // });
   }
 
   tryTwitterLogin() {
-    this.authService.doTwitterLogin()
-    .then((res) => {
-      this.router.navigateByUrl('/home');
-    }, (err) => {
-      this.errorMessage = err.message;
-    });
+    // this.authService.doTwitterLogin()
+    // .then((res) => {
+    //   this.router.navigateByUrl('/home');
+    // }, (err) => {
+    //   this.errorMessage = err.message;
+    // });
+  }
+  public ngOnDestroy() {
+    this.ngDestroyed$.next();
   }
 
 }

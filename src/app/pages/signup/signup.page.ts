@@ -2,8 +2,6 @@ import { AddUser, AddSocialUser } from './../../state/user/user.actions';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { ModalController } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
 import { Store } from '@ngxs/store';
@@ -18,7 +16,6 @@ export class SignupPage implements OnInit {
   registerForm: FormGroup;
   errorMessage: string;
   successMessage: string;
-
   validationMessages = {
     name: [
       { type: 'required', message: 'Name is required.' }
@@ -79,12 +76,6 @@ export class SignupPage implements OnInit {
       console.log('result try facebook = ');
       console.log(result);
     });
-    // this.authService.doFacebookLogin()
-    // .then((res) => {
-    //   this.router.navigateByUrl('/home');
-    // }, (err) => {
-    //   this.errorMessage = err.message;
-    // });
   }
 
   tryGoogleLogin() {
@@ -92,12 +83,6 @@ export class SignupPage implements OnInit {
       console.log('result try google = ');
       console.log(result);
     });
-    // this.authService.doGoogleLogin()
-    // .then((res) => {
-    //   this.router.navigateByUrl('/home');
-    // }, (err) => {
-    //   this.errorMessage = err.message;
-    // });
   }
 
   tryTwitterLogin() {
