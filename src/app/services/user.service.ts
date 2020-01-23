@@ -1,3 +1,4 @@
+import { UserStateModel } from './../state/models/user.state.model';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -19,15 +20,19 @@ export class UserService {
     public afAuth: AngularFireAuth,
     public afs: AngularFirestore
   ) {
+    console.log('firebase.auth().currentUser = ');
+    console.log(firebase.auth().currentUser);
+    if (firebase.auth().currentUser) {
 
-    this.userId = firebase.auth().currentUser.uid;
-    console.log('this.userId = ');
-    console.log(this.userId);
-    this.afs.doc(`users/${this.userId}`).valueChanges().subscribe(user => {
-      this.user = user;
-    });
+      this.userId = firebase.auth().currentUser.uid;
+      console.log('this.userId = ');
+      console.log(this.userId);
+      this.afs.doc(`users/${this.userId}`).valueChanges().subscribe(user => {
+        this.user = user;
+      });
+    
 
-    this.user$ = this.afAuth.authState.pipe(
+      this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         console.log('user = ');
         console.log(user);
@@ -38,7 +43,7 @@ export class UserService {
         }
       })
     );
-    this.users$ = this.afAuth.authState.pipe(
+      this.users$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
           return this.afs.collection(`users`).valueChanges();
@@ -48,9 +53,14 @@ export class UserService {
       })
     );
   }
+  }
 
-  getUserInfo(userId: string) {
-    return this.afs.doc(`users/${userId}`).valueChanges();
+  setUserId(userId: string) {
+    this.userId = userId;
+  }
+
+  getUserInfo(userId: string): Observable<UserStateModel> {
+    return this.afs.doc<UserStateModel>(`users/${userId}`).valueChanges();
   }
 
   getPlanedRecipes(recipeIds): Observable<any> {
@@ -71,30 +81,14 @@ export class UserService {
       );
   }
 
-  getUserPlans(userId, date): Observable<any> {
-    let curr = new Date(date);
-    let startDate = new Date(curr.getFullYear(), curr.getMonth(), curr.getDate());
-    let endDate = new Date(curr.getFullYear(), curr.getMonth(), curr.getDate() + 1);
-    // return this.afs
-    //   .collection<any>('recipesplan', ref =>
-    //     ref
-    //       .where('userId', '==', userId)
-    //       .where('time', '>=', startDate)
-    //       .where('time', '<', endDate)
-    //   )
-    //   .snapshotChanges()
-    //   .pipe(
-    //     map(actions =>
-    //       actions.map(a => {
-    //         const data = a.payload.doc.data();
-    //         return { ...data };
-    //       })
-    //     )
-    //   );
+  getUserPlans(date): Observable<any> {
+    const curr = new Date(date);
+    const startDate = new Date(curr.getFullYear(), curr.getMonth(), curr.getDate());
+    const endDate = new Date(curr.getFullYear(), curr.getMonth(), curr.getDate() + 1);
     return this.afs
       .collection<any>('mealPlan', ref =>
         ref
-          .where('userID', '==', userId)
+          .where('userID', '==', this.userId)
           .where('date', '>=', startDate)
           .where('date', '<', endDate)
       )

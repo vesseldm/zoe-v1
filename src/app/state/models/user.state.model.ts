@@ -1,16 +1,44 @@
 import { DocumentReference } from 'angularfire2/firestore';
 
+export class ProfileFormModel {
+        model: {
+            details?: {
+                email?: string;
+                name?: string;
+                measurements?: string;
+                mobile?: string;
+            };
+            aboutMe?: {
+                height?: string;
+                weight?: string;
+                sex?: string;
+                mealPlanType?: string;
+                foodPreference?: string;
+                allergies?: string;
+                medicalHistory?: string;
+            }
+            alerts?: {
+                mealTimes?: string;
+                mealReview?: string;
+            }
+            emailPreferences?: {
+                newsLetters?: string;
+                updates?: string;
+            }
+        };
+        dirty?: boolean;
+        status?: string;
+        errors?: object;
+}
+
 export class UserStateModel {
+    profileForm?: ProfileFormModel;
     uid: string;
-    email: string;
     photoURL?: string;
     type?: 'user' | 'author' | 'admin' = 'user';
-    gender?: 'female' | 'male';
     age?: number;
-    tall?: number;
     goal?: string;
     level?: string;
-    weight?: number;
     currentPlan?: DocumentReference; // Plan ID
     subscriptionType?: 'week' | 'annual' = 'annual';
     subscriptionId?: string;
@@ -20,5 +48,4 @@ export class UserStateModel {
     portionSize?: string;
     mealsToPrep?: string[] = [];
     password?: string;
-    name?: string;
   }

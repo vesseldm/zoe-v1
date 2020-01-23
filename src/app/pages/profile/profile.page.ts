@@ -7,7 +7,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FormBuilder, Validators } from '@angular/forms';
-
+import { SaveProfileUserForm } from '../../state/user/user.actions';
 
 @Component({
   selector: 'app-profile',
@@ -411,7 +411,8 @@ export class ProfilePage implements OnInit {
     ];
     this.allergies = ['Corn', 'Egg', 'Fish', 'Meat', 'Milk', 'Peanut', 'Shellfish', 'Soy'];
     this.medicalHistory = ['History1', 'History2', 'History3'];
-    this.mealTimes = ['6: 00 AM', '7: 00 AM', '8: 00 AM', '9: 00 AM', '10: 00 AM', '11: 00 AM', '12: 00 PM', '1: 00 PM', '2: 00 PM', '3: 00 PM', '4: 00 PM', '5: 00 PM', '6: 00 PM', '7: 00 PM', '8: 00 PM', '9: 00 PM', '10: 00 PM',];
+    this.mealTimes = ['6: 00 AM', '7: 00 AM', '8: 00 AM', '9: 00 AM', '10: 00 AM', '11: 00 AM', '12: 00 PM', '1: 00 PM',
+    '2: 00 PM', '3: 00 PM', '4: 00 PM', '5: 00 PM', '6: 00 PM', '7: 00 PM', '8: 00 PM', '9: 00 PM', '10: 00 PM'];
   }
 
   ngOnInit() {
@@ -422,15 +423,10 @@ export class ProfilePage implements OnInit {
         this.router.navigateByUrl('/');
       }
     });
-    
   }
 
-  save() {
-    try {
-      this.authService.doUpdateUser(this.user);
-    } catch (e) {
-      alert(e.message);
-    }
+  onSubmit() {
+    this.store.dispatch(new SaveProfileUserForm());
   }
 
   logout() {

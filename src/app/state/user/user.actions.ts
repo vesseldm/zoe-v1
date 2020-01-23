@@ -14,3 +14,8 @@ export class LoginUser {
   static readonly type = '[User] Login User';
   constructor(public payload: any) { }
 }
+
+export class SaveProfileUserForm {
+  static readonly type = '[User] Save User Form';
+  constructor() { }
+}

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
 import { combineLatest } from 'rxjs';
 import { RecipeService } from '../../services/recipe.service';
 
@@ -27,7 +26,6 @@ export class TodayPage implements OnInit {
 
   constructor(
     public router: Router,
-    public userService: UserService,
     public recipeService: RecipeService
   ) { }
 
@@ -48,49 +46,49 @@ export class TodayPage implements OnInit {
       const nextDay = new Date(curr.setDate(next));
       this.weekDays.push(nextDay);
     }
-    this.userService.getUserPlans(this.userService.userId, this.currentDay.toString()).subscribe(plans => {
-          const recipeIDs = [];
-          for (let i = 0; i < plans.length; i++) {
-            for (let j = 0; j < plans[i].recipeIDs.length; j++) {
-              recipeIDs.push(plans[i].recipeIDs[j]);
-            }
-          }
-          combineLatest([this.userService.getPlanedRecipes(recipeIDs), this.userService.getAllIngredients()]).subscribe(
-            data => {
-              const [recipes, ingredients] = data;
-              this.recipes = recipes;
-              this.ingredients = ingredients;
-              if (recipes) {
-                this.initNutritional(recipes);
-              }
-            }
-          );
-        });
+    // this.userService.getUserPlans(this.currentDay.toString()).subscribe(plans => {
+    //       const recipeIDs = [];
+    //       for (let i = 0; i < plans.length; i++) {
+    //         for (let j = 0; j < plans[i].recipeIDs.length; j++) {
+    //           recipeIDs.push(plans[i].recipeIDs[j]);
+    //         }
+    //       }
+    //       combineLatest([this.userService.getPlanedRecipes(recipeIDs), this.userService.getAllIngredients()]).subscribe(
+    //         data => {
+    //           const [recipes, ingredients] = data;
+    //           this.recipes = recipes;
+    //           this.ingredients = ingredients;
+    //           if (recipes) {
+    //             this.initNutritional(recipes);
+    //           }
+    //         }
+    //       );
+    //     });
 
-    this.userService.user$.subscribe(userData => {
-        if (userData) {
-          this.user = userData;
-          this.initRecipes();
-        }
-      });
+    // this.userService.user$.subscribe(userData => {
+    //     if (userData) {
+    //       this.user = userData;
+    //       this.initRecipes();
+    //     }
+      // });
 
 
       /////////////////////////
       // Get Featured Recipe //
       /////////////////////////
     const tomorrow = new Date(curr.getFullYear(), curr.getMonth(), curr.getDate() + 1);
-    this.userService.getUserPlans(this.userService.userId, tomorrow.toString()).subscribe(plans => {
-        const recipeIDs = [];
-        for (let i = 0; i < plans.length; i++) {
-          for (let j = 0; j < plans[i].recipeIDs.length; j++) {
-            recipeIDs.push(plans[i].recipeIDs[j]);
-          }
-        }
-        const featuredRecipeId = recipeIDs[0];
-        this.recipeService.getRecipe(featuredRecipeId).subscribe(res => {
-          this.featuredRecipe = res;
-        });
-      });
+    // this.userService.getUserPlans(tomorrow.toString()).subscribe(plans => {
+    //     const recipeIDs = [];
+    //     for (let i = 0; i < plans.length; i++) {
+    //       for (let j = 0; j < plans[i].recipeIDs.length; j++) {
+    //         recipeIDs.push(plans[i].recipeIDs[j]);
+    //       }
+    //     }
+    //     const featuredRecipeId = recipeIDs[0];
+    //     this.recipeService.getRecipe(featuredRecipeId).subscribe(res => {
+    //       this.featuredRecipe = res;
+    //     });
+    //   });
 
     this.notification = 'Nulla quis lectus dolor. Sed et dolor eu elit viverra vestibulum eu vitae velit.';
   }

@@ -1,5 +1,5 @@
 <ion-content>
-  <form [formGroup]="profileForm">
+  <form [formGroup]="profileForm" ngxsForm="user.profileForm" (ngSubmit)="onSubmit()">
   <div formGroupName="details" class="section">
     <div class="section-header">
       <h2>Details</h2>
@@ -136,7 +136,7 @@
       </ion-list>
     </div>
   </div>
-  <ion-button (click)="save()" class="btn-basic" color="basic" expand="block" shape="round">Save</ion-button>
+  <ion-button type="submit" class="btn-basic" color="basic" expand="block" shape="round">Save</ion-button>
   <ion-button (click)="logout()" class="btn-basic" color="basic" expand="block" shape="round">Log Out</ion-button>
 </form>
 </ion-content>

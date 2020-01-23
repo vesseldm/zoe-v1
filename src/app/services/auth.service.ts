@@ -1,4 +1,4 @@
-import { UserStateModel } from '../state/user/user.state';
+import { UserStateModel } from '../state/models/user.state.model';
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -24,7 +24,7 @@ export class AuthService {
     private firestore: AngularFirestore
   ) { }
 
-  public registerUser(value: Partial<UserStateModel>) {
+  public registerUser(value) {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.auth.createUserWithEmailAndPassword(value.email, value.password)
         .then(
@@ -51,9 +51,11 @@ export class AuthService {
     }
   }
 
-  doUpdateUser(user) {
+  doUpdateUser(user: UserStateModel) {
+    console.log('user = ');
+    console.log(user);
     return new Promise<any>((resolve, reject) => {
-      this.firestore.collection('users').doc(user.id).update(user);
+      this.firestore.collection('users').doc(user.uid).update(user);
       resolve(user);
     });
   }
