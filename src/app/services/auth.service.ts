@@ -52,8 +52,6 @@ export class AuthService {
   }
 
   doUpdateUser(user: UserStateModel) {
-    console.log('user = ');
-    console.log(user);
     return new Promise<any>((resolve, reject) => {
       this.firestore.collection('users').doc(user.uid).update(user);
       resolve(user);

@@ -20,17 +20,12 @@ export class UserService {
     public afAuth: AngularFireAuth,
     public afs: AngularFirestore
   ) {
-    console.log('firebase.auth().currentUser = ');
-    console.log(firebase.auth().currentUser);
     if (firebase.auth().currentUser) {
 
       this.userId = firebase.auth().currentUser.uid;
-      console.log('this.userId = ');
-      console.log(this.userId);
       this.afs.doc(`users/${this.userId}`).valueChanges().subscribe(user => {
         this.user = user;
       });
-    
 
       this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -121,8 +116,6 @@ export class UserService {
 
   updateUser(user) {
     return new Promise<any>((resolve, reject) => {
-      console.log('this.userId = ');
-      console.log(this.userId);
       this.afs.collection('users').doc(this.userId).update(user);
       resolve(user);
     });

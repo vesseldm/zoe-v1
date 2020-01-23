@@ -57,13 +57,9 @@ export class UserState {
   loginUser(ctx: StateContext<UserStateModel>, action: LoginUser) {
     return from(this.authService.login(action.payload)).pipe(
       tap(result => {
-        console.log('result = ');
-        console.log(result);
         if (result.user.uid) {
           this.userService.setUserId(result.user.uid);
           this.userService.getUserInfo(result.user.uid).pipe(take(1)).subscribe(user => {
-            console.log('user = ');
-            console.log(user);
             ctx.setState(user);
           });
         }
