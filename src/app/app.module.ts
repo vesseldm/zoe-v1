@@ -1,3 +1,4 @@
+import { UserState } from './state/user/user.state';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -19,6 +20,17 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { TwitterConnect } from '@ionic-native/twitter-connect/ngx';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ModalPageModule } from './pages/modal/modal.module';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsModuleOptions } from '@ngxs/store';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+
+export const ngxsConfig: NgxsModuleOptions = {
+  developmentMode: !environment.production,
+  selectorOptions: {
+    suppressErrors: false,
+    injectContainerState: false
+  },
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +43,9 @@ import { ModalPageModule } from './pages/modal/modal.module';
     AngularFireAuthModule,
     AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    ModalPageModule
+    ModalPageModule,
+    NgxsModule.forRoot([UserState], ngxsConfig),
+    NgxsFormPluginModule.forRoot()
   ],
   providers: [
     StatusBar,

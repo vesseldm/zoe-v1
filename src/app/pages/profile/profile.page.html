@@ -1,5 +1,6 @@
 <ion-content>
-  <div class="section">
+  <form [formGroup]="profileForm" ngxsForm="user.profileForm" (ngSubmit)="onSubmit()">
+  <div formGroupName="details" class="section">
     <div class="section-header">
       <h2>Details</h2>
     </div>
@@ -7,30 +8,26 @@
       <ion-list>
         <ion-item>
           <ion-label class="label">Email</ion-label>
-          <ion-input [(ngModel)]="user && user.email" type="email"></ion-input>
+          <ion-input formControlName="email" type="email"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label class="label">First Name</ion-label>
-          <ion-input [(ngModel)]="user && user.firstName"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label class="label">Last Name</ion-label>
-          <ion-input [(ngModel)]="user && user.lastName"></ion-input>
+          <ion-label class="label">Name</ion-label>
+          <ion-input formControlName="name"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label class="label">Measurements</ion-label>
-          <ion-select [(ngModel)]="user && user.measurements">
+          <ion-select formControlName="measurements">
             <ion-select-option value="{{item}}" *ngFor="let item of measurements">{{item}}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item lines="none">
           <ion-label class="label" type="tel">Mobile</ion-label>
-          <ion-input [(ngModel)]="user && user.mobile"></ion-input>
+          <ion-input formControlName="mobile"></ion-input>
         </ion-item>
       </ion-list>
     </div>
   </div>
-  <div class="section">
+  <div formGroupName="aboutMe" class="section">
     <div class="section-header">
       <h2>About Me</h2>
     </div>
@@ -38,50 +35,50 @@
       <ion-list>
         <ion-item>
           <ion-label class="label">Height</ion-label>
-          <ion-select [(ngModel)]="user && user.height">
+          <ion-select formControlName="height">
             <ion-select-option value="{{item}}" *ngFor="let item of height">{{item}}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label class="label">Weight</ion-label>
-          <ion-select [(ngModel)]="user && user.weight">
+          <ion-select formControlName="weight">
             <ion-select-option value="{{item}}" *ngFor="let item of weight">{{item}}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label class="label">Sex</ion-label>
-          <ion-select [(ngModel)]="user && user.sex">
+          <ion-select formControlName="sex">
             <ion-select-option value="{{item}}" *ngFor="let item of sex">{{item}}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label class="label">Meal Plan Type</ion-label>
-          <ion-select [(ngModel)]="user && user.meal_plan">
-            <ion-select-option value="{{item}}" *ngFor="let item of meal_plan">{{item}}</ion-select-option>
+          <ion-select formControlName="mealPlanType">
+            <ion-select-option value="{{item}}" *ngFor="let item of mealPlan">{{item}}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label class="label">Food Preferences</ion-label>
-          <ion-select [(ngModel)]="user && user.food_reference">
-            <ion-select-option value="{{item}}" *ngFor="let item of food_reference">{{item}}</ion-select-option>
+          <ion-select formControlName="foodPreference">
+            <ion-select-option value="{{item}}" *ngFor="let item of foodPreference">{{item}}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label class="label">Allergies</ion-label>
-          <ion-select [(ngModel)]="user && user.allergies">
+          <ion-select formControlName="allergies">
             <ion-select-option value="{{item}}" *ngFor="let item of allergies">{{item}}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item lines="none">
           <ion-label class="label">Medical History</ion-label>
-          <ion-select [(ngModel)]="user && user.medical_history">
-            <ion-select-option value="{{item}}" *ngFor="let item of medical_history">{{item}}</ion-select-option>
+          <ion-select formControlName="medicalHistory">
+            <ion-select-option value="{{item}}" *ngFor="let item of medicalHistory">{{item}}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-list>
     </div>
   </div>
-  <div class="section">
+  <div formGroupName="alerts" class="section">
     <div class="section-header">
       <h2>Alerts & Reminders</h2>
     </div>
@@ -89,8 +86,8 @@
       <ion-list>
         <ion-item>
           <ion-label class="label">Meal Times</ion-label>
-          <ion-select [(ngModel)]="user && user.meal_times">
-            <ion-select-option value="{{item}}" *ngFor="let item of meal_times">{{item}}</ion-select-option>
+          <ion-select formControlName="mealTimes">
+            <ion-select-option value="{{item}}" *ngFor="let item of mealTimes">{{item}}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item>
@@ -99,12 +96,12 @@
         </ion-item>
         <ion-item lines="none">
           <ion-label class="label">Meal Review</ion-label>
-          <ion-toggle *ngIf="user" color="success" [(ngModel)]="user.review"></ion-toggle>
+          <ion-toggle color="success" formControlName="mealReview"></ion-toggle>
         </ion-item>
       </ion-list>
     </div>
   </div>
-  <div class="section">
+  <div formGroupName="emailPreferences" class="section">
     <div class="section-header">
       <h2>Emails</h2>
     </div>
@@ -112,11 +109,11 @@
       <ion-list>
         <ion-item>
           <ion-label class="label">Newsletters</ion-label>
-          <ion-toggle *ngIf="user" color="success" [(ngModel)]="user.newsletters"></ion-toggle>
+          <ion-toggle color="success" formControlName="newsLetters"></ion-toggle>
         </ion-item>
         <ion-item lines="none">
           <ion-label class="label">Updates</ion-label>
-          <ion-toggle *ngIf="user" color="success" [(ngModel)]="user.updates"></ion-toggle>
+          <ion-toggle color="success" formControlName="updates"></ion-toggle>
         </ion-item>
       </ion-list>
     </div>
@@ -139,6 +136,7 @@
       </ion-list>
     </div>
   </div>
-  <ion-button (click)="save()" class="btn-basic" color="basic" expand="block" shape="round">Save</ion-button>
+  <ion-button type="submit" class="btn-basic" color="basic" expand="block" shape="round">Save</ion-button>
   <ion-button (click)="logout()" class="btn-basic" color="basic" expand="block" shape="round">Log Out</ion-button>
+</form>
 </ion-content>

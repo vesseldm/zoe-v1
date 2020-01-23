@@ -1,10 +1,10 @@
+import { AddUser, AddSocialUser } from './../../state/user/user.actions';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { ModalController } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +16,6 @@ export class SignupPage implements OnInit {
   registerForm: FormGroup;
   errorMessage: string;
   successMessage: string;
-
   validationMessages = {
     name: [
       { type: 'required', message: 'Name is required.' }
@@ -34,17 +33,16 @@ export class SignupPage implements OnInit {
   constructor(
     public router: Router,
     public formBuilder: FormBuilder,
-    public authService: AuthService,
-    public afAuth: AngularFireAuth,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private store: Store
   ) { }
 
   ngOnInit() {
-    this.afAuth.user.subscribe(user => {
-      if (user) {
-        this.goHome();
-      }
-    });
+    // this.afAuth.user.subscribe(user => {
+    //   if (user) {
+    //     this.goHome();
+    //   }
+    // });
 
     this.registerForm = this.formBuilder.group({
       name: new FormControl('', Validators.compose([
@@ -70,42 +68,27 @@ export class SignupPage implements OnInit {
   }
 
   register(value) {
-    this.authService.registerUser(value)
-    .then(res => {
-      console.log(res);
-      this.errorMessage = '';
-      this.successMessage = 'Your account has been created. Please log in.';
-    }, err => {
-      console.log(err);
-      this.errorMessage = err.message;
-      this.successMessage = '';
-    });
+    this.store.dispatch(new AddUser(value));
   }
 
   tryFacebookLogin() {
-    this.authService.doFacebookLogin()
-    .then((res) => {
-      this.router.navigateByUrl('/home');
-    }, (err) => {
-      this.errorMessage = err.message;
+    this.store.dispatch(new AddSocialUser('facebook')).subscribe(result => {
+      console.log('result try facebook = ');
+      console.log(result);
     });
   }
 
   tryGoogleLogin() {
-    this.authService.doGoogleLogin()
-    .then((res) => {
-      this.router.navigateByUrl('/home');
-    }, (err) => {
-      this.errorMessage = err.message;
+    this.store.dispatch(new AddSocialUser('google')).subscribe(result => {
+      console.log('result try google = ');
+      console.log(result);
     });
   }
 
   tryTwitterLogin() {
-    this.authService.doTwitterLogin()
-    .then((res) => {
-      this.router.navigateByUrl('/home');
-    }, (err) => {
-      this.errorMessage = err.message;
+    this.store.dispatch(new AddSocialUser('twitter')).subscribe(result => {
+      console.log('result try twitter = ');
+      console.log(result);
     });
   }
 

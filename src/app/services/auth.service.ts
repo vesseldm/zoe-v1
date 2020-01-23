@@ -1,4 +1,4 @@
-import { User } from './../models/user';
+import { UserStateModel } from '../state/models/user.state.model';
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -24,13 +24,11 @@ export class AuthService {
     private firestore: AngularFirestore
   ) { }
 
-  public registerUser(value: Partial<User>) {
+  public registerUser(value) {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.auth.createUserWithEmailAndPassword(value.email, value.password)
         .then(
           res => {
-            console.log('res = ');
-            console.log(res);
             this.firestore.collection('users').doc(res.user.uid).set({
               id: res.user.uid,
               name: value.name,
@@ -42,14 +40,27 @@ export class AuthService {
     });
   }
 
-  doUpdateUser(user) {
+  socialLogin(socialNetwork: string): Promise<any> {
+    switch (socialNetwork) {
+      case 'facebook':
+        return this.doFacebookLogin();
+      case 'twitter':
+          return this.doTwitterLogin();
+      case 'google':
+        return this.doGoogleLogin();
+    }
+  }
+
+  doUpdateUser(user: UserStateModel) {
+    console.log('user = ');
+    console.log(user);
     return new Promise<any>((resolve, reject) => {
-      this.firestore.collection('users').doc(user.id).update(user);
+      this.firestore.collection('users').doc(user.uid).update(user);
       resolve(user);
     });
   }
 
-  login(value: Partial<User>) {
+  login(value) {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.auth.signInWithEmailAndPassword(value.email, value.password)
         .then(

@@ -28,6 +28,8 @@
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic-native/twitter-connect": "^5.17.0",
     "@ionic/angular": "^4.7.1",
+    "@ngxs/form-plugin": "^3.6.1",
+    "@ngxs/store": "^3.6.1",
     "angularfire2": "^5.2.3",
     "br-mask": "0.0.8",
     "chart.js": "^2.9.3",
