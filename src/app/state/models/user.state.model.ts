@@ -1,6 +1,11 @@
 import { DocumentReference } from 'angularfire2/firestore';
 
-export class ProfileFormModel {
+export interface Ingredient {
+    name: string;
+    uid: string;
+}
+
+export interface ProfileFormModel {
         model: {
             details?: {
                 email?: string;
@@ -48,4 +53,5 @@ export class UserStateModel {
     portionSize?: string;
     mealsToPrep?: string[] = [];
     password?: string;
+    allergies?: Ingredient[];
   }

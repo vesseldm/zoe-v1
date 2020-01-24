@@ -1,3 +1,5 @@
+import { GetIngredientList } from './../../state/ingredients/ingredients.actions';
+import { IngredientsStateModel, Ingredient } from './../../state/models/ingredients.state.model';
 import { UserState } from '../../state/user/user.state';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -16,6 +18,7 @@ import { SaveProfileUserForm } from '../../state/user/user.actions';
 })
 export class ProfilePage implements OnInit {
   @Select(UserState.loggedIn) loggedIn$: Observable<string>;
+  allergies$: Observable<Ingredient[]>;
   public ngDestroyed$ = new Subject();
   public profileForm = this.formBuilder.group({
     details: this.formBuilder.group({
@@ -49,7 +52,6 @@ export class ProfilePage implements OnInit {
   sex: any;
   mealPlan: any;
   foodPreference: any;
-  allergies: any;
   medicalHistory: any;
   mealTimes: any;
 
@@ -409,7 +411,6 @@ export class ProfilePage implements OnInit {
       'Sriracha',
       'Nutella'
     ];
-    this.allergies = ['Corn', 'Egg', 'Fish', 'Meat', 'Milk', 'Peanut', 'Shellfish', 'Soy'];
     this.medicalHistory = ['History1', 'History2', 'History3'];
     this.mealTimes = ['6: 00 AM', '7: 00 AM', '8: 00 AM', '9: 00 AM', '10: 00 AM', '11: 00 AM', '12: 00 PM', '1: 00 PM',
     '2: 00 PM', '3: 00 PM', '4: 00 PM', '5: 00 PM', '6: 00 PM', '7: 00 PM', '8: 00 PM', '9: 00 PM', '10: 00 PM'];
@@ -420,9 +421,17 @@ export class ProfilePage implements OnInit {
     .pipe(takeUntil(this.ngDestroyed$))
     .subscribe(data => {
       if (!data) {
+        console.log('No Data')
         this.router.navigateByUrl('/');
       }
+      console.log('427')
+      this.getIngredientList();
     });
+  }
+
+  getIngredientList() {
+    console.log('ran = get ingredients lsit');
+    this.store.dispatch(new GetIngredientList());
   }
 
   onSubmit() {
