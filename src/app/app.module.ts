@@ -23,6 +23,7 @@ import { ModalPageModule } from './pages/modal/modal.module';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsModuleOptions } from '@ngxs/store';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+import { IngredientsState } from './state/ingredients/ingredients.state';
 
 export const ngxsConfig: NgxsModuleOptions = {
   developmentMode: !environment.production,
@@ -44,7 +45,7 @@ export const ngxsConfig: NgxsModuleOptions = {
     AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ModalPageModule,
-    NgxsModule.forRoot([UserState], ngxsConfig),
+    NgxsModule.forRoot([UserState, IngredientsState], ngxsConfig),
     NgxsFormPluginModule.forRoot()
   ],
   providers: [

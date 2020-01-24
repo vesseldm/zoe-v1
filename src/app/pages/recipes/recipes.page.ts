@@ -34,37 +34,37 @@ export class RecipesPage implements OnInit {
       this.recipes_drinks = [];
       this.recipes_snacks = [];
 
-      recipes.forEach(item => {
-        switch (item.type) {
-          case "Breakfast":
-            this.recipes_breakfasts.push(item);
-            break;
+      // recipes.forEach(item => {
+      //   switch (item.type) {
+      //     case "Breakfast":
+      //       this.recipes_breakfasts.push(item);
+      //       break;
 
-          case "Lunch":
-            this.recipes_lunchs.push(item);
-            break;
+      //     case "Lunch":
+      //       this.recipes_lunchs.push(item);
+      //       break;
 
-          case "Dinner":
-            this.recipes_dinners.push(item);
-            break;
+      //     case "Dinner":
+      //       this.recipes_dinners.push(item);
+      //       break;
 
-          case "Drinks":
-            this.recipes_drinks.push(item);
-            break;
+      //     case "Drinks":
+      //       this.recipes_drinks.push(item);
+      //       break;
 
-          case "Snacks":
-            this.recipes_snacks.push(item);
-            break;
+      //     case "Snacks":
+      //       this.recipes_snacks.push(item);
+      //       break;
 
-          default:
-            break;
-        }
-      });
+      //     default:
+      //       break;
+      //   }
+      // });
     });
 
-    this.userService.user$.subscribe(user => {
-      if (user) this.user = user;
-    });
+    // this.userService.user$.subscribe(user => {
+    //   if (user) this.user = user;
+    // });
   }
 
   goRecipePage(id) {

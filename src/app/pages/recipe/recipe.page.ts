@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { NavController } from "@ionic/angular";
 import { RecipeService } from "../../services/recipe.service";
 import { UserService } from '../../services/user.service';
-import { IngredientService } from "../../services/ingredient.service";
 
 @Component({
   selector: "app-recipe",
@@ -24,7 +23,6 @@ export class RecipePage implements OnInit {
     public router: Router,
     private route: ActivatedRoute,
     public recipeService: RecipeService,
-    public ingredientService: IngredientService,
     private navCtrl: NavController,
     public userService: UserService
   ) {
@@ -37,26 +35,26 @@ export class RecipePage implements OnInit {
     this.recipeService.getRecipe(this.recipeId).subscribe(recipe => {
       this.recipe = recipe;
       this.ingredients = [];
-      this.recipe.ingredients.forEach(item => {
-        this.calories = 0;
-        this.protein = 0;
-        this.carbs = 0;
-        this.fats = 0;
-        this.recipeService.getIngredient(item.id).subscribe(ingredient => {
+      // this.recipe.ingredients.forEach(item => {
+      //   this.calories = 0;
+      //   this.protein = 0;
+      //   this.carbs = 0;
+      //   this.fats = 0;
+      //   this.recipeService.getIngredient(item.id).subscribe(ingredient => {
 
-          this.ingredients.push({
-            id: ingredient['id'],
-            name: ingredient['name'],
-            checked: this.userService.user.shoppingList.includes(item.id)
-          });
+      //     this.ingredients.push({
+      //       id: ingredient['id'],
+      //       name: ingredient['name'],
+      //       checked: this.userService.user.shoppingList.includes(item.id)
+      //     });
 
-          // this.ingredients.push(ingredient);
-          this.calories += ingredient["average"]["calories"];
-          this.protein += ingredient["average"]["protein"];
-          this.carbs += ingredient["average"]["carbs"];
-          this.fats += ingredient["average"]["fats"];
-        });
-      });
+      //     // this.ingredients.push(ingredient);
+      //     this.calories += ingredient["average"]["calories"];
+      //     this.protein += ingredient["average"]["protein"];
+      //     this.carbs += ingredient["average"]["carbs"];
+      //     this.fats += ingredient["average"]["fats"];
+      //   });
+      // });
     });
   }
 
@@ -71,9 +69,7 @@ export class RecipePage implements OnInit {
 
   shoppingList(ingredient, e) {
     if (e.detail.checked) {
-      this.ingredientService.addToShoppingList(ingredient.id);
     } else {
-      this.ingredientService.removeFromShoppingList(ingredient.id);
     }
   }
 }

@@ -34,6 +34,13 @@ export class UserState {
     return state.uid;
   }
 
+  @Selector()
+  static allergiesList(state: UserStateModel) {
+    console.log('state = ');
+    console.log(state.allergies);
+    return state.allergies;
+  }
+
   @Action(AddUser)
   addUser(ctx: StateContext<UserStateModel>, action: AddUser) {
     return from(this.authService.registerUser(action.payload)).pipe(
