@@ -29,8 +29,6 @@ export class UserState {
 
   @Selector()
   static loggedIn(state: UserStateModel) {
-    console.log('state = ');
-    console.log(state);
     return state.uid;
   }
 

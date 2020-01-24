@@ -7,6 +7,7 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { Select, Store } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Component({
   selector: 'app-login',
@@ -41,9 +42,10 @@ export class LoginPage implements OnInit, OnDestroy {
     .subscribe(data => {
       if (data) {
         this.goHome();
+      } else {
+        this.generateForm();
       }
     });
-    this.generateForm();
   }
 
   generateForm() {
@@ -60,7 +62,7 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   goSignup() {
-    this.router.navigateByUrl('/signup');
+    this.store.dispatch(new Navigate(['/signup']));
   }
 
   goForgot() {
@@ -68,7 +70,7 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   goHome() {
-    this.router.navigateByUrl('/home');
+    this.store.dispatch(new Navigate(['/home']));
   }
 
   tryLogin(value) {

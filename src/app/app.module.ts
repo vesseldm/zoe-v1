@@ -24,6 +24,7 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsModuleOptions } from '@ngxs/store';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { IngredientsState } from './state/ingredients/ingredients.state';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 
 export const ngxsConfig: NgxsModuleOptions = {
   developmentMode: !environment.production,
@@ -46,7 +47,8 @@ export const ngxsConfig: NgxsModuleOptions = {
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ModalPageModule,
     NgxsModule.forRoot([UserState, IngredientsState], ngxsConfig),
-    NgxsFormPluginModule.forRoot()
+    NgxsFormPluginModule.forRoot(),
+    NgxsRouterPluginModule.forRoot(),
   ],
   providers: [
     StatusBar,

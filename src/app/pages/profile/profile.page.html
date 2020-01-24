@@ -59,14 +59,14 @@
         </ion-item>
         <ion-item>
           <ion-label class="label">Food Preferences</ion-label>
-          <ion-select formControlName="foodPreference">
-            <ion-select-option value="{{item}}" *ngFor="let item of foodPreference">{{item}}</ion-select-option>
+          <ion-select multiple={true} formControlName="foodPreference">
+            <ion-select-option value="{{item.uid}}" *ngFor="let item of foodPreference">{{item.name}}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label class="label">Allergies</ion-label>
-          <ion-select formControlName="allergies">
-            <ion-select-option value="{{item}}" *ngFor="let item of allergies">{{item}}</ion-select-option>
+          <ion-select multiple={true} formControlName="allergies">
+            <ion-select-option value="{{item.uid}}" *ngFor="let item of allergies">{{item.name}}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item lines="none">
