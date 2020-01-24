@@ -12,7 +12,6 @@ export class IngredientsService {
   ) { }
 
   getIngredientList() {
-    console.log('rsana')
-    return this.angularFireStore.collection<Ingredient>('ingredients').valueChanges();
+    return this.angularFireStore.collection<Ingredient>('ingredients').valueChanges({idField: 'uid'});
   }
 }

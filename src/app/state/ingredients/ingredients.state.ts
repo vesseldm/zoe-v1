@@ -12,7 +12,6 @@ export class IngredientsState {
 
   @Action(GetIngredientList)
   getIngredientList(ctx: StateContext<IngredientsStateModel>, action: GetIngredientList) {
-    console.log('ran ran ran')
     return this.ingredientsService.getIngredientList().pipe(tap(result => {
       console.log('result = ');
       console.log(result);

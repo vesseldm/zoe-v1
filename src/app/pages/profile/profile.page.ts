@@ -18,7 +18,7 @@ import { SaveProfileUserForm } from '../../state/user/user.actions';
 })
 export class ProfilePage implements OnInit {
   @Select(UserState.loggedIn) loggedIn$: Observable<string>;
-  allergies$: Observable<Ingredient[]>;
+  allergies;
   public ngDestroyed$ = new Subject();
   public profileForm = this.formBuilder.group({
     details: this.formBuilder.group({
@@ -54,6 +54,7 @@ export class ProfilePage implements OnInit {
   foodPreference: any;
   medicalHistory: any;
   mealTimes: any;
+  ingredients: Ingredient[];
 
   constructor(
     public store: Store,
@@ -421,17 +422,20 @@ export class ProfilePage implements OnInit {
     .pipe(takeUntil(this.ngDestroyed$))
     .subscribe(data => {
       if (!data) {
-        console.log('No Data')
         this.router.navigateByUrl('/');
       }
-      console.log('427')
       this.getIngredientList();
     });
   }
 
   getIngredientList() {
-    console.log('ran = get ingredients lsit');
-    this.store.dispatch(new GetIngredientList());
+    this.store.dispatch(new GetIngredientList())
+    .subscribe(ingredients => {
+      this.ingredients = ingredients;
+      console.log('this.ingredients = ');
+      console.log(this.ingredients);
+      this.allergies = this.ingredients;
+    });
   }
 
   onSubmit() {
