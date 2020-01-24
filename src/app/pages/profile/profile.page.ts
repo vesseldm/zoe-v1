@@ -1,24 +1,26 @@
+import { takeUntil } from 'rxjs/operators';
+import { IngredientsState } from './../../state/ingredients/ingredients.state';
 import { GetIngredientList } from './../../state/ingredients/ingredients.actions';
-import { IngredientsStateModel, Ingredient } from './../../state/models/ingredients.state.model';
+import { Ingredient } from './../../state/models/ingredients.state.model';
 import { UserState } from '../../state/user/user.state';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { Select, Store } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SaveProfileUserForm } from '../../state/user/user.actions';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss']
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage implements OnInit, OnDestroy {
   @Select(UserState.loggedIn) loggedIn$: Observable<string>;
-  allergies;
+  @Select(IngredientsState.getIngredients) ingredients$: Observable<any>;
+  allergies: Ingredient[];
   public ngDestroyed$ = new Subject();
   public profileForm = this.formBuilder.group({
     details: this.formBuilder.group({
@@ -58,7 +60,6 @@ export class ProfilePage implements OnInit {
 
   constructor(
     public store: Store,
-    public router: Router,
     public authService: AuthService,
     public userService: UserService,
     public formBuilder: FormBuilder,
@@ -399,42 +400,27 @@ export class ProfilePage implements OnInit {
     ];
     this.sex = ['Male', 'Female'];
     this.mealPlan = ['Regular', 'Normal'];
-    this.foodPreference = [
-      'Butter',
-      'Margarine',
-      'Ketchup',
-      'Hot sauce',
-      'Ranch dressing',
-      'Barbecue sauce',
-      'Yellow mustard',
-      'Dijon mustard',
-      'Pickle relish',
-      'Sriracha',
-      'Nutella'
-    ];
     this.medicalHistory = ['History1', 'History2', 'History3'];
     this.mealTimes = ['6: 00 AM', '7: 00 AM', '8: 00 AM', '9: 00 AM', '10: 00 AM', '11: 00 AM', '12: 00 PM', '1: 00 PM',
     '2: 00 PM', '3: 00 PM', '4: 00 PM', '5: 00 PM', '6: 00 PM', '7: 00 PM', '8: 00 PM', '9: 00 PM', '10: 00 PM'];
   }
 
   ngOnInit() {
-    this.loggedIn$
+    this.ingredients$
     .pipe(takeUntil(this.ngDestroyed$))
     .subscribe(data => {
-      if (!data) {
-        this.router.navigateByUrl('/');
+      if (data.length) {
+        this.allergies = data;
+        this.foodPreference = data;
       }
-      this.getIngredientList();
     });
+    this.getIngredientList();
   }
 
   getIngredientList() {
-    this.store.dispatch(new GetIngredientList())
-    .subscribe(ingredients => {
-      this.ingredients = ingredients;
-      console.log('this.ingredients = ');
-      console.log(this.ingredients);
-      this.allergies = this.ingredients;
+    this.store.dispatch(new GetIngredientList()).subscribe(data => {
+      console.log('get ingredients data = ');
+      console.log(data);
     });
   }
 
@@ -445,11 +431,15 @@ export class ProfilePage implements OnInit {
   logout() {
     this.authService.doLogout().then(
       res => {
-        this.router.navigateByUrl('/');
+        this.store.dispatch(new Navigate(['/']));
       },
       error => {
         console.log('Logout error', error);
       }
     );
+  }
+
+  public ngOnDestroy() {
+    this.ngDestroyed$.next();
   }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { RecipeService } from '../../services/recipe.service';
+import { Store } from '@ngxs/store';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Component({
   selector: 'app-today',
@@ -25,8 +27,8 @@ export class TodayPage implements OnInit {
   notification: any;
 
   constructor(
-    public router: Router,
-    public recipeService: RecipeService
+    public recipeService: RecipeService,
+    private store: Store,
   ) { }
 
   ngOnInit() {
@@ -120,14 +122,17 @@ export class TodayPage implements OnInit {
   }
 
   goProfile() {
-    this.router.navigateByUrl('/home/profile');
+    this.store.dispatch(new Navigate(['/home/profile']));
   }
 
   editRecipes() {
-    this.router.navigateByUrl('/home/recipes');
+    this.store.dispatch(new Navigate(['/home/recipes']));
   }
 
   goRecipePage(id) {
-    this.router.navigate(['/recipe', id]);
+    // id needs to be passed
+    console.log('id = ');
+    console.log(id);
+    this.store.dispatch(new Navigate(['/recipe']));
   }
 }
