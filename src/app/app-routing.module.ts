@@ -96,6 +96,10 @@ const routes: Routes = [
   {
     path: 'modal',
     loadChildren: () => import('./pages/modal/modal.module').then( m => m.ModalPageModule)
+  },
+  {
+    path: 'food-preferences',
+    loadChildren: () => import('./pages/food-preferences/food-preferences.module').then( m => m.FoodPreferencesPageModule)
   }
 ];
 @NgModule({

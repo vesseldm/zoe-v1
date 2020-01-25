@@ -1,9 +1,5 @@
+import { Ingredient } from './ingredients.state.model';
 import { DocumentReference } from 'angularfire2/firestore';
-
-export interface Ingredient {
-    name: string;
-    uid: string;
-}
 
 export interface ProfileFormModel {
         model: {
@@ -18,7 +14,6 @@ export interface ProfileFormModel {
                 weight?: string;
                 sex?: string;
                 mealPlanType?: string;
-                foodPreference?: string;
                 allergies?: string;
                 medicalHistory?: string;
             }
@@ -54,4 +49,5 @@ export class UserStateModel {
     mealsToPrep?: string[] = [];
     password?: string;
     allergies?: Ingredient[];
+    foodPreference?: Ingredient[];
   }

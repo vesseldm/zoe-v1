@@ -5,7 +5,7 @@ import { AuthService } from './../../services/auth.service';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { from } from 'rxjs';
 import { tap, takeUntil, take } from 'rxjs/operators';
-import { AddUser, AddSocialUser, LoginUser, SaveProfileUserForm } from './user.actions';
+import { AddUser, AddSocialUser, LoginUser, SaveProfileUserForm, IngredientLiked } from './user.actions';
 import { UserStateModel } from '../models/user.state.model';
 
 
@@ -80,5 +80,10 @@ export class UserState {
         console.log(result);
       })
     );
+  }
+
+  @Action(IngredientLiked)
+  saveIngredientLike(ctx: StateContext<UserStateModel>, action: IngredientLiked ) {
+    return from(this.userService.addIngredientPreference(action.ingredient));
   }
 }

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Food Preferences</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list>
+<ion-item *ngFor="let ingredient of ingredients">
+  <ion-grid>
+    
+    <ion-row>
+    <ion-col size="6" size-lg>
+      {{ingredient.name}}
+      </ion-col>
+      <ion-col size="3">
+        <ion-button color="secondary" (click)="ingredientDisliked(ingredient)">Dislike</ion-button>
+      </ion-col>
+      <ion-col size="3" class="ion-align-self-end">
+        <ion-button color="primary" (click)="ingredientLiked(ingredient)">Like</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-item>
+</ion-list>
+</ion-content>

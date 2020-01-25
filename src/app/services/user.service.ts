@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, of, from } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import * as firebase from 'firebase/app';
+import { Ingredient } from '../state/models/ingredients.state.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,34 +21,7 @@ export class UserService {
     public afAuth: AngularFireAuth,
     public afs: AngularFirestore
   ) {
-    if (firebase.auth().currentUser) {
 
-      this.userId = firebase.auth().currentUser.uid;
-      this.afs.doc(`users/${this.userId}`).valueChanges().subscribe(user => {
-        this.user = user;
-      });
-
-      this.user$ = this.afAuth.authState.pipe(
-      switchMap(user => {
-        console.log('user = ');
-        console.log(user);
-        if (user) {
-          return this.afs.doc(`users/${user.uid}`).valueChanges();
-        } else {
-          return of(null);
-        }
-      })
-    );
-      this.users$ = this.afAuth.authState.pipe(
-      switchMap(user => {
-        if (user) {
-          return this.afs.collection(`users`).valueChanges();
-        } else {
-          return of(null);
-        }
-      })
-    );
-  }
   }
 
   setUserId(userId: string) {
@@ -60,7 +34,7 @@ export class UserService {
 
   getPlanedRecipes(recipeIds): Observable<any> {
     console.log('getPlanedRecipes called');
-    if (recipeIds.length == 0) return of(null);
+    if (recipeIds.length === 0) { return of(null); }
     return this.afs
       .collection<any>('recipes', ref => ref.where('id', 'in', recipeIds))
       .snapshotChanges()
@@ -91,8 +65,6 @@ export class UserService {
       .pipe(
         map(actions =>
           actions.map(a => {
-            console.log('a = ');
-            console.log(a);
             const data = a.payload.doc.data({serverTimestamps: 'none'});
             return { ...data };
           })
@@ -112,6 +84,10 @@ export class UserService {
           })
         )
       );
+  }
+
+  addIngredientPreference(ingredient: Ingredient) {
+    return this.afs.collection(`users/${this.userId}/ingredientPreferences`).add(ingredient);
   }
 
   updateUser(user) {

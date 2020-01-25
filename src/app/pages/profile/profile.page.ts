@@ -411,17 +411,14 @@ export class ProfilePage implements OnInit, OnDestroy {
     .subscribe(data => {
       if (data.length) {
         this.allergies = data;
-        this.foodPreference = data;
+        this.ingredients = data;
       }
     });
     this.getIngredientList();
   }
 
   getIngredientList() {
-    this.store.dispatch(new GetIngredientList()).subscribe(data => {
-      console.log('get ingredients data = ');
-      console.log(data);
-    });
+    this.store.dispatch(new GetIngredientList());
   }
 
   onSubmit() {
@@ -437,6 +434,10 @@ export class ProfilePage implements OnInit, OnDestroy {
         console.log('Logout error', error);
       }
     );
+  }
+
+  goToFoodPreferences() {
+    this.store.dispatch(new Navigate(['/food-preferences']));
   }
 
   public ngOnDestroy() {
