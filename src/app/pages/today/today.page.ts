@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { combineLatest } from 'rxjs';
+import { UserState } from './../../state/user/user.state';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { RecipeService } from '../../services/recipe.service';
-import { Store } from '@ngxs/store';
+import { Store, Select } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-today',
   templateUrl: './today.page.html',
   styleUrls: ['./today.page.scss']
 })
-export class TodayPage implements OnInit {
+export class TodayPage implements OnInit, OnDestroy {
+  @Select(UserState.loggedIn) loggedIn$: Observable<string>;
+  public ngDestroyed$ = new Subject();
   slideOpts = {
     slidesPerView: 1.7,
     centeredSlides: true,
@@ -32,7 +35,7 @@ export class TodayPage implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.checkIfUserIsLoggedIn();
     this.nutritional = {
       calories: 0,
       protein: 0,
@@ -48,51 +51,20 @@ export class TodayPage implements OnInit {
       const nextDay = new Date(curr.setDate(next));
       this.weekDays.push(nextDay);
     }
-    // this.userService.getUserPlans(this.currentDay.toString()).subscribe(plans => {
-    //       const recipeIDs = [];
-    //       for (let i = 0; i < plans.length; i++) {
-    //         for (let j = 0; j < plans[i].recipeIDs.length; j++) {
-    //           recipeIDs.push(plans[i].recipeIDs[j]);
-    //         }
-    //       }
-    //       combineLatest([this.userService.getPlanedRecipes(recipeIDs), this.userService.getAllIngredients()]).subscribe(
-    //         data => {
-    //           const [recipes, ingredients] = data;
-    //           this.recipes = recipes;
-    //           this.ingredients = ingredients;
-    //           if (recipes) {
-    //             this.initNutritional(recipes);
-    //           }
-    //         }
-    //       );
-    //     });
-
-    // this.userService.user$.subscribe(userData => {
-    //     if (userData) {
-    //       this.user = userData;
-    //       this.initRecipes();
-    //     }
-      // });
-
-
       /////////////////////////
       // Get Featured Recipe //
       /////////////////////////
     const tomorrow = new Date(curr.getFullYear(), curr.getMonth(), curr.getDate() + 1);
-    // this.userService.getUserPlans(tomorrow.toString()).subscribe(plans => {
-    //     const recipeIDs = [];
-    //     for (let i = 0; i < plans.length; i++) {
-    //       for (let j = 0; j < plans[i].recipeIDs.length; j++) {
-    //         recipeIDs.push(plans[i].recipeIDs[j]);
-    //       }
-    //     }
-    //     const featuredRecipeId = recipeIDs[0];
-    //     this.recipeService.getRecipe(featuredRecipeId).subscribe(res => {
-    //       this.featuredRecipe = res;
-    //     });
-    //   });
-
     this.notification = 'Nulla quis lectus dolor. Sed et dolor eu elit viverra vestibulum eu vitae velit.';
+  }
+
+  checkIfUserIsLoggedIn() {
+    this.loggedIn$
+    .pipe(takeUntil(this.ngDestroyed$))
+    .subscribe(data => {
+      console.log('data = ');
+      console.log(data);
+    });
   }
 
   initNutritional(recipes) {
@@ -135,4 +107,9 @@ export class TodayPage implements OnInit {
     console.log(id);
     this.store.dispatch(new Navigate(['/recipe']));
   }
+
+  public ngOnDestroy() {
+    this.ngDestroyed$.next();
+  }
+
 }

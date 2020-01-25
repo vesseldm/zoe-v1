@@ -25,14 +25,18 @@ export class FoodPreferencesPage implements OnInit {
     .pipe(takeUntil(this.ngDestroyed$))
     .subscribe(data => {
       if (data) {
+        console.log('data = ');
+        console.log(data);
         this.ingredients = data;
       }
     });
   }
 
   ingredientLiked(ingredient: Ingredient) {
-    const newObj = Object.assign({score: 1}, ingredient);
-    this.store.dispatch(new IngredientLiked(newObj));
+    ingredient.score = ingredient.score++;
+    ingredient.liked = true;
+    ingredient.disliked = false;
+    this.store.dispatch(new IngredientLiked(ingredient));
   }
 
   ingredientDisliked(ingredient: Ingredient) {

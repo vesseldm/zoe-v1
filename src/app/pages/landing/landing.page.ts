@@ -15,11 +15,6 @@ export class LandingPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.afAuth.user.subscribe(user => {
-      if (user) {
-        this.router.navigateByUrl('/home');
-      }
-    });
   }
   
   goSignup() {

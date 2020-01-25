@@ -18,7 +18,6 @@ import { Navigate } from '@ngxs/router-plugin';
   styleUrls: ['./profile.page.scss']
 })
 export class ProfilePage implements OnInit, OnDestroy {
-  @Select(UserState.loggedIn) loggedIn$: Observable<string>;
   @Select(IngredientsState.getIngredients) ingredients$: Observable<any>;
   allergies: Ingredient[];
   public ngDestroyed$ = new Subject();
