@@ -16,6 +16,11 @@ export class LoginUser {
   constructor(public payload: any) { }
 }
 
+export class GetIngredientPreferences {
+  static readonly type = '[User] Get IngredientPreferences';
+  constructor() { }
+}
+
 export class SaveProfileUserForm {
   static readonly type = '[User] Save User Form';
   constructor() { }

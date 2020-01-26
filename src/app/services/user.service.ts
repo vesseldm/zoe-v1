@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, of, from } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
-import * as firebase from 'firebase/app';
+import { map } from 'rxjs/operators';
 import { Ingredient } from '../state/models/ingredients.state.model';
 
 @Injectable({
@@ -41,8 +40,6 @@ export class UserService {
       .pipe(
         map(actions =>
           actions.map(a => {
-            console.log('a = ');
-            console.log(a);
             const data = a.payload.doc.data({serverTimestamps: 'none'});
             return { ...data };
           })
@@ -95,5 +92,9 @@ export class UserService {
       this.afs.collection('users').doc(this.userId).update(user);
       resolve(user);
     });
+  }
+
+  getIngredientPreference(): Observable<Ingredient[]> {
+    return this.afs.collection<Ingredient>(`users/${this.userId}/ingredientPreferences`).valueChanges();
   }
 }

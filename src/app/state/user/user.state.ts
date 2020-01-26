@@ -1,11 +1,18 @@
+import { UserStateModel } from './../models/user.state.model';
 import { UserService } from './../../services/user.service';
-import { ProfileFormModel } from './../models/user.state.model';
-import { DocumentReference } from '@angular/fire/firestore';
 import { AuthService } from './../../services/auth.service';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { from } from 'rxjs';
-import { tap, takeUntil, take } from 'rxjs/operators';
-import { AddUser, AddSocialUser, LoginUser, SaveProfileUserForm, IngredientLiked } from './user.actions';
+import { tap, take } from 'rxjs/operators';
+import {
+  AddUser,
+  AddSocialUser,
+  LoginUser,
+  SaveProfileUserForm,
+  IngredientLiked,
+  IngredientDisliked,
+  GetIngredientPreferences
+} from './user.actions';
 import { UserStateModel } from '../models/user.state.model';
 
 
@@ -34,9 +41,12 @@ export class UserState {
 
   @Selector()
   static allergiesList(state: UserStateModel) {
-    console.log('state = ');
-    console.log(state.allergies);
     return state.allergies;
+  }
+
+  @Selector()
+  static getIngredientPreferences(state: UserStateModel) {
+    return state.foodPreference;
   }
 
   @Action(AddUser)
@@ -82,8 +92,25 @@ export class UserState {
     );
   }
 
+  @Action(GetIngredientPreferences)
+  getIngredientList(ctx: StateContext<UserStateModel>) {
+    return this.userService.getIngredientPreference().pipe(tap(foodPreference => {
+      const state = ctx.getState();
+      ctx.patchState({...state.foodPreference, foodPreference});
+    }));
+  }
+
   @Action(IngredientLiked)
   saveIngredientLike(ctx: StateContext<UserStateModel>, action: IngredientLiked ) {
-    return from(this.userService.addIngredientPreference(action.ingredient));
+    return from(this.userService.addIngredientPreference(action.ingredient)).pipe(tap(() => {
+      ctx.patchState(action.ingredient);
+    }));
+  }
+
+  @Action(IngredientDisliked)
+  saveIngredientDislike(ctx: StateContext<UserStateModel>, action: IngredientDisliked ) {
+    return from(this.userService.addIngredientPreference(action.ingredient)).pipe(tap(() => {
+      ctx.patchState(action.ingredient);
+    }));
   }
 }
