@@ -65,7 +65,7 @@ export class UserState {
         if (result.user.uid) {
           this.userService.setUserId(result.user.uid);
           this.userService.getUserInfo(result.user.uid).pipe(take(1)).subscribe(user => {
-            ctx.setState(user);
+          ctx.setState(user);
           });
         }
       })

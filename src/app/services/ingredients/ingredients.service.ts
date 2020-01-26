@@ -1,7 +1,6 @@
 import { Ingredient, IngredientsStateModel } from './../../state/models/ingredients.state.model';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +12,6 @@ export class IngredientsService {
   ) { }
 
   getIngredientList() {
-    return this.angularFireStore.collection<any[]>('ingredients').valueChanges({idField: 'uid'});
+    return this.angularFireStore.collection<Ingredient[]>('ingredients').valueChanges({idField: 'uid'});
   }
 }

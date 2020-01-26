@@ -15,7 +15,7 @@ import { IngredientLiked } from '../../state/user/user.actions';
 export class FoodPreferencesPage implements OnInit {
   @Select(IngredientsState.getIngredients) ingredients$: Observable<IngredientsStateModel>;
   public ngDestroyed$ = new Subject();
-  ingredients;
+  ingredients: Ingredient[];
   constructor(
     private store: Store,
   ) { }
@@ -27,16 +27,15 @@ export class FoodPreferencesPage implements OnInit {
       if (data) {
         console.log('data = ');
         console.log(data);
-        this.ingredients = data;
+        this.ingredients = data.ingredients;
       }
     });
   }
 
   ingredientLiked(ingredient: Ingredient) {
-    ingredient.score = ingredient.score++;
-    ingredient.liked = true;
-    ingredient.disliked = false;
-    this.store.dispatch(new IngredientLiked(ingredient));
+    const newIngredient: Ingredient = Object.assign({}, ingredient);
+    newIngredient.liked = true;
+    this.store.dispatch(new IngredientLiked(newIngredient));
   }
 
   ingredientDisliked(ingredient: Ingredient) {
