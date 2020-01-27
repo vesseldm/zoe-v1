@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { UserIngredientPreference } from './../../state/models/user.state.model';
 import { Ingredient, IngredientsStateModel } from './../../state/models/ingredients.state.model';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -11,7 +13,7 @@ export class IngredientsService {
     public angularFireStore: AngularFirestore
   ) { }
 
-  getIngredientList() {
-    return this.angularFireStore.collection<Ingredient[]>('ingredients').valueChanges({idField: 'uid'});
+  getIngredientList(): Observable<UserIngredientPreference[]> {
+    return this.angularFireStore.collection<UserIngredientPreference>('ingredients').valueChanges({idField: 'uid'});
   }
 }

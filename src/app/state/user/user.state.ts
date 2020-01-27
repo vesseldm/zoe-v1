@@ -1,12 +1,20 @@
+import { IngredientsService } from './../../services/ingredients/ingredients.service';
+import { UserStateModel, UserIngredientPreference } from './../models/user.state.model';
 import { UserService } from './../../services/user.service';
-import { ProfileFormModel } from './../models/user.state.model';
-import { DocumentReference } from '@angular/fire/firestore';
 import { AuthService } from './../../services/auth.service';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
+import { patch, append, removeItem, insertItem, updateItem } from '@ngxs/store/operators';
 import { from } from 'rxjs';
-import { tap, takeUntil, take } from 'rxjs/operators';
-import { AddUser, AddSocialUser, LoginUser, SaveProfileUserForm } from './user.actions';
-import { UserStateModel } from '../models/user.state.model';
+import { tap, take } from 'rxjs/operators';
+import {
+  AddUser,
+  AddSocialUser,
+  LoginUser,
+  SaveProfileUserForm,
+  IngredientLiked,
+  IngredientDisliked,
+  GetIngredientPreferences
+} from './user.actions';
 
 
 @State<UserStateModel>({
@@ -34,9 +42,14 @@ export class UserState {
 
   @Selector()
   static allergiesList(state: UserStateModel) {
-    console.log('state = ');
-    console.log(state.allergies);
     return state.allergies;
+  }
+
+  @Selector()
+  static getIngredientPreferences(state: UserStateModel) {
+    console.log('state = ');
+    console.log(state);
+    return state.ingredientPreferences;
   }
 
   @Action(AddUser)
@@ -65,7 +78,10 @@ export class UserState {
         if (result.user.uid) {
           this.userService.setUserId(result.user.uid);
           this.userService.getUserInfo(result.user.uid).pipe(take(1)).subscribe(user => {
-            ctx.setState(user);
+            this.userService.getUserIngredientPreferences(result.user.uid).subscribe(data => {
+              user.ingredientPreferences = data;
+              ctx.setState(user);
+            });
           });
         }
       })
@@ -80,5 +96,25 @@ export class UserState {
         console.log(result);
       })
     );
+  }
+
+  @Action(IngredientLiked)
+  saveIngredientLike(ctx: StateContext<UserStateModel>, action: IngredientLiked ) {
+    return from(this.userService.updateIngredientPreference(action.ingredient)).subscribe(() => {
+      ctx.setState(
+        patch({
+        ingredientPreferences: updateItem(item => item.uid === action.ingredient.uid, action.ingredient)
+      }));
+    });
+  }
+
+  @Action(IngredientDisliked)
+  saveIngredientDislike(ctx: StateContext<UserStateModel>, action: IngredientDisliked ) {
+    return from(this.userService.updateIngredientPreference(action.ingredient)).subscribe(() => {
+      ctx.setState(
+        patch({
+        ingredientPreferences: updateItem(item => item.uid === action.ingredient.uid, action.ingredient)
+      }));
+    });
   }
 }

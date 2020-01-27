@@ -2,7 +2,6 @@ import { IngredientsStateModel } from './../models/ingredients.state.model';
 import { IngredientsService } from '../../services/ingredients/ingredients.service';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { GetIngredientList } from './ingredients.actions';
-import { IngredientsStateModel } from '../models/ingredients.state.model';
 import { tap } from 'rxjs/operators';
 
 @State<IngredientsStateModel>({
@@ -13,16 +12,13 @@ export class IngredientsState {
 
   @Selector()
   static getIngredients(state: IngredientsStateModel) {
-    console.log('state = ');
-    console.log(state);
     return state;
   }
   @Action(GetIngredientList)
   getIngredientList(ctx: StateContext<any>) {
     return this.ingredientsService.getIngredientList().pipe(tap(result => {
-      console.log('result = ');
-      console.log(result);
-      ctx.setState(result);
+      const state = ctx.getState();
+      ctx.setState({...state, ingredients: result});
     }));
   }
 }

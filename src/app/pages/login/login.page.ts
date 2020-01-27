@@ -37,15 +37,7 @@ export class LoginPage implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.loggedIn$
-    .pipe(takeUntil(this.ngDestroyed$))
-    .subscribe(data => {
-      if (data) {
-        this.goHome();
-      } else {
-        this.generateForm();
-      }
-    });
+    this.generateForm();
   }
 
   generateForm() {
@@ -74,7 +66,9 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   tryLogin(value) {
-    this.store.dispatch(new LoginUser(value));
+    this.store.dispatch(new LoginUser(value)).subscribe(data => {
+      this.goHome();
+    });
   }
 
   tryFacebookLogin() {

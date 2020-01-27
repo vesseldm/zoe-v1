@@ -1,13 +1,9 @@
-import { takeUntil } from 'rxjs/operators';
-import { IngredientsState } from './../../state/ingredients/ingredients.state';
-import { GetIngredientList } from './../../state/ingredients/ingredients.actions';
 import { Ingredient } from './../../state/models/ingredients.state.model';
-import { UserState } from '../../state/user/user.state';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
-import { Select, Store } from '@ngxs/store';
-import { Observable, Subject } from 'rxjs';
+import { Store } from '@ngxs/store';
+import { Subject } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SaveProfileUserForm } from '../../state/user/user.actions';
 import { Navigate } from '@ngxs/router-plugin';
@@ -18,8 +14,6 @@ import { Navigate } from '@ngxs/router-plugin';
   styleUrls: ['./profile.page.scss']
 })
 export class ProfilePage implements OnInit, OnDestroy {
-  @Select(UserState.loggedIn) loggedIn$: Observable<string>;
-  @Select(IngredientsState.getIngredients) ingredients$: Observable<any>;
   allergies: Ingredient[];
   public ngDestroyed$ = new Subject();
   public profileForm = this.formBuilder.group({
@@ -406,22 +400,6 @@ export class ProfilePage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.ingredients$
-    .pipe(takeUntil(this.ngDestroyed$))
-    .subscribe(data => {
-      if (data.length) {
-        this.allergies = data;
-        this.foodPreference = data;
-      }
-    });
-    this.getIngredientList();
-  }
-
-  getIngredientList() {
-    this.store.dispatch(new GetIngredientList()).subscribe(data => {
-      console.log('get ingredients data = ');
-      console.log(data);
-    });
   }
 
   onSubmit() {
@@ -437,6 +415,10 @@ export class ProfilePage implements OnInit, OnDestroy {
         console.log('Logout error', error);
       }
     );
+  }
+
+  goToFoodPreferences() {
+    this.store.dispatch(new Navigate(['/food-preferences']));
   }
 
   public ngOnDestroy() {

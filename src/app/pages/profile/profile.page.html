@@ -58,10 +58,7 @@
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label class="label">Food Preferences</ion-label>
-          <ion-select multiple={true} formControlName="foodPreference">
-            <ion-select-option value="{{item.uid}}" *ngFor="let item of foodPreference">{{item.name}}</ion-select-option>
-          </ion-select>
+          <ion-label class="label" (click)="goToFoodPreferences()">Food Preferences</ion-label>
         </ion-item>
         <ion-item>
           <ion-label class="label">Allergies</ion-label>
