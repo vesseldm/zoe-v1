@@ -100,8 +100,6 @@ export class UserState {
 
   @Action(IngredientLiked)
   saveIngredientLike(ctx: StateContext<UserStateModel>, action: IngredientLiked ) {
-    console.log('action = ');
-    console.log(action);
     return from(this.userService.updateIngredientPreference(action.ingredient)).subscribe(() => {
       ctx.setState(
         patch({
