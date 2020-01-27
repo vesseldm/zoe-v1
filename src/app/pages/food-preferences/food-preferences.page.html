@@ -6,7 +6,7 @@
 
 <ion-content>
 <ion-list>
-<ion-item *ngFor="let ingredient of ingredients">
+<ion-item *ngFor="let ingredient of getIngredientPreferences$ | async">
   <ion-grid>
     
     <ion-row>

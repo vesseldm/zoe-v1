@@ -1,3 +1,5 @@
+import { GetIngredientList } from './../../state/ingredients/ingredients.actions';
+import { UserIngredientPreference } from './../../state/models/user.state.model';
 import { GetIngredientPreferences } from './../../state/user/user.actions';
 import { UserState } from './../../state/user/user.state';
 import { Ingredient } from '../../state/models/ingredients.state.model';
@@ -15,29 +17,25 @@ import { IngredientLiked, IngredientDisliked } from '../../state/user/user.actio
   styleUrls: ['./food-preferences.page.scss'],
 })
 export class FoodPreferencesPage implements OnInit {
-  @Select(IngredientsState.getIngredients) ingredients$: Observable<IngredientsStateModel>;
-  @Select(UserState.getIngredientPreferences) getIngredientPreferences$: Observable<any>;
+  @Select(UserState.getIngredientPreferences) getIngredientPreferences$: Observable<UserIngredientPreference[]>;
+  userIngredientPreferences: UserIngredientPreference[];
   public ngDestroyed$ = new Subject();
-  ingredients: Ingredient[];
   constructor(
     private store: Store,
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new GetIngredientPreferences());
-    this.ingredients$
-    .pipe(takeUntil(this.ngDestroyed$))
-    .subscribe(data => {
-      if (data) {
-        this.ingredients = data.ingredients;
-      }
-    });
+    this.getIngredientList();
     this.getIngredientPreferences$
     .pipe(takeUntil(this.ngDestroyed$))
     .subscribe(data => {
       console.log('getIngredientPreferences data = ');
       console.log(data);
     });
+  }
+
+  getIngredientList() {
+    this.store.dispatch(new GetIngredientList());
   }
 
   ingredientLiked(ingredient: Ingredient) {

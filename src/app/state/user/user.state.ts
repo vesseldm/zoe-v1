@@ -1,7 +1,10 @@
-import { UserStateModel } from './../models/user.state.model';
+import { IngredientsService } from './../../services/ingredients/ingredients.service';
+import { UserStateModel, UserIngredientPreference } from './../models/user.state.model';
 import { UserService } from './../../services/user.service';
 import { AuthService } from './../../services/auth.service';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
+import { patch, append, removeItem, insertItem, updateItem } from '@ngxs/store/operators';
+
 import { from } from 'rxjs';
 import { tap, take } from 'rxjs/operators';
 import {
@@ -13,7 +16,6 @@ import {
   IngredientDisliked,
   GetIngredientPreferences
 } from './user.actions';
-import { UserStateModel } from '../models/user.state.model';
 
 
 @State<UserStateModel>({
@@ -32,6 +34,7 @@ export class UserState {
   constructor(
     private authService: AuthService,
     private userService: UserService,
+    private ingredientsService: IngredientsService,
   ) { }
 
   @Selector()
@@ -46,7 +49,7 @@ export class UserState {
 
   @Selector()
   static getIngredientPreferences(state: UserStateModel) {
-    return state.foodPreference;
+    return state.ingredientPreferences;
   }
 
   @Action(AddUser)
@@ -94,16 +97,44 @@ export class UserState {
 
   @Action(GetIngredientPreferences)
   getIngredientList(ctx: StateContext<UserStateModel>) {
-    return this.userService.getIngredientPreference().pipe(tap(foodPreference => {
-      const state = ctx.getState();
-      ctx.patchState({...state.foodPreference, foodPreference});
+    return this.userService.getIngredientPreference().pipe(tap(userIngredientPreferences => {
+      this.ingredientsService.getIngredientList().subscribe(ingredients => {
+        ingredients.forEach(ingredient => {
+          if (userIngredientPreferences.indexOf(ingredient) === -1) {
+            console.log('ingredient = ');
+            console.log(ingredient);
+            ctx.setState(
+              patch({
+              ingredientPreferences: append([ingredient])
+            }));
+            const state = ctx.getState();
+            console.log('state.ingredientPreferences = ');
+            console.log(state.ingredientPreferences);
+          }
+        });
+      });
     }));
   }
 
   @Action(IngredientLiked)
   saveIngredientLike(ctx: StateContext<UserStateModel>, action: IngredientLiked ) {
-    return from(this.userService.addIngredientPreference(action.ingredient)).pipe(tap(() => {
-      ctx.patchState(action.ingredient);
+    const state = ctx.getState();
+    const updateIngredeintPreference = state.ingredientPreferences.map(ingredient => ingredient.uid === action.ingredient.uid);
+    return updateIngredeintPreference ?
+      this.updateIngredientPreference(action.ingredient, ctx) : this.addIngredientPreference(action.ingredient, ctx);
+
+  }
+
+  addIngredientPreference(ingredient: UserIngredientPreference, ctx: StateContext<UserStateModel>) {
+    return from(this.userService.addIngredientPreference(ingredient)).pipe(tap(() => {
+      ctx.patchState(ingredient);
+    }));
+  }
+
+  updateIngredientPreference(ingredient: UserIngredientPreference, ctx: StateContext<UserStateModel>) {
+    return from(this.userService.updateIngredientPreference(ingredient)).pipe(tap(result => {
+      console.log('result = ');
+      console.log(result);
     }));
   }
 

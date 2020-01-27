@@ -1,3 +1,4 @@
+import { UserIngredientPreference } from './../models/user.state.model';
 import { Ingredient } from './../models/ingredients.state.model';
 import { UserStateModel } from '../models/user.state.model';
 
@@ -28,7 +29,7 @@ export class SaveProfileUserForm {
 
 export class IngredientLiked {
   static readonly type = '[User] Ingredient Liked';
-  constructor(public ingredient: Ingredient) { }
+  constructor(public ingredient: UserIngredientPreference) { }
 }
 
 export class IngredientDisliked {

@@ -12,14 +12,14 @@ export class IngredientsState {
 
   @Selector()
   static getIngredients(state: IngredientsStateModel) {
-    console.log('state = ');
-    console.log(state);
     return state;
   }
   @Action(GetIngredientList)
   getIngredientList(ctx: StateContext<any>) {
     return this.ingredientsService.getIngredientList().pipe(tap(result => {
       const state = ctx.getState();
+      console.log('state = ');
+      console.log(state);
       ctx.setState({...state, ingredients: result});
     }));
   }

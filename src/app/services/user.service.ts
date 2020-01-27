@@ -1,10 +1,12 @@
-import { UserStateModel } from './../state/models/user.state.model';
+import { IngredientsService } from './ingredients/ingredients.service';
+import { UserStateModel, UserIngredientPreference } from './../state/models/user.state.model';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable, of, from } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Ingredient } from '../state/models/ingredients.state.model';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,8 @@ export class UserService {
 
   constructor(
     public afAuth: AngularFireAuth,
-    public afs: AngularFirestore
+    public afs: AngularFirestore,
+    public ingredientsService: IngredientsService
   ) {
 
   }
@@ -40,7 +43,7 @@ export class UserService {
       .pipe(
         map(actions =>
           actions.map(a => {
-            const data = a.payload.doc.data({serverTimestamps: 'none'});
+            const data = a.payload.doc.data({ serverTimestamps: 'none' });
             return { ...data };
           })
         )
@@ -62,7 +65,7 @@ export class UserService {
       .pipe(
         map(actions =>
           actions.map(a => {
-            const data = a.payload.doc.data({serverTimestamps: 'none'});
+            const data = a.payload.doc.data({ serverTimestamps: 'none' });
             return { ...data };
           })
         )
@@ -76,7 +79,7 @@ export class UserService {
       .pipe(
         map(actions =>
           actions.map(a => {
-            const data = a.payload.doc.data({serverTimestamps: 'none'});
+            const data = a.payload.doc.data({ serverTimestamps: 'none' });
             return { ...data };
           })
         )
@@ -87,6 +90,10 @@ export class UserService {
     return this.afs.collection(`users/${this.userId}/ingredientPreferences`).add(ingredient);
   }
 
+  updateIngredientPreference(ingredient: UserIngredientPreference) {
+    return this.afs.doc(`users/${this.userId}/ingredientPreferences/${ingredient.uid}`).update(ingredient);
+  }
+
   updateUser(user) {
     return new Promise<any>((resolve, reject) => {
       this.afs.collection('users').doc(this.userId).update(user);
@@ -94,7 +101,7 @@ export class UserService {
     });
   }
 
-  getIngredientPreference(): Observable<Ingredient[]> {
-    return this.afs.collection<Ingredient>(`users/${this.userId}/ingredientPreferences`).valueChanges();
+  getIngredientPreference(): Observable<UserIngredientPreference[]> {
+    return this.afs.collection<UserIngredientPreference>(`users/${this.userId}/ingredientPreferences`).valueChanges();
   }
 }
