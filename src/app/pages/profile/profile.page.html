@@ -63,7 +63,7 @@
         <ion-item>
           <ion-label class="label">Allergies</ion-label>
           <ion-select multiple={true} formControlName="allergies">
-            <ion-select-option value="{{item.uid}}" *ngFor="let item of allergies">{{item.name}}</ion-select-option>
+          <ion-select-option *ngFor="let item of getIngredientPreferences$ | async">{{item.name}}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item lines="none">

@@ -5,9 +5,11 @@ export interface UserIngredientPreference {
     name: string;
     uid: string;
     score: number;
-    notAllowed: boolean;
     liked: boolean;
     disliked: boolean;
+    allergic: boolean;
+    vegan: boolean;
+    vegetarian: boolean;
 }
 
 export interface ProfileFormModel {
