@@ -14,6 +14,6 @@ export class IngredientsService {
   ) { }
 
   getIngredientList(): Observable<UserIngredientPreference[]> {
-    return this.angularFireStore.collection<UserIngredientPreference>('ingredients').valueChanges();
+    return this.angularFireStore.collection<UserIngredientPreference>('ingredients').valueChanges({idField: 'uid'});
   }
 }

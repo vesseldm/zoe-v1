@@ -18,8 +18,6 @@ export class IngredientsState {
   getIngredientList(ctx: StateContext<any>) {
     return this.ingredientsService.getIngredientList().pipe(tap(result => {
       const state = ctx.getState();
-      console.log('state = ');
-      console.log(state);
       ctx.setState({...state, ingredients: result});
     }));
   }

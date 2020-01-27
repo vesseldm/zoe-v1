@@ -1,16 +1,11 @@
-import { UserIngredientPreference } from './../../state/models/user.state.model';
-import { UserState } from './../../state/user/user.state';
-import { takeUntil } from 'rxjs/operators';
-import { IngredientsState } from './../../state/ingredients/ingredients.state';
-import { GetIngredientList } from './../../state/ingredients/ingredients.actions';
 import { Ingredient } from './../../state/models/ingredients.state.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
-import { Select, Store } from '@ngxs/store';
-import { Observable, Subject } from 'rxjs';
+import { Store } from '@ngxs/store';
+import { Subject } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SaveProfileUserForm, GetIngredientPreferences } from '../../state/user/user.actions';
+import { SaveProfileUserForm } from '../../state/user/user.actions';
 import { Navigate } from '@ngxs/router-plugin';
 
 @Component({
@@ -19,9 +14,6 @@ import { Navigate } from '@ngxs/router-plugin';
   styleUrls: ['./profile.page.scss']
 })
 export class ProfilePage implements OnInit, OnDestroy {
-  @Select(IngredientsState.getIngredients) ingredients$: Observable<any>;
-  @Select(UserState.getIngredientPreferences) userIngredientPreferences$: Observable<UserIngredientPreference[]>;
-  userIngredientPreferences: UserIngredientPreference[];
   allergies: Ingredient[];
   public ngDestroyed$ = new Subject();
   public profileForm = this.formBuilder.group({
@@ -408,31 +400,6 @@ export class ProfilePage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.ingredients$
-    .pipe(takeUntil(this.ngDestroyed$))
-    .subscribe(data => {
-      if (data.length) {
-        this.allergies = data;
-        this.ingredients = data;
-      }
-    });
-    this.userIngredientPreferences$
-    .pipe(takeUntil(this.ngDestroyed$))
-    .subscribe(data => {
-        this.userIngredientPreferences = data;
-        console.log('this.userIngredientPreferences = ');
-        console.log(this.userIngredientPreferences);
-    });
-    this.getIngredientList();
-    this.getUserIngredientPreference();
-  }
-
-  getUserIngredientPreference() {
-    this.store.dispatch(new GetIngredientPreferences());
-  }
-
-  getIngredientList() {
-    this.store.dispatch(new GetIngredientList());
   }
 
   onSubmit() {
