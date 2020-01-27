@@ -29,18 +29,18 @@ export class FoodPreferencesPage implements OnInit {
     });
   }
 
-  ingredientLiked(ingredient: Ingredient) {
-    const newIngredient: Ingredient = Object.assign({}, ingredient);
+  ingredientLiked(ingredient: UserIngredientPreference) {
+    const newIngredient: UserIngredientPreference = Object.assign({}, ingredient);
     newIngredient.liked = true;
     newIngredient.disliked = false;
     this.store.dispatch(new IngredientLiked(newIngredient));
   }
 
-  ingredientDisliked(ingredient: Ingredient) {
-    const newIngredient: Ingredient = Object.assign({}, ingredient);
+  ingredientDisliked(ingredient: UserIngredientPreference) {
+    const newIngredient: UserIngredientPreference = Object.assign({}, ingredient);
     newIngredient.liked = false;
     newIngredient.disliked = true;
-    this.store.dispatch(new IngredientDisliked(newIngredient));
+    this.store.dispatch(new IngredientLiked(newIngredient));
   }
 
 }

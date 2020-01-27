@@ -1,12 +1,15 @@
+import { UserIngredientPreference } from './../../state/models/user.state.model';
+import { UserState } from './../../state/user/user.state';
 import { Ingredient } from './../../state/models/ingredients.state.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
-import { Store } from '@ngxs/store';
-import { Subject } from 'rxjs';
+import { Store, Select } from '@ngxs/store';
+import { Subject, Observable } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SaveProfileUserForm } from '../../state/user/user.actions';
 import { Navigate } from '@ngxs/router-plugin';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +17,7 @@ import { Navigate } from '@ngxs/router-plugin';
   styleUrls: ['./profile.page.scss']
 })
 export class ProfilePage implements OnInit, OnDestroy {
-  allergies: Ingredient[];
+  @Select(UserState.getIngredientPreferences) getIngredientPreferences$: Observable<UserIngredientPreference[]>;
   public ngDestroyed$ = new Subject();
   public profileForm = this.formBuilder.group({
     details: this.formBuilder.group({
@@ -51,6 +54,7 @@ export class ProfilePage implements OnInit, OnDestroy {
   medicalHistory: any;
   mealTimes: any;
   ingredients: Ingredient[];
+  allergies: UserIngredientPreference[];
 
   constructor(
     public store: Store,
@@ -400,6 +404,22 @@ export class ProfilePage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.getIngredientPreferences$
+    .pipe(takeUntil(this.ngDestroyed$))
+    .subscribe(data => {
+      console.log('getIngredientPreferences data = ');
+      console.log(data);
+      this.allergies = data;
+      this.setUpAllergieForm();
+    });
+  }
+
+  setUpAllergieForm() {
+    this.allergies.forEach(food => {
+      console.log('food = ');
+      console.log(food);
+      this.profileForm.patchValue(['allergies', food.allergic]);
+    });
   }
 
   onSubmit() {
