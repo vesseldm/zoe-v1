@@ -1,3 +1,4 @@
+import { RecipesState } from './state/recipes/recipes.state';
 import { UserState } from './state/user/user.state';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,6 +26,8 @@ import { NgxsModuleOptions } from '@ngxs/store';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { IngredientsState } from './state/ingredients/ingredients.state';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+import { HttpClientModule } from '@angular/common/http';
+
 
 export const ngxsConfig: NgxsModuleOptions = {
   developmentMode: !environment.production,
@@ -39,6 +42,7 @@ export const ngxsConfig: NgxsModuleOptions = {
   entryComponents: [],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -46,7 +50,7 @@ export const ngxsConfig: NgxsModuleOptions = {
     AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ModalPageModule,
-    NgxsModule.forRoot([UserState, IngredientsState], ngxsConfig),
+    NgxsModule.forRoot([RecipesState, UserState, IngredientsState], ngxsConfig),
     NgxsFormPluginModule.forRoot(),
     NgxsRouterPluginModule.forRoot(),
   ],

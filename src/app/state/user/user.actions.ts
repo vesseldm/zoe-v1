@@ -34,5 +34,10 @@ export class IngredientLiked {
 
 export class IngredientDisliked {
   static readonly type = '[User] Ingredient disliked';
-  constructor(public ingredient: Ingredient) { }
+  constructor(public ingredient: UserIngredientPreference) { }
+}
+
+export class GetUserRecipes {
+  static readonly type = '[User] Get user recipes';
+  constructor() { }
 }

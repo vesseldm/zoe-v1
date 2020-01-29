@@ -1,3 +1,4 @@
+import { RecipesStateModel } from '../state/models/recipes.state.model';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -16,20 +17,24 @@ export class RecipeService {
 
   constructor(public afAuth: AngularFireAuth, public afs: AngularFirestore) {
 
-    this.userId = firebase.auth().currentUser.uid;
-    this.afs.doc(`users/${this.userId}`).valueChanges().subscribe(user => {
-      this.user = user;
-    });
+    // this.userId = firebase.auth().currentUser.uid;
+    // this.afs.doc(`users/${this.userId}`).valueChanges().subscribe(user => {
+    //   this.user = user;
+    // });
 
-    this.recipes$ = this.afAuth.authState.pipe(
-      switchMap(user => {
-        if (user) {
-          return this.afs.collection(`recipes`).valueChanges();
-        } else {
-          return of(null);
-        }
-      })
-    );
+    // this.recipes$ = this.afAuth.authState.pipe(
+    //   switchMap(user => {
+    //     if (user) {
+    //       return this.afs.collection(`recipes`).valueChanges();
+    //     } else {
+    //       return of(null);
+    //     }
+    //   })
+    // );
+  }
+
+  getAllRecipes(): Observable<RecipesStateModel[]> {
+    return this.afs.collection<RecipesStateModel>('/recipes').valueChanges();
   }
 
   getRecipe(recipeId) {

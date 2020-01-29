@@ -2,7 +2,7 @@ import { GetIngredientList } from './../../state/ingredients/ingredients.actions
 import { UserIngredientPreference } from './../../state/models/user.state.model';
 import { UserState } from './../../state/user/user.state';
 import { Ingredient } from '../../state/models/ingredients.state.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs/operators';
@@ -13,7 +13,7 @@ import { IngredientLiked, IngredientDisliked } from '../../state/user/user.actio
   templateUrl: './food-preferences.page.html',
   styleUrls: ['./food-preferences.page.scss'],
 })
-export class FoodPreferencesPage implements OnInit {
+export class FoodPreferencesPage implements OnInit, OnDestroy {
   @Select(UserState.getIngredientPreferences) getIngredientPreferences$: Observable<UserIngredientPreference[]>;
   public ngDestroyed$ = new Subject();
   constructor(
@@ -41,6 +41,10 @@ export class FoodPreferencesPage implements OnInit {
     newIngredient.liked = false;
     newIngredient.disliked = true;
     this.store.dispatch(new IngredientLiked(newIngredient));
+  }
+
+  public ngOnDestroy() {
+    this.ngDestroyed$.next();
   }
 
 }

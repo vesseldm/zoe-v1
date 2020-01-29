@@ -52,6 +52,13 @@ export class UserState {
     return state.ingredientPreferences;
   }
 
+  @Selector()
+  static getUsersRecipes(state: UserStateModel) {
+    console.log('state = ');
+    console.log(state);
+    return state.recipes;
+  }
+
   @Action(AddUser)
   addUser(ctx: StateContext<UserStateModel>, action: AddUser) {
     return from(this.authService.registerUser(action.payload)).pipe(
@@ -80,7 +87,10 @@ export class UserState {
           this.userService.getUserInfo(result.user.uid).pipe(take(1)).subscribe(user => {
             this.userService.getUserIngredientPreferences(result.user.uid).subscribe(data => {
               user.ingredientPreferences = data;
-              ctx.setState(user);
+              this.userService.getUserRecipes(result.user.uid).subscribe(recipes => {
+                user.recipes = recipes;
+                ctx.setState(user);
+              });
             });
           });
         }
@@ -103,7 +113,7 @@ export class UserState {
     return from(this.userService.updateIngredientPreference(action.ingredient)).subscribe(() => {
       ctx.setState(
         patch({
-        ingredientPreferences: updateItem(item => item.uid === action.ingredient.uid, action.ingredient)
+        ingredientPreferences: updateItem(item => item.ingredientId === action.ingredient.ingredientId, action.ingredient)
       }));
     });
   }
@@ -113,7 +123,7 @@ export class UserState {
     return from(this.userService.updateIngredientPreference(action.ingredient)).subscribe(() => {
       ctx.setState(
         patch({
-        ingredientPreferences: updateItem(item => item.uid === action.ingredient.uid, action.ingredient)
+        ingredientPreferences: updateItem(item => item.ingredientId === action.ingredient.ingredientId, action.ingredient)
       }));
     });
   }

@@ -4,6 +4,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,7 @@ export class UserService {
   constructor(
     public afAuth: AngularFireAuth,
     public afs: AngularFirestore,
+    private httpClient: HttpClient,
   ) {
 
   }
@@ -34,8 +37,18 @@ export class UserService {
   }
 
   getUserIngredientPreferences(userId) {
-    return this.afs.collection<UserIngredientPreference>(`users/${userId}/ingredientPreferences`).valueChanges().pipe(tap(result => {
+    return this.afs.collection<UserIngredientPreference>(`users/${userId}/ingredientPreferences`)
+    .valueChanges({idField: 'uid'}).pipe(tap(result => {
       console.log('result from getUserIngredientPreferences = ');
+      console.log(result);
+    }));
+  }
+
+  getUserRecipes(userId) {
+    return this.afs.collection<any>(`users/${userId}/recipes`)
+    .valueChanges({idField: 'uid'})
+    .pipe(tap(result => {
+      console.log('result from getUserRecipes = ');
       console.log(result);
     }));
   }
@@ -79,7 +92,18 @@ export class UserService {
   }
 
   updateIngredientPreference(ingredient: UserIngredientPreference) {
+    this.updateRecipeScores();
     return this.afs.doc(`users/${this.userId}/ingredientPreferences/${ingredient.uid}`).update(ingredient);
+  }
+
+  updateRecipeScores() {
+    this.httpClient.post(
+      'https://us-central1-zoe-v1-19ba3.cloudfunctions.net/updateUserRecipes/api/updateIngredientPreferences/',
+      {userId: this.userId})
+        .subscribe(data => {
+          console.log('data = ');
+          console.log(data);
+        });
   }
 
   updateUser(user) {
