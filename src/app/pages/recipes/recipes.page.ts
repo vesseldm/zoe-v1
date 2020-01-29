@@ -82,11 +82,11 @@ export class RecipesPage implements OnInit, OnDestroy {
   }
 
   orderByScore() {
-    this.recipesBreakfasts = this.recipesBreakfasts.sort((a, b) => a.score - b.score);
+    this.recipesBreakfasts = this.recipesBreakfasts.sort((a, b) => b.score - a.score);
     this.recipesLunchs = this.recipesLunchs.sort((a, b) => b.score - a.score);
-    this.recipesDinners = this.recipesDinners.sort((a, b) => a.score - b.score);
-    this.recipesDrinks = this.recipesDrinks.sort((a, b) => a.score - b.score);
-    this.recipesSnacks = this.recipesSnacks.sort((a, b) => a.score - b.score);
+    this.recipesDinners = this.recipesDinners.sort((a, b) => b.score - a.score);
+    this.recipesDrinks = this.recipesDrinks.sort((a, b) => b.score - a.score);
+    this.recipesSnacks = this.recipesSnacks.sort((a, b) => b.score - a.score);
   }
 
   // goRecipePage(id) {
