@@ -1,4 +1,4 @@
-import { UserStateModel, UserIngredientPreference } from './../state/models/user.state.model';
+import { UserStateModel, UserIngredientPreference, UserRecipe } from './../state/models/user.state.model';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -111,5 +111,11 @@ export class UserService {
       this.afs.collection('users').doc(this.userId).update(user);
       resolve(user);
     });
+  }
+
+  updateUserRecipe(recipe: UserRecipe) {
+    console.log('recipe = ');
+    console.log(recipe);
+    return this.afs.collection(`users/${this.userId}/recipes`).valueChanges();
   }
 }

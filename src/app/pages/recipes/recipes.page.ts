@@ -1,9 +1,11 @@
+import { UserRecipe } from './../../state/models/user.state.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
 import { UserState } from 'src/app/state/user/user.state';
 import { takeUntil } from 'rxjs/operators';
-import { UserRecipe } from 'src/app/state/models/user.state.model';
+import { Navigate } from '@ngxs/router-plugin';
+import { SelectedRecipe } from 'src/app/state/user/user.actions';
 
 @Component({
   selector: 'app-recipes',
@@ -47,8 +49,6 @@ export class RecipesPage implements OnInit, OnDestroy {
     this.recipesSnacks = [];
 
     this.recipes.forEach(item => {
-      console.log('item = ');
-      console.log(item);
       switch (item.type) {
           case 'Breakfast':
             this.recipesBreakfasts.push(item);
@@ -89,9 +89,11 @@ export class RecipesPage implements OnInit, OnDestroy {
     this.recipesSnacks = this.recipesSnacks.sort((a, b) => b.score - a.score);
   }
 
-  // goRecipePage(id) {
-  //   this.router.navigate(['/recipe', id]);
-  // }
+  goRecipePage(recipe: UserRecipe) {
+    this.store.dispatch(new SelectedRecipe(recipe)).subscribe(() => {
+      this.store.dispatch(new Navigate(['/recipe']));
+    });
+  }
 
   public ngOnDestroy() {
     this.ngDestroyed$.next();

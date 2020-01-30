@@ -13,7 +13,10 @@ import {
   SaveProfileUserForm,
   IngredientLiked,
   IngredientDisliked,
-  GetIngredientPreferences
+  GetIngredientPreferences,
+  SelectedRecipe,
+  RecipeThumbsUp,
+  RecipeThumbsDown
 } from './user.actions';
 
 
@@ -47,16 +50,17 @@ export class UserState {
 
   @Selector()
   static getIngredientPreferences(state: UserStateModel) {
-    console.log('state = ');
-    console.log(state);
     return state.ingredientPreferences;
   }
 
   @Selector()
   static getUsersRecipes(state: UserStateModel) {
-    console.log('state = ');
-    console.log(state);
     return state.recipes;
+  }
+
+  @Selector()
+  static getSelectedRecipe(state: UserStateModel) {
+    return state.selectedRecipe;
   }
 
   @Action(AddUser)
@@ -124,6 +128,33 @@ export class UserState {
       ctx.setState(
         patch({
         ingredientPreferences: updateItem(item => item.ingredientId === action.ingredient.ingredientId, action.ingredient)
+      }));
+    });
+  }
+
+  @Action(SelectedRecipe)
+  getSelectedRecipe(ctx: StateContext<UserStateModel>, action: SelectedRecipe) {
+    ctx.patchState({
+      selectedRecipe: action.recipe
+    });
+  }
+
+  @Action(RecipeThumbsUp)
+  setRecipeThumbsUp(ctx: StateContext<UserStateModel>, action: RecipeThumbsUp) {
+    this.userService.updateUserRecipe(action.recipe).subscribe(data => {
+      ctx.setState(
+        patch({
+        recipes: updateItem(item => item.uid === action.recipe.uid, action.recipe)
+      }));
+    });
+  }
+
+  @Action(RecipeThumbsDown)
+  setRecipeThumbsDown(ctx: StateContext<UserStateModel>, action: RecipeThumbsDown) {
+    this.userService.updateUserRecipe(action.recipe).subscribe(data => {
+      ctx.setState(
+        patch({
+        recipes: updateItem(item => item.uid === action.recipe.uid, action.recipe)
       }));
     });
   }

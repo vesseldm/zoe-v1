@@ -1,4 +1,4 @@
-import { UserIngredientPreference } from './../models/user.state.model';
+import { UserIngredientPreference, UserRecipe } from './../models/user.state.model';
 import { Ingredient } from './../models/ingredients.state.model';
 import { UserStateModel } from '../models/user.state.model';
 
@@ -40,4 +40,19 @@ export class IngredientDisliked {
 export class GetUserRecipes {
   static readonly type = '[User] Get user recipes';
   constructor() { }
+}
+
+export class SelectedRecipe {
+  static readonly type = '[User] Set Recipe Id';
+  constructor(public recipe: UserRecipe) { }
+}
+
+export class RecipeThumbsDown {
+  static readonly type = '[User] Recipe Thumbs Down';
+  constructor(public recipe: UserRecipe) { }
+}
+
+export class RecipeThumbsUp {
+  static readonly type = '[User] Recipe Thumbs Up';
+  constructor(public recipe: UserRecipe) { }
 }

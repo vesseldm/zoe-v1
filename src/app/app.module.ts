@@ -1,4 +1,3 @@
-import { RecipesState } from './state/recipes/recipes.state';
 import { UserState } from './state/user/user.state';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -50,7 +49,7 @@ export const ngxsConfig: NgxsModuleOptions = {
     AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ModalPageModule,
-    NgxsModule.forRoot([RecipesState, UserState, IngredientsState], ngxsConfig),
+    NgxsModule.forRoot([UserState, IngredientsState], ngxsConfig),
     NgxsFormPluginModule.forRoot(),
     NgxsRouterPluginModule.forRoot(),
   ],

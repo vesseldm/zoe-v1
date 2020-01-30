@@ -63,6 +63,7 @@ export class UserStateModel {
     allergies?: Ingredient[];
     ingredientPreferences?: UserIngredientPreference[];
     recipes?: UserRecipe[];
+    selectedRecipe?: UserRecipe;
   }
 
 export interface UserRecipe {
@@ -71,4 +72,7 @@ export interface UserRecipe {
     recipeId: string;
     score: number;
     type: string;
+    uid: string;
+    thumbsUp: boolean;
+    thumbsDown: boolean;
   }

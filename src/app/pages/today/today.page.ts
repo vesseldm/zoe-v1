@@ -1,7 +1,6 @@
 import { UserState } from './../../state/user/user.state';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { RecipeService } from '../../services/recipe.service';
 import { Store, Select } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { takeUntil } from 'rxjs/operators';
@@ -30,7 +29,6 @@ export class TodayPage implements OnInit, OnDestroy {
   notification: any;
 
   constructor(
-    public recipeService: RecipeService,
     private store: Store,
   ) { }
 
@@ -90,7 +88,7 @@ export class TodayPage implements OnInit, OnDestroy {
   }
 
   initRecipes() {
-    this.recipeService.initRecipes(this.user.id);
+    // this.recipeService.initRecipes(this.user.id);
   }
 
   goProfile() {
