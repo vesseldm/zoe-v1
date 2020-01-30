@@ -1,41 +1,50 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { NavController } from "@ionic/angular";
-import { RecipeService } from "../../services/recipe.service";
+import { RecipeThumbsDown, RecipeThumbsUp } from './../../state/user/user.actions';
+import { UserState } from 'src/app/state/user/user.state';
+import { UserRecipe } from './../../state/models/user.state.model';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { UserService } from '../../services/user.service';
+import { Observable, Subject } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: "app-recipe",
-  templateUrl: "./recipe.page.html",
-  styleUrls: ["./recipe.page.scss"]
+  selector: 'app-recipe',
+  templateUrl: './recipe.page.html',
+  styleUrls: ['./recipe.page.scss']
 })
-export class RecipePage implements OnInit {
+export class RecipePage implements OnInit, OnDestroy {
+  @Select(UserState.getSelectedRecipe) getSelectedRecipe$: Observable<UserRecipe>;
+  public ngDestroyed$ = new Subject();
   recipeId: any;
-  recipe: any;
+  recipe: UserRecipe;
   ingredients: any;
   calories: any;
-  protein: Number;
-  carbs: Number;
-  fats: Number;
+  protein: number;
+  carbs: number;
+  fats: number;
   sub: any;
 
   constructor(
-    public router: Router,
-    private route: ActivatedRoute,
-    public recipeService: RecipeService,
+    private store: Store,
     private navCtrl: NavController,
     public userService: UserService
   ) {
-    this.sub = this.route.params.subscribe(params => {
-      this.recipeId = params["id"];
-    });
   }
 
   ngOnInit() {
-    this.recipeService.getRecipe(this.recipeId).subscribe(recipe => {
-      this.recipe = recipe;
-      this.ingredients = [];
+    this.getSelectedRecipe$
+    .pipe(takeUntil(this.ngDestroyed$))
+    .subscribe(data => {
+      console.log('getSelectedRecipe data = ');
+      console.log(data);
+      this.recipe = data;
     });
+    // this.recipeService.getRecipe(this.recipeId).subscribe(recipe => {
+    //   this.recipe = recipe;
+    //   this.ingredients = [];
+    // });
   }
 
   goBack() {
@@ -44,12 +53,27 @@ export class RecipePage implements OnInit {
   }
 
   addRecipe() {
-    this.recipeService.addRecipe(this.recipeId);
+    // this.recipeService.addRecipe(this.recipeId);
   }
 
   shoppingList(ingredient, e) {
     if (e.detail.checked) {
     } else {
     }
+  }
+
+  thumbsUp() {
+    this.recipe.thumbsUp = true;
+    this.recipe.thumbsDown = false;
+    this.store.dispatch(new RecipeThumbsUp(this.recipe));
+  }
+
+  thumbsDown() {
+
+    this.store.dispatch(new RecipeThumbsDown(this.recipe));
+  }
+
+  ngOnDestroy() {
+    this.ngDestroyed$.next();
   }
 }

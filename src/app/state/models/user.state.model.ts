@@ -3,6 +3,7 @@ import { DocumentReference } from 'angularfire2/firestore';
 
 export interface UserIngredientPreference {
     name: string;
+    ingredientId: string;
     uid: string;
     score: number;
     liked: boolean;
@@ -61,4 +62,17 @@ export class UserStateModel {
     password?: string;
     allergies?: Ingredient[];
     ingredientPreferences?: UserIngredientPreference[];
+    recipes?: UserRecipe[];
+    selectedRecipe?: UserRecipe;
+  }
+
+export interface UserRecipe {
+    ingredients: string[];
+    name: string;
+    recipeId: string;
+    score: number;
+    type: string;
+    uid: string;
+    thumbsUp: boolean;
+    thumbsDown: boolean;
   }

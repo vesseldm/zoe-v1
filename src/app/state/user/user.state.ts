@@ -13,7 +13,10 @@ import {
   SaveProfileUserForm,
   IngredientLiked,
   IngredientDisliked,
-  GetIngredientPreferences
+  GetIngredientPreferences,
+  SelectedRecipe,
+  RecipeThumbsUp,
+  RecipeThumbsDown
 } from './user.actions';
 
 
@@ -47,9 +50,17 @@ export class UserState {
 
   @Selector()
   static getIngredientPreferences(state: UserStateModel) {
-    console.log('state = ');
-    console.log(state);
     return state.ingredientPreferences;
+  }
+
+  @Selector()
+  static getUsersRecipes(state: UserStateModel) {
+    return state.recipes;
+  }
+
+  @Selector()
+  static getSelectedRecipe(state: UserStateModel) {
+    return state.selectedRecipe;
   }
 
   @Action(AddUser)
@@ -80,7 +91,10 @@ export class UserState {
           this.userService.getUserInfo(result.user.uid).pipe(take(1)).subscribe(user => {
             this.userService.getUserIngredientPreferences(result.user.uid).subscribe(data => {
               user.ingredientPreferences = data;
-              ctx.setState(user);
+              this.userService.getUserRecipes(result.user.uid).subscribe(recipes => {
+                user.recipes = recipes;
+                ctx.setState(user);
+              });
             });
           });
         }
@@ -103,7 +117,7 @@ export class UserState {
     return from(this.userService.updateIngredientPreference(action.ingredient)).subscribe(() => {
       ctx.setState(
         patch({
-        ingredientPreferences: updateItem(item => item.uid === action.ingredient.uid, action.ingredient)
+        ingredientPreferences: updateItem(item => item.ingredientId === action.ingredient.ingredientId, action.ingredient)
       }));
     });
   }
@@ -113,7 +127,34 @@ export class UserState {
     return from(this.userService.updateIngredientPreference(action.ingredient)).subscribe(() => {
       ctx.setState(
         patch({
-        ingredientPreferences: updateItem(item => item.uid === action.ingredient.uid, action.ingredient)
+        ingredientPreferences: updateItem(item => item.ingredientId === action.ingredient.ingredientId, action.ingredient)
+      }));
+    });
+  }
+
+  @Action(SelectedRecipe)
+  getSelectedRecipe(ctx: StateContext<UserStateModel>, action: SelectedRecipe) {
+    ctx.patchState({
+      selectedRecipe: action.recipe
+    });
+  }
+
+  @Action(RecipeThumbsUp)
+  setRecipeThumbsUp(ctx: StateContext<UserStateModel>, action: RecipeThumbsUp) {
+    this.userService.updateUserRecipe(action.recipe).subscribe(data => {
+      ctx.setState(
+        patch({
+        recipes: updateItem(item => item.uid === action.recipe.uid, action.recipe)
+      }));
+    });
+  }
+
+  @Action(RecipeThumbsDown)
+  setRecipeThumbsDown(ctx: StateContext<UserStateModel>, action: RecipeThumbsDown) {
+    this.userService.updateUserRecipe(action.recipe).subscribe(data => {
+      ctx.setState(
+        patch({
+        recipes: updateItem(item => item.uid === action.recipe.uid, action.recipe)
       }));
     });
   }

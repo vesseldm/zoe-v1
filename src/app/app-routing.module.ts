@@ -60,7 +60,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'recipe/:id',
+    path: 'recipe',
     loadChildren: () =>
       import('./pages/recipe/recipe.module').then(m => m.RecipePageModule),
     canActivate: [AuthGuard],

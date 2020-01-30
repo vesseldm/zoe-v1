@@ -25,6 +25,8 @@ import { NgxsModuleOptions } from '@ngxs/store';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { IngredientsState } from './state/ingredients/ingredients.state';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+import { HttpClientModule } from '@angular/common/http';
+
 
 export const ngxsConfig: NgxsModuleOptions = {
   developmentMode: !environment.production,
@@ -39,6 +41,7 @@ export const ngxsConfig: NgxsModuleOptions = {
   entryComponents: [],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
