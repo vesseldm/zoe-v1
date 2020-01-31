@@ -91,7 +91,9 @@ export class UserState {
           this.userService.getUserInfo(result.user.uid).pipe(take(1)).subscribe(user => {
             this.userService.getUserIngredientPreferences(result.user.uid).subscribe(data => {
               user.ingredientPreferences = data;
-              this.userService.getUserRecipes(result.user.uid).subscribe(recipes => {
+              this.userService.getUserRecipes(result.user.uid).pipe(take(1)).subscribe(recipes => {
+                console.log('recipes = ');
+                console.log(recipes);
                 user.recipes = recipes;
                 ctx.setState(user);
               });

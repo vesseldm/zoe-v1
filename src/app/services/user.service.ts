@@ -2,7 +2,7 @@ import { UserStateModel, UserIngredientPreference, UserRecipe } from './../state
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
@@ -114,8 +114,6 @@ export class UserService {
   }
 
   updateUserRecipe(recipe: UserRecipe) {
-    console.log('recipe = ');
-    console.log(recipe);
-    return this.afs.collection(`users/${this.userId}/recipes`).valueChanges();
+    return from(this.afs.doc(`users/${this.userId}/recipes/${recipe.uid}`).update(recipe));
   }
 }

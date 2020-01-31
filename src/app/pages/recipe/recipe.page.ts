@@ -63,14 +63,16 @@ export class RecipePage implements OnInit, OnDestroy {
   }
 
   thumbsUp() {
-    this.recipe.thumbsUp = true;
-    this.recipe.thumbsDown = false;
-    this.store.dispatch(new RecipeThumbsUp(this.recipe));
-  }
+    const updatedRecipe = Object.assign({}, this.recipe);
+    updatedRecipe.thumbsUp = true;
+    updatedRecipe.thumbsDown = false;
+    this.store.dispatch(new RecipeThumbsUp(updatedRecipe));  }
 
   thumbsDown() {
-
-    this.store.dispatch(new RecipeThumbsDown(this.recipe));
+    const updatedRecipe = Object.assign({}, this.recipe);
+    updatedRecipe.thumbsUp = false;
+    updatedRecipe.thumbsDown = true;
+    this.store.dispatch(new RecipeThumbsDown(updatedRecipe));
   }
 
   ngOnDestroy() {
