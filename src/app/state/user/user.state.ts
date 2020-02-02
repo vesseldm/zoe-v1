@@ -1,5 +1,4 @@
-import { IngredientsService } from './../../services/ingredients/ingredients.service';
-import { UserStateModel, UserIngredientPreference } from './../models/user.state.model';
+import { UserStateModel, UserRecipe, UserIngredientPreference } from './../models/user.state.model';
 import { UserService } from './../../services/user.service';
 import { AuthService } from './../../services/auth.service';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
@@ -13,10 +12,9 @@ import {
   SaveProfileUserForm,
   IngredientLiked,
   IngredientDisliked,
-  GetIngredientPreferences,
   SelectedRecipe,
   RecipeThumbsUp,
-  RecipeThumbsDown
+  RecipeThumbsDown,
 } from './user.actions';
 
 
@@ -55,6 +53,8 @@ export class UserState {
 
   @Selector()
   static getUsersRecipes(state: UserStateModel) {
+    console.log('state.recipes = ');
+    console.log(state.recipes);
     return state.recipes;
   }
 
@@ -92,16 +92,47 @@ export class UserState {
             this.userService.getUserIngredientPreferences(result.user.uid).subscribe(data => {
               user.ingredientPreferences = data;
               this.userService.getUserRecipes(result.user.uid).pipe(take(1)).subscribe(recipes => {
-                console.log('recipes = ');
-                console.log(recipes);
-                user.recipes = recipes;
+                user.recipes = this.setRecipeData(recipes, user);
+                console.log('user.recipes = ');
+                console.log(user.recipes);
                 ctx.setState(user);
+                const state = ctx.getState();
+                console.log('state = ');
+                console.log(state);
               });
             });
           });
         }
       })
     );
+  }
+
+
+  setRecipeData(recipes, user): UserRecipe[] {
+    const newRecipes = [];
+    recipes.forEach(recipe => {
+      newRecipes.push(this.getIngredientInfo(recipe, user));
+    });
+    return newRecipes;
+  }
+
+  getIngredientInfo(recipe: UserRecipe, user: UserStateModel): UserRecipe {
+    const recipeIngredients: UserIngredientPreference[] = [];
+    recipe.ingredients.map(ingredient => {
+      recipeIngredients.push(this.assignIngredientInfo(ingredient, user));
+    });
+    recipe.ingredients = recipeIngredients;
+    return recipe;
+  }
+
+  assignIngredientInfo(ingredient, user: UserStateModel): UserIngredientPreference {
+    let newIngredients;
+    user.ingredientPreferences.map(ingredientPref => {
+      if (ingredientPref.ingredientId === ingredient) {
+        newIngredients = ingredientPref;
+      }
+    });
+    return newIngredients;
   }
 
   @Action(SaveProfileUserForm)

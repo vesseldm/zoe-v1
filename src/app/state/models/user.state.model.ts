@@ -67,7 +67,7 @@ export class UserStateModel {
   }
 
 export interface UserRecipe {
-    ingredients: string[];
+    ingredients: UserIngredientPreference[];
     name: string;
     recipeId: string;
     score: number;
@@ -75,4 +75,13 @@ export interface UserRecipe {
     uid: string;
     thumbsUp: boolean;
     thumbsDown: boolean;
+    photo: string;
+    prepTime: string;
+    cookTime: number;
+    servingSize: string;
+    description: string;
+    calories: number;
+    carbs: number;
+    proteins: number;
+    fats: number;
   }

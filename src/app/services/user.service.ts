@@ -98,7 +98,7 @@ export class UserService {
 
   updateRecipeScores() {
     this.httpClient.post(
-      'https://us-central1-zoe-v1-19ba3.cloudfunctions.net/updateUserRecipes/api/updateIngredientPreferences/',
+      'https://us-central1-zoe-v1-19ba3.cloudfunctions.net/updateIngredientPreferences/api/updateIngredientPreferences/',
       {userId: this.userId})
         .subscribe(data => {
           console.log('data = ');
@@ -114,6 +114,22 @@ export class UserService {
   }
 
   updateUserRecipe(recipe: UserRecipe) {
+    console.log('recipe = ');
+    console.log(recipe);
+    console.log('recipe.uid = ');
+    console.log(recipe.uid);
+    this.updateIngredientScores(recipe.uid);
     return from(this.afs.doc(`users/${this.userId}/recipes/${recipe.uid}`).update(recipe));
+  }
+
+
+  updateIngredientScores(uid) {
+    this.httpClient.post(
+      'https://us-central1-zoe-v1-19ba3.cloudfunctions.net/updateUserRecipe/api/updateUserReicpe/',
+      {userId: this.userId, uid})
+        .subscribe(data => {
+          console.log('data = ');
+          console.log(data);
+        });
   }
 }

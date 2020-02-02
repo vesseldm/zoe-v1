@@ -2,9 +2,7 @@ import { RecipeThumbsDown, RecipeThumbsUp } from './../../state/user/user.action
 import { UserState } from 'src/app/state/user/user.state';
 import { UserRecipe } from './../../state/models/user.state.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { UserService } from '../../services/user.service';
 import { Observable, Subject } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs/operators';
@@ -19,17 +17,10 @@ export class RecipePage implements OnInit, OnDestroy {
   public ngDestroyed$ = new Subject();
   recipeId: any;
   recipe: UserRecipe;
-  ingredients: any;
-  calories: any;
-  protein: number;
-  carbs: number;
-  fats: number;
-  sub: any;
 
   constructor(
     private store: Store,
     private navCtrl: NavController,
-    public userService: UserService
   ) {
   }
 
@@ -40,11 +31,9 @@ export class RecipePage implements OnInit, OnDestroy {
       console.log('getSelectedRecipe data = ');
       console.log(data);
       this.recipe = data;
+      console.log('this.recipe.ingredients = ');
+      console.log(this.recipe.ingredients);
     });
-    // this.recipeService.getRecipe(this.recipeId).subscribe(recipe => {
-    //   this.recipe = recipe;
-    //   this.ingredients = [];
-    // });
   }
 
   goBack() {
