@@ -89,8 +89,6 @@ export class UserState {
         if (result.user.uid) {
           this.userService.setUserId(result.user.uid);
           this.userService.getUserInfo(result.user.uid).pipe(take(1)).subscribe(user => {
-            this.userService.getUserIngredientPreferences(result.user.uid).subscribe(data => {
-              user.ingredientPreferences = data;
               this.userService.getUserRecipes(result.user.uid).pipe(take(1)).subscribe(recipes => {
                 user.recipes = this.setRecipeData(recipes, user);
                 console.log('user.recipes = ');
@@ -101,14 +99,16 @@ export class UserState {
                     if (recipe) {
                       recipe.ingredients.forEach(ingredient => {
                         user.ingredientPreferences.forEach(ingredientPref => {
-                          if(ingredientPref.ingredientId === ingredient.ingredientId) {
-                            if (ingredient && ingredient.score) {
-                              console.log('ingredient = ');
-                              console.log(ingredient);
-                              score = score + ingredient.score;
-                              console.log('score = ');
-                              console.log(score);
-                            }
+                          if (ingredientPref.ingredientId === ingredient.ingredientId) {
+                            console.log('ingredientPref = ');
+                            console.log(ingredientPref);
+                            console.log('ingredient = ');
+                            console.log(ingredient);
+                            console.log('ingredient = ');
+                            console.log(ingredient);
+                            score = score + ingredientPref.score;
+                            console.log('score = ');
+                            console.log(score);
                           }
                         });
                       });
@@ -122,7 +122,6 @@ export class UserState {
                 console.log('state = ');
                 console.log(state);
               });
-            });
           });
         }
       })
