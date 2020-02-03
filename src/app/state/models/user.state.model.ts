@@ -84,4 +84,5 @@ export interface UserRecipe {
     carbs: number;
     proteins: number;
     fats: number;
+    instructions: string[];
   }

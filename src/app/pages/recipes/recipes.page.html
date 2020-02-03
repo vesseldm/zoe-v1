@@ -58,7 +58,7 @@
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let item of recipesLunchs">
           <ion-card class="recipe" (click)="goRecipePage(item)">
-            <!-- <img src="{{item.photo}}" alt="recipe" /> -->
+            <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
               <ion-card-subtitle>{{item.type}} {{item.score}}</ion-card-subtitle>
             <ion-card-title>{{item.name}} {{item.score}}</ion-card-title>
@@ -80,7 +80,7 @@
             <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
               <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
-              <ion-card-title>{{item.title}}</ion-card-title>
+              <ion-card-title>{{item.name}}</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-slide>
@@ -99,7 +99,7 @@
             <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
               <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
-              <ion-card-title>{{item.title}}</ion-card-title>
+              <ion-card-title>{{item.name}}</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-slide>
@@ -118,7 +118,7 @@
             <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
               <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
-              <ion-card-title>{{item.title}}</ion-card-title>
+              <ion-card-title>{{item.name}}</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-slide>

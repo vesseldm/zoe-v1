@@ -56,3 +56,13 @@ export class RecipeThumbsUp {
   static readonly type = '[User] Recipe Thumbs Up';
   constructor(public recipe: UserRecipe) { }
 }
+
+export class RaiseIngredientsScore {
+  static readonly type = '[User] RaiseIngredientsScore';
+  constructor(public ingredient: UserIngredientPreference) { }
+}
+
+export class LowerIngredientsScore {
+  static readonly type = '[User] LowerIngredientsScore';
+  constructor(public ingredients: UserIngredientPreference[]) { }
+}

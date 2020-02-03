@@ -4,6 +4,8 @@ import { Observable, Subject } from 'rxjs';
 import { Store, Select } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { takeUntil } from 'rxjs/operators';
+import { UserRecipe } from '../../state/models/user.state.model';
+import { SelectedRecipe } from '../../state/user/user.actions';
 
 @Component({
   selector: 'app-today',
@@ -12,6 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class TodayPage implements OnInit, OnDestroy {
   @Select(UserState.loggedIn) loggedIn$: Observable<string>;
+  @Select(UserState.getUsersRecipes) recipes$: Observable<UserRecipe[]>;
   public ngDestroyed$ = new Subject();
   slideOpts = {
     slidesPerView: 1.7,
@@ -19,8 +22,8 @@ export class TodayPage implements OnInit, OnDestroy {
     loop: true,
     autoHeight: true
   };
-  recipes: any;
-  featuredRecipe: any;
+  recipes: UserRecipe[];
+  featuredRecipe: UserRecipe;
   weekDays: any = [];
   currentDay: any;
   nutritional: any;
@@ -34,6 +37,7 @@ export class TodayPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.checkIfUserIsLoggedIn();
+    this.getRecipes();
     this.nutritional = {
       calories: 0,
       protein: 0,
@@ -55,6 +59,21 @@ export class TodayPage implements OnInit, OnDestroy {
     const tomorrow = new Date(curr.getFullYear(), curr.getMonth(), curr.getDate() + 1);
     this.notification = 'Nulla quis lectus dolor. Sed et dolor eu elit viverra vestibulum eu vitae velit.';
   }
+
+  getRecipes() {
+    this.recipes$
+    .pipe(takeUntil(this.ngDestroyed$))
+    .subscribe(data => {
+      console.log('data = ');
+      console.log(data);
+      this.recipes = data;
+      if (this.recipes) {
+        this.featuredRecipe = this.recipes[0];
+      }
+
+    });
+  }
+
 
   checkIfUserIsLoggedIn() {
     this.loggedIn$
@@ -99,11 +118,11 @@ export class TodayPage implements OnInit, OnDestroy {
     this.store.dispatch(new Navigate(['/home/recipes']));
   }
 
-  goRecipePage(id) {
+  goRecipePage(recipe: UserRecipe) {
     // id needs to be passed
-    console.log('id = ');
-    console.log(id);
-    this.store.dispatch(new Navigate(['/recipe']));
+    this.store.dispatch(new SelectedRecipe(recipe)).subscribe(() => {
+      this.store.dispatch(new Navigate(['/recipe']));
+    });
   }
 
   public ngOnDestroy() {

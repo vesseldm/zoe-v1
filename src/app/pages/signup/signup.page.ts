@@ -68,7 +68,9 @@ export class SignupPage implements OnInit {
   }
 
   register(value) {
-    this.store.dispatch(new AddUser(value));
+    this.store.dispatch(new AddUser(value)).subscribe(() =>{
+      this.goHome();
+    });
   }
 
   tryFacebookLogin() {

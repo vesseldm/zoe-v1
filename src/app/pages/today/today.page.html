@@ -22,14 +22,14 @@
       <h2>My Recipes</h2>
       <ion-icon (click)="editRecipes()" name="create" color="basic"></ion-icon>
     </div>
-    <div *ngIf="recipes" class="section-content">
+    <div class="section-content">
       <ion-slides #slider pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let recipe of recipes">
-          <ion-card class="recipe" (click)="goRecipePage(recipe.id)">
+          <ion-card class="recipe" (click)="goRecipePage(recipe)">
             <img [src]="recipe.photo" alt="recipe" />
             <ion-card-header>
               <ion-card-subtitle>{{recipe.type}}</ion-card-subtitle>
-              <ion-card-title>{{recipe.title}}</ion-card-title>
+              <ion-card-title>{{recipe.name}}</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-slide>
@@ -85,11 +85,11 @@
       <h2>Featured Recipe</h2>
     </div>
     <div class="section-content">
-      <ion-card class="recipe featured-recipe" *ngIf="featuredRecipe" (click)="goRecipePage(featuredRecipe.id)">
+      <ion-card class="recipe featured-recipe" *ngIf="featuredRecipe" (click)="goRecipePage(featuredRecipe)">
         <img src="{{ featuredRecipe.photo }}" alt="recipe" />
         <ion-card-header>
           <ion-card-subtitle>{{ featuredRecipe.type }}</ion-card-subtitle>
-          <ion-card-title>{{ featuredRecipe.title }}</ion-card-title>
+          <ion-card-title>{{ featuredRecipe.name }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <ion-label>

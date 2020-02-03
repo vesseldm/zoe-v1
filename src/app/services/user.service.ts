@@ -92,7 +92,7 @@ export class UserService {
   }
 
   updateIngredientPreference(ingredient: UserIngredientPreference) {
-    this.updateRecipeScores();
+    // this.updateRecipeScores();
     return this.afs.doc(`users/${this.userId}/ingredientPreferences/${ingredient.uid}`).update(ingredient);
   }
 
@@ -118,7 +118,7 @@ export class UserService {
     console.log(recipe);
     console.log('recipe.uid = ');
     console.log(recipe.uid);
-    this.updateIngredientScores(recipe.uid);
+    // this.updateIngredientScores(recipe.uid);
     return from(this.afs.doc(`users/${this.userId}/recipes/${recipe.uid}`).update(recipe));
   }
 
