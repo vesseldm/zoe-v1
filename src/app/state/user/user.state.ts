@@ -91,8 +91,6 @@ export class UserState {
           this.userService.getUserInfo(result.user.uid).pipe(take(1)).subscribe(user => {
               this.userService.getUserRecipes(result.user.uid).pipe(take(1)).subscribe(recipes => {
                 user.recipes = this.setRecipeData(recipes, user);
-                console.log('user.recipes = ');
-                console.log(user.recipes);
                 if (user.recipes) {
                   user.recipes.forEach(recipe => {
                     let score = 0;
@@ -100,15 +98,7 @@ export class UserState {
                       recipe.ingredients.forEach(ingredient => {
                         user.ingredientPreferences.forEach(ingredientPref => {
                           if (ingredientPref.ingredientId === ingredient.ingredientId) {
-                            console.log('ingredientPref = ');
-                            console.log(ingredientPref);
-                            console.log('ingredient = ');
-                            console.log(ingredient);
-                            console.log('ingredient = ');
-                            console.log(ingredient);
                             score = score + ingredientPref.score;
-                            console.log('score = ');
-                            console.log(score);
                           }
                         });
                       });
