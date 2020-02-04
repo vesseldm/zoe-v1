@@ -42,7 +42,7 @@
           <ion-card class="recipe" >
             <img src="{{item.photo}}" alt="recipe"/>
             <ion-card-header>
-              <ion-card-title>{{item.name}} {{item.score}}</ion-card-title>
+              <ion-card-title>{{item.name}}</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-slide>
@@ -60,8 +60,8 @@
           <ion-card class="recipe" (click)="goRecipePage(item)">
             <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
-              <ion-card-subtitle>{{item.type}} {{item.score}}</ion-card-subtitle>
-            <ion-card-title>{{item.name}} {{item.score}}</ion-card-title>
+              <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
+            <ion-card-title>{{item.name}}</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-slide>
