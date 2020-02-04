@@ -15,12 +15,12 @@
       </ion-col>
       <ion-col size="4">
         <div class="action-button">
-          <ion-icon name="thumbs-down" (click)="thumbsUp()"></ion-icon>
+          <ion-icon name="thumbs-down" (click)="thumbsDown()"></ion-icon>
         </div>
       </ion-col>
       <ion-col size="4">
         <div class="action-button">
-          <ion-icon name="thumbs-up" (click)="thumbsDown()"></ion-icon>
+          <ion-icon name="thumbs-up" (click)="thumbsUp()"></ion-icon>
         </div>
       </ion-col>
       <ion-col>
@@ -73,41 +73,41 @@
       <div class="section-header">
         <h2>Nutrition</h2>
       </div>
-      <div class="section-content">
+      <div class="section-content" >
         <ion-list class="progress">
           <ion-list-header>
-            <ion-label>{{calories}} Calories</ion-label>
+            <ion-label>{{recipe.calories}} Calories</ion-label>
           </ion-list-header>
           <ion-progress-bar
             color="basic"
-            value="{{calories/1000}}"
+            value="{{recipe.calories/1000}}"
           ></ion-progress-bar>
         </ion-list>
         <ion-list class="progress">
           <ion-list-header>
-            <ion-label>Protein: {{protein}}g</ion-label>
+            <ion-label>Protein: {{recipe.proteins}}g</ion-label>
           </ion-list-header>
           <ion-progress-bar
             color="basic"
-            value="{{protein/1000}}"
+            value="{{recipe.proteins/1000}}"
           ></ion-progress-bar>
         </ion-list>
         <ion-list class="progress">
           <ion-list-header>
-            <ion-label>Carbs: {{carbs}}g</ion-label>
+            <ion-label>Carbs: {{recipe.carbs}}g</ion-label>
           </ion-list-header>
           <ion-progress-bar
             color="basic"
-            value="{{carbs/1000}}"
+            value="{{recipe.carbs/1000}}"
           ></ion-progress-bar>
         </ion-list>
         <ion-list class="progress">
           <ion-list-header>
-            <ion-label>Fats: {{fats}}g</ion-label>
+            <ion-label>Fats: {{recipe.fats}}g</ion-label>
           </ion-list-header>
           <ion-progress-bar
             color="basic"
-            value="{{fats/1000}}"
+            value="{{recipe.fats/1000}}"
           ></ion-progress-bar>
         </ion-list>
       </div>
@@ -120,9 +120,9 @@
       <div class="section-content">
         <ion-list lines="none">
 
-          <ion-item-sliding *ngFor="let ingredient of ingredients">
+          <ion-item-sliding *ngFor="let ingredient of recipe.ingredients">
             <ion-item>
-              <ion-checkbox color="dark" [(ngModel)]="ingredient.checked" (ionChange)="shoppingList(ingredient, $event)"></ion-checkbox>
+              <ion-checkbox color="dark" (ionChange)="shoppingList(ingredient, $event)"></ion-checkbox>
               <ion-label>{{ ingredient.name }}</ion-label>
               <!-- <div class="line" *ngIf="food.checked"></div>
               <ion-checkbox color="dark" slot="start" [(ngModel)]="food.checked" (ionChange)="checked(food, $event)">
@@ -226,7 +226,7 @@
         </ion-list>
       </div>
     </div>
-    <!-- <div class="section instructions">
+    <div class="section instructions">
       <div class="section-header">
         <h2>Instructions</h2>
       </div>
@@ -240,5 +240,5 @@
       <ion-button color="basic" (click)="addRecipe()">
         <ion-icon name="add"></ion-icon>
       </ion-button>
-    </div> -->
+    </div>
 </ion-content>

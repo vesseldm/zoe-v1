@@ -38,12 +38,11 @@
     </div>
     <div *ngIf="recipesBreakfasts" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
-        <ion-slide *ngFor="let item of recipesBreakfasts">
-          <ion-card class="recipe" (click)="goRecipePage(item.id)">
-            <!-- <img src="{{item.photo}}" alt="recipe" /> -->
+        <ion-slide (click)="goRecipePage(item)" *ngFor="let item of recipesBreakfasts">
+          <ion-card class="recipe" >
+            <img src="{{item.photo}}" alt="recipe"/>
             <ion-card-header>
-              <ion-card-subtitle>{{item.type}} {{item.score}}</ion-card-subtitle>
-              <ion-card-title>{{item.name}} {{item.score}}</ion-card-title>
+              <ion-card-title>{{item.name}}</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-slide>
@@ -59,10 +58,10 @@
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let item of recipesLunchs">
           <ion-card class="recipe" (click)="goRecipePage(item)">
-            <!-- <img src="{{item.photo}}" alt="recipe" /> -->
+            <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
-              <ion-card-subtitle>{{item.type}} {{item.score}}</ion-card-subtitle>
-            <ion-card-title>{{item.name}} {{item.score}}</ion-card-title>
+              <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
+            <ion-card-title>{{item.name}}</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-slide>
@@ -77,11 +76,11 @@
     <div *ngIf="recipesDinners" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let item of recipesDinners">
-          <ion-card class="recipe" (click)="goRecipePage(item.id)">
+          <ion-card class="recipe" (click)="goRecipePage(item)">
             <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
               <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
-              <ion-card-title>{{item.title}}</ion-card-title>
+              <ion-card-title>{{item.name}}</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-slide>
@@ -96,11 +95,11 @@
     <div *ngIf="recipesSnacks" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let item of recipesSnacks">
-          <ion-card class="recipe" (click)="goRecipePage(item.id)">
+          <ion-card class="recipe" (click)="goRecipePage(item)">
             <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
               <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
-              <ion-card-title>{{item.title}}</ion-card-title>
+              <ion-card-title>{{item.name}}</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-slide>
@@ -115,11 +114,11 @@
     <div *ngIf="recipesDrinks" class="section-content">
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let item of recipesDrinks">
-          <ion-card class="recipe" (click)="goRecipePage(item.id)">
+          <ion-card class="recipe" (click)="goRecipePage(item)">
             <img src="{{item.photo}}" alt="recipe" />
             <ion-card-header>
               <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
-              <ion-card-title>{{item.title}}</ion-card-title>
+              <ion-card-title>{{item.name}}</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-slide>

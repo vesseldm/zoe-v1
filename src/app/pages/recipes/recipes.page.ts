@@ -74,14 +74,16 @@ export class RecipesPage implements OnInit, OnDestroy {
             break;
         }
       });
-    this.orderByScore();
 
+    this.orderByScore();
     // this.userService.user$.subscribe(user => {
     //   if (user) this.user = user;
     // });
   }
 
   orderByScore() {
+    console.log('this.recipesBreakfasts = ');
+    console.log(this.recipesBreakfasts);
     this.recipesBreakfasts = this.recipesBreakfasts.sort((a, b) => b.score - a.score);
     this.recipesLunchs = this.recipesLunchs.sort((a, b) => b.score - a.score);
     this.recipesDinners = this.recipesDinners.sort((a, b) => b.score - a.score);

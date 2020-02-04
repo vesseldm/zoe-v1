@@ -2,7 +2,7 @@ import { UserStateModel, UserIngredientPreference, UserRecipe } from './../state
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
@@ -92,13 +92,13 @@ export class UserService {
   }
 
   updateIngredientPreference(ingredient: UserIngredientPreference) {
-    this.updateRecipeScores();
+    // this.updateRecipeScores();
     return this.afs.doc(`users/${this.userId}/ingredientPreferences/${ingredient.uid}`).update(ingredient);
   }
 
   updateRecipeScores() {
     this.httpClient.post(
-      'https://us-central1-zoe-v1-19ba3.cloudfunctions.net/updateUserRecipes/api/updateIngredientPreferences/',
+      'https://us-central1-zoe-v1-19ba3.cloudfunctions.net/updateIngredientPreferences/api/updateIngredientPreferences/',
       {userId: this.userId})
         .subscribe(data => {
           console.log('data = ');
@@ -116,6 +116,20 @@ export class UserService {
   updateUserRecipe(recipe: UserRecipe) {
     console.log('recipe = ');
     console.log(recipe);
-    return this.afs.collection(`users/${this.userId}/recipes`).valueChanges();
+    console.log('recipe.uid = ');
+    console.log(recipe.uid);
+    // this.updateIngredientScores(recipe.uid);
+    return from(this.afs.doc(`users/${this.userId}/recipes/${recipe.uid}`).update(recipe));
+  }
+
+
+  updateIngredientScores(uid) {
+    this.httpClient.post(
+      'https://us-central1-zoe-v1-19ba3.cloudfunctions.net/updateUserRecipe/api/updateUserReicpe/',
+      {userId: this.userId, uid})
+        .subscribe(data => {
+          console.log('data = ');
+          console.log(data);
+        });
   }
 }
