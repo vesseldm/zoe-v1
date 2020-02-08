@@ -9,6 +9,7 @@ import { TwitterConnect } from '@ionic-native/twitter-connect/ngx';
 import { FirebaseUserModel } from '../models/user.model';
 import { environment } from '../../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -21,23 +22,18 @@ export class AuthService {
     public googlePlus: GooglePlus,
     public twitter: TwitterConnect,
     public platform: Platform,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private httpClient: HttpClient
   ) { }
 
   public registerUser(value) {
-    return new Promise<any>((resolve, reject) => {
-      this.afAuth.auth.createUserWithEmailAndPassword(value.email, value.password)
-        .then(
-          res => {
-            this.firestore.collection('users').doc(res.user.uid).set({
-              id: res.user.uid,
-              name: value.name,
-              email: value.email
-            });
-            resolve(res);
-          },
-          err => reject(err));
-    });
+    return this.httpClient.post(
+      'http://localhost:3000/auth/register',
+      {
+        username: value.username,
+        password: value.password,
+        email: value.email
+      })
   }
 
   socialLogin(socialNetwork: string): Promise<any> {

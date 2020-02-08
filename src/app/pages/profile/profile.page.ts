@@ -410,7 +410,7 @@ export class ProfilePage implements OnInit, OnDestroy {
       console.log('getIngredientPreferences data = ');
       console.log(data);
       this.allergies = data;
-      this.setUpAllergieForm();
+      // this.setUpAllergieForm();
     });
   }
 

@@ -23,7 +23,7 @@
       <ion-icon (click)="editRecipes()" name="create" color="basic"></ion-icon>
     </div>
     <div class="section-content">
-      <ion-slides #slider pager="true" [options]="slideOpts">
+      <ion-slides #slider pager="false" [options]="slideOpts">
         <ion-slide *ngFor="let recipe of recipes">
           <ion-card class="recipe" (click)="goRecipePage(recipe)">
             <img [src]="recipe.photo" alt="recipe" />

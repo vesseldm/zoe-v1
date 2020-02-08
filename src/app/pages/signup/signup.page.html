@@ -4,14 +4,14 @@
     <h1 class="form-title">Sign Up</h1>
     <div class="form-content">
       <ion-item color="transparent">
-        <ion-label position="floating">Full Name</ion-label>
-        <ion-input formControlName="name"></ion-input>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input formControlName="username"></ion-input>
       </ion-item>
       <div class="validation-errors">
-        <ng-container *ngFor="let validation of validationMessages.name">
+        <ng-container *ngFor="let validation of validationMessages.username">
           <div class="error-message" *ngIf="
-            registerForm.get('name').hasError(validation.type) && 
-            (registerForm.get('name').dirty || registerForm.get('name').touched)
+            registerForm.get('username').hasError(validation.type) && 
+            (registerForm.get('username').dirty || registerForm.get('username').touched)
           ">
             {{ validation.message }}
           </div>

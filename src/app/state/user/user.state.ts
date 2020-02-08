@@ -67,7 +67,9 @@ export class UserState {
   addUser(ctx: StateContext<UserStateModel>, action: AddUser) {
     return from(this.authService.registerUser(action.payload)).pipe(
       tap(result => {
-        ctx.setState(action.payload);
+        console.log('result = ');
+        console.log(result);
+        // ctx.setState(result)
       })
     );
   }
@@ -94,7 +96,7 @@ export class UserState {
                 if (user.recipes) {
                   user.recipes.forEach(recipe => {
                     let score = 0;
-                    if (recipe) {
+                    if (recipe && recipe.ingredients) {
                       recipe.ingredients.forEach(ingredient => {
                         user.ingredientPreferences.forEach(ingredientPref => {
                           if (ingredientPref.ingredientId === ingredient.ingredientId) {
@@ -102,7 +104,9 @@ export class UserState {
                           }
                         });
                       });
-                      recipe.score = score;
+                      recipe.score = score / recipe.ingredients.length;
+                      console.log('recipe.score = ');
+                      console.log(recipe.score);
                     }
                   });
                 }
@@ -122,6 +126,8 @@ export class UserState {
   setRecipeData(recipes, user): UserRecipe[] {
     const newRecipes = [];
     recipes.forEach(recipe => {
+      console.log('recipe = ');
+      console.log(recipe);
       newRecipes.push(this.getIngredientInfo(recipe, user));
     });
     return newRecipes;
@@ -129,15 +135,20 @@ export class UserState {
 
   getIngredientInfo(recipe: UserRecipe, user: UserStateModel): UserRecipe {
     const recipeIngredients: UserIngredientPreference[] = [];
-    recipe.ingredients.map(ingredient => {
-      if (!ingredient.name) {
-        recipeIngredients.push(this.assignIngredientInfo(ingredient, user));
-      } else {
-        recipeIngredients.push(ingredient);
+    if (recipe.ingredients) {
+
+      recipe.ingredients.map(ingredient => {
+        if (!ingredient.name) {
+          recipeIngredients.push(this.assignIngredientInfo(ingredient, user));
+        } else {
+          recipeIngredients.push(ingredient);
+        }
+      });
+      if (recipeIngredients[0]) {
+        recipe.ingredients = recipeIngredients;
+        return recipe;
       }
-    });
-    if (recipeIngredients[0]) {
-      recipe.ingredients = recipeIngredients;
+    } else {
       return recipe;
     }
   }
