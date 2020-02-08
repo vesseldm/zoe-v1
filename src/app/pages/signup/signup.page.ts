@@ -17,7 +17,7 @@ export class SignupPage implements OnInit {
   errorMessage: string;
   successMessage: string;
   validationMessages = {
-    name: [
+    username: [
       { type: 'required', message: 'Name is required.' }
     ],
     email: [
@@ -45,7 +45,7 @@ export class SignupPage implements OnInit {
     // });
 
     this.registerForm = this.formBuilder.group({
-      name: new FormControl('', Validators.compose([
+      username: new FormControl('', Validators.compose([
         Validators.required
       ])),
       email: new FormControl('', Validators.compose([

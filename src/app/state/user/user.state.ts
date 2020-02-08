@@ -67,8 +67,9 @@ export class UserState {
   addUser(ctx: StateContext<UserStateModel>, action: AddUser) {
     return from(this.authService.registerUser(action.payload)).pipe(
       tap(result => {
-        this.userService.createNewIngredients(result.user);
-        ctx.setState(action.payload);
+        console.log('result = ');
+        console.log(result);
+        // ctx.setState(result)
       })
     );
   }
