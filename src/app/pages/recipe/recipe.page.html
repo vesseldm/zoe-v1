@@ -112,7 +112,7 @@
         </ion-list>
       </div>
     </div>
-    <div class="section ingredients">
+    <div class="section ingredients" *ngIf="recipe.ingredients">
       <div class="section-header">
         <h2>Ingredients</h2>
         <ion-icon name="add-circle-outline"></ion-icon>
@@ -232,9 +232,9 @@
       </div>
       <div class="section-content">
         <ol>
-          <li class="checked" *ngFor="let item of recipe.instructions">
+          <!-- <li class="checked" *ngFor="let item of recipe.instructions">
             {{item}}
-          </li>
+          </li> -->
         </ol>
       </div>
       <ion-button color="basic" (click)="addRecipe()">
