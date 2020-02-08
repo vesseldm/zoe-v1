@@ -30,10 +30,10 @@ export class AuthService {
     return this.httpClient.post(
       'http://localhost:3000/auth/register',
       {
-        username: value.username,
+        username: value.email,
         password: value.password,
         email: value.email
-      })
+      });
   }
 
   socialLogin(socialNetwork: string): Promise<any> {
@@ -55,12 +55,14 @@ export class AuthService {
   }
 
   login(value) {
-    return new Promise<any>((resolve, reject) => {
-      this.afAuth.auth.signInWithEmailAndPassword(value.email, value.password)
-        .then(
-          res => resolve(res),
-          err => reject(err));
-    });
+    console.log('value = ');
+    console.log(value);
+    return this.httpClient.post(
+      'http://localhost:3000/auth/login',
+      {
+        username: value.email,
+        password: value.password,
+      });
   }
 
   doLogout() {
