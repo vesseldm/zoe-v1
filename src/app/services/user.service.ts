@@ -4,7 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, of, from } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -131,6 +131,24 @@ export class UserService {
           console.log('data = ');
           console.log(data);
         });
+  }
+
+  // his.http.request(method, baseUrl + route, {
+  //   body: data,
+  //   responseType: 'json',
+  //   observe: 'body',
+  //   headers: header
+  // });
+
+  getUserData(token, email): Observable<UserStateModel> {
+    const header = {Authorization: `Bearer ${token}`};
+    return this.httpClient.post<UserStateModel>(
+      'http://localhost:3000/users/getUserData',
+      {
+        email
+      },
+      {headers: header},
+    );
   }
 
   createNewIngredients(user) {

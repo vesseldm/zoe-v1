@@ -26,6 +26,8 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { IngredientsState } from './state/ingredients/ingredients.state';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthState } from './state/auth/auth.state';
+import { AuthGuard } from './services/auth.guard';
 
 
 export const ngxsConfig: NgxsModuleOptions = {
@@ -40,6 +42,7 @@ export const ngxsConfig: NgxsModuleOptions = {
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
+    NgxsModule.forRoot([AuthState]),
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(),
@@ -49,11 +52,12 @@ export const ngxsConfig: NgxsModuleOptions = {
     AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ModalPageModule,
-    NgxsModule.forRoot([UserState, IngredientsState], ngxsConfig),
+    NgxsModule.forRoot([AuthState, UserState, IngredientsState], ngxsConfig),
     NgxsFormPluginModule.forRoot(),
     NgxsRouterPluginModule.forRoot(),
   ],
   providers: [
+    AuthGuard,
     StatusBar,
     SplashScreen,
     Facebook,

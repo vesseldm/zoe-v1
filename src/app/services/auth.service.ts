@@ -10,6 +10,7 @@ import { FirebaseUserModel } from '../models/user.model';
 import { environment } from '../../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -54,9 +55,7 @@ export class AuthService {
     });
   }
 
-  login(value) {
-    console.log('value = ');
-    console.log(value);
+  login(value): Observable<any> {
     return this.httpClient.post(
       'http://localhost:3000/auth/login',
       {

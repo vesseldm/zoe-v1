@@ -1,4 +1,3 @@
-import { LoginUser } from './../../state/user/user.actions';
 import { UserState } from '../../state/user/user.state';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
@@ -8,6 +7,8 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Navigate } from '@ngxs/router-plugin';
+import { Login } from 'src/app/state/auth/auth.actions';
+import { GetUserData } from 'src/app/state/user/user.actions';
 
 @Component({
   selector: 'app-login',
@@ -66,7 +67,19 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   tryLogin(value) {
-    this.store.dispatch(new LoginUser(value)).subscribe(data => {
+    const auth = {
+      email: value.email,
+      password: value.password
+    };
+    this.store.dispatch(new Login(auth)).subscribe(data => {
+      console.log('data = ');
+      console.log(data);
+      this.store.dispatch(new GetUserData(data.auth.token, data.auth.email)).subscribe(userData => {
+        console.log('userData = ');
+        console.log(userData);
+      });
+      console.log('data = ');
+      console.log(data);
       this.goHome();
     });
   }
