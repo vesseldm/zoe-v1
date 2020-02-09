@@ -12,11 +12,6 @@ export class AddSocialUser {
   constructor(public payload: string) { }
 }
 
-export class LoginUser {
-  static readonly type = '[User] Login User';
-  constructor(public payload: any) { }
-}
-
 export class GetIngredientPreferences {
   static readonly type = '[User] Get IngredientPreferences';
   constructor() { }
@@ -65,4 +60,9 @@ export class RaiseIngredientsScore {
 export class LowerIngredientsScore {
   static readonly type = '[User] LowerIngredientsScore';
   constructor(public ingredients: UserIngredientPreference[]) { }
+}
+
+export class GetUserData {
+  static readonly type = '[User] get user data';
+  constructor(public token: string, public email: string) {}
 }
