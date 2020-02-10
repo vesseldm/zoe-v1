@@ -13,7 +13,7 @@ import { tap } from 'rxjs/operators';
   export class AuthState {
     @Selector()
     static token(state: AuthStateModel): string | null {
-      return state.token;
+      return state ? state.token : null;
     }
 
     @Selector()

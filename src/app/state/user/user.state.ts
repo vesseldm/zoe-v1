@@ -44,13 +44,18 @@ export class UserState {
   }
 
   @Selector()
+  static getUsername(state: UserStateModel) {
+    return state.username;
+  }
+
+  @Selector()
   static allergiesList(state: UserStateModel) {
     return state.allergies;
   }
 
   @Selector()
   static getIngredientPreferences(state: UserStateModel) {
-    return state.ingredientPreferences;
+    return state.ingredients;
   }
 
   @Selector()
@@ -149,20 +154,20 @@ export class UserState {
 
   @Action(IngredientLiked)
   saveIngredientLike(ctx: StateContext<UserStateModel>, action: IngredientLiked) {
-    return from(this.userService.updateIngredientPreference(action.ingredient)).subscribe(() => {
+    return from(this.userService.updateIngredient(action.ingredient, action.username)).subscribe(data => {
       ctx.setState(
         patch({
-          ingredientPreferences: updateItem(item => item.ingredientId === action.ingredient.ingredientId, action.ingredient)
+          ingredients: updateItem(item => item._id === action.ingredient._id, action.ingredient)
         }));
     });
   }
 
   @Action(IngredientDisliked)
   saveIngredientDislike(ctx: StateContext<UserStateModel>, action: IngredientDisliked) {
-    return from(this.userService.updateIngredientPreference(action.ingredient)).subscribe(() => {
+    return from(this.userService.updateIngredient(action.ingredient, action.username)).subscribe(() => {
       ctx.setState(
         patch({
-          ingredientPreferences: updateItem(item => item.ingredientId === action.ingredient.ingredientId, action.ingredient)
+          ingredients: updateItem(item => item._id === action.ingredient._id, action.ingredient)
         }));
     });
   }

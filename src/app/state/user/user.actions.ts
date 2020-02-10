@@ -24,12 +24,12 @@ export class SaveProfileUserForm {
 
 export class IngredientLiked {
   static readonly type = '[User] Ingredient Liked';
-  constructor(public ingredient: UserIngredientPreference) { }
+  constructor(public ingredient: UserIngredientPreference, public username: string) { }
 }
 
 export class IngredientDisliked {
   static readonly type = '[User] Ingredient disliked';
-  constructor(public ingredient: UserIngredientPreference) { }
+  constructor(public ingredient: UserIngredientPreference, public username: string) { }
 }
 
 export class GetUserRecipes {

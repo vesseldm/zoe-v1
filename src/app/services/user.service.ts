@@ -5,6 +5,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, of, from } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthState } from '../state/auth/auth.state';
+import { Select } from '@ngxs/store';
 
 
 @Injectable({
@@ -13,6 +15,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class UserService {
   user$: Observable<any>;
   users$: Observable<any>;
+  @Select(AuthState.token) token$: Observable<string>;
+  token: string;
 
   public userId: any;
   public user: any;
@@ -22,6 +26,9 @@ export class UserService {
     public afs: AngularFirestore,
     private httpClient: HttpClient,
   ) {
+    this.token$.subscribe(token => {
+      this.token = token;
+    });
 
   }
 
@@ -91,9 +98,16 @@ export class UserService {
       );
   }
 
-  updateIngredientPreference(ingredient: UserIngredientPreference) {
-    // this.updateRecipeScores();
-    return this.afs.doc(`users/${this.userId}/ingredientPreferences/${ingredient.uid}`).update(ingredient);
+  updateIngredient(ingredient: UserIngredientPreference, username: string) {
+    const header = {Authorization: `Bearer ${this.token}`};
+    return this.httpClient.post<UserStateModel>(
+      'http://localhost:3000/users/updateuseringredient',
+      {
+        ingredient,
+        username,
+      },
+      {headers: header},
+    );
   }
 
   updateRecipeScores() {
@@ -106,19 +120,8 @@ export class UserService {
         });
   }
 
-  updateUser(user) {
-    return new Promise<any>((resolve, reject) => {
-      this.afs.collection('users').doc(this.userId).update(user);
-      resolve(user);
-    });
-  }
-
   updateUserRecipe(recipe: UserRecipe) {
-    console.log('recipe = ');
-    console.log(recipe);
-    console.log('recipe.uid = ');
-    console.log(recipe.uid);
-    // this.updateIngredientScores(recipe.uid);
+    // this.updateIngredientScores(recipe.uid); 
     return from(this.afs.doc(`users/${this.userId}/recipes/${recipe.uid}`).update(recipe));
   }
 
@@ -132,13 +135,6 @@ export class UserService {
           console.log(data);
         });
   }
-
-  // his.http.request(method, baseUrl + route, {
-  //   body: data,
-  //   responseType: 'json',
-  //   observe: 'body',
-  //   headers: header
-  // });
 
   getUserData(token, email): Observable<UserStateModel> {
     const header = {Authorization: `Bearer ${token}`};
