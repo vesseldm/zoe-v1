@@ -2,7 +2,7 @@
     <div class="page-header">
       <div class="title">
         <ion-icon (click)="goBack()" name="arrow-back"></ion-icon>
-        <h1>{{recipe.name}}</h1>
+        <h1>{{recipe.name}} score: {{recipe.score}}</h1>
       </div>
 
       <img src="{{recipe.photo}}" />
@@ -123,7 +123,7 @@
           <ion-item-sliding *ngFor="let ingredient of recipe.ingredients">
             <ion-item>
               <ion-checkbox color="dark" (ionChange)="shoppingList(ingredient, $event)"></ion-checkbox>
-              <ion-label>{{ ingredient.name }}</ion-label>
+              <ion-label>{{ ingredient }}</ion-label>
               <!-- <div class="line" *ngIf="food.checked"></div>
               <ion-checkbox color="dark" slot="start" [(ngModel)]="food.checked" (ionChange)="checked(food, $event)">
               </ion-checkbox> -->

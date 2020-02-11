@@ -165,7 +165,6 @@ export class UserState {
       ctx.setState(
         patch(data)
       );
-      const state = ctx.getState();
     });
   }
 
@@ -175,7 +174,6 @@ export class UserState {
       ctx.setState(
         patch(data)
       );
-      const state = ctx.getState();
     });
     }
 

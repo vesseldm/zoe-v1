@@ -15,6 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 export class RecipePage implements OnInit, OnDestroy {
   @Select(UserState.getSelectedRecipe) getSelectedRecipe$: Observable<UserRecipe>;
   @Select(UserState.getUsername) getUsername$: Observable<string>;
+  public ingredientPreferences;
   public username: string;
   public ngDestroyed$ = new Subject();
   recipeId: any;
