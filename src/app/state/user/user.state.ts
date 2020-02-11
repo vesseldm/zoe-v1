@@ -22,15 +22,6 @@ import {
 
 @State<UserStateModel>({
   name: 'user',
-  defaults: {
-    uid: '',
-    profileForm: {
-      model: undefined,
-      dirty: false,
-      status: '',
-      errors: {}
-    }
-  }
 })
 export class UserState {
   constructor(
@@ -60,6 +51,8 @@ export class UserState {
 
   @Selector()
   static getUsersRecipes(state: UserStateModel) {
+    console.log('state = ');
+    console.log(state);
     return state.recipes;
   }
 
@@ -118,7 +111,6 @@ export class UserState {
 
       recipe.ingredients.map(ingredient => {
         if (!ingredient.name) {
-          recipeIngredients.push(this.assignIngredientInfo(ingredient, user));
         } else {
           recipeIngredients.push(ingredient);
         }
@@ -130,16 +122,6 @@ export class UserState {
     } else {
       return recipe;
     }
-  }
-
-  assignIngredientInfo(ingredient, user: UserStateModel): UserIngredientPreference {
-    let newIngredients;
-    user.ingredientPreferences.map(ingredientPref => {
-      if (ingredientPref.ingredientId === ingredient) {
-        newIngredients = ingredientPref;
-      }
-    });
-    return newIngredients;
   }
 
   @Action(SaveProfileUserForm)
@@ -181,49 +163,30 @@ export class UserState {
 
   @Action(RecipeThumbsUp)
   setRecipeThumbsUp(ctx: StateContext<UserStateModel>, action: RecipeThumbsUp) {
-    this.userService.updateUserRecipe(action.recipe).subscribe(data => {
-      ctx.setState(
-        patch({
-          recipes: updateItem(item => item.uid === action.recipe.uid, action.recipe)
-        }));
-      const state = ctx.getState();
-      state.ingredientPreferences.forEach(ingredient => {
-        action.recipe.ingredients.forEach(recIngredient => {
-          if (recIngredient.ingredientId === ingredient.ingredientId) {
-            ctx.dispatch(new RaiseIngredientsScore(ingredient));
-          }
-        });
-      });
-    });
-  }
-
-  @Action(RaiseIngredientsScore)
-  raiseIngredientsScore(ctx: StateContext<UserStateModel>, action: RaiseIngredientsScore) {
-    const newObj = Object.assign({}, action.ingredient);
-    newObj.score = newObj.score + 1;
-    ctx.setState(
-      patch({
-        ingredientPreferences: updateItem(item => item.ingredientId === action.ingredient.ingredientId, newObj)
-      }));
-    const state = ctx.getState();
-    console.log('state = ');
-    console.log(state);
-    from(this.userService.updateUser(state)).subscribe(data => {
+    console.log('action.recipe = ');
+    console.log(action.recipe);
+    this.userService.likedUserRecipe(action.recipe, action.username).subscribe(data => {
       console.log('data = ');
       console.log(data);
+      ctx.setState(
+        patch(data)
+      );
+      const state = ctx.getState();
+      console.log('state = ');
+      console.log(state);
     });
   }
 
   @Action(RecipeThumbsDown)
   setRecipeThumbsDown(ctx: StateContext<UserStateModel>, action: RecipeThumbsDown) {
-    this.userService.updateUserRecipe(action.recipe).subscribe(data => {
-      ctx.setState(
-        patch({
-          recipes: updateItem(item => item.uid === action.recipe.uid, action.recipe)
-        }));
+    // this.userService.disLikedUserRecipe(action.recipe).subscribe(data => {
+    //   ctx.setState(
+    //     patch({
+    //       recipes: updateItem(item => item.uid === action.recipe.uid, action.recipe)
+    //     }));
       // ctx.dispatch(new LowerIngredientsScore(action.recipe.ingredients));
-    });
-  }
+    };
+
 
 
   //   @Action(LowerIngredientsScore)

@@ -14,6 +14,8 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class RecipePage implements OnInit, OnDestroy {
   @Select(UserState.getSelectedRecipe) getSelectedRecipe$: Observable<UserRecipe>;
+  @Select(UserState.getUsername) getUsername$: Observable<string>;
+  public username: string;
   public ngDestroyed$ = new Subject();
   recipeId: any;
   recipe: UserRecipe;
@@ -28,11 +30,12 @@ export class RecipePage implements OnInit, OnDestroy {
     this.getSelectedRecipe$
     .pipe(takeUntil(this.ngDestroyed$))
     .subscribe(data => {
-      console.log('getSelectedRecipe data = ');
-      console.log(data);
       this.recipe = data;
-      console.log('this.recipe.ingredients = ');
-      console.log(this.recipe.ingredients);
+    });
+    this.getUsername$
+    .pipe(takeUntil(this.ngDestroyed$))
+    .subscribe(username => {
+      this.username = username;
     });
   }
 
@@ -52,16 +55,17 @@ export class RecipePage implements OnInit, OnDestroy {
   }
 
   thumbsUp() {
-    const updatedRecipe = Object.assign({}, this.recipe);
-    updatedRecipe.thumbsUp = true;
-    updatedRecipe.thumbsDown = false;
-    this.store.dispatch(new RecipeThumbsUp(updatedRecipe));  }
+    console.log('this.recipe = ');
+    console.log(this.recipe);
+    console.log('this.username = ');
+    console.log(this.username);
+    this.store.dispatch(new RecipeThumbsUp(this.recipe, this.username))};
 
   thumbsDown() {
     const updatedRecipe = Object.assign({}, this.recipe);
     updatedRecipe.thumbsUp = false;
     updatedRecipe.thumbsDown = true;
-    this.store.dispatch(new RecipeThumbsDown(updatedRecipe));
+    this.store.dispatch(new RecipeThumbsDown(updatedRecipe, this.username));
   }
 
   ngOnDestroy() {
