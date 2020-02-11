@@ -121,13 +121,21 @@ export class UserService {
   }
 
   likedUserRecipe(recipe: UserRecipe, username: string) {
-    console.log('recipe = ');
-    console.log(recipe);
-    console.log('username = ');
-    console.log(username);
     const header = {Authorization: `Bearer ${this.token}`};
     return this.httpClient.post<UserStateModel>(
       'http://localhost:3000/users/likeduserrecipe',
+      {
+        recipe,
+        username,
+      },
+      {headers: header},
+    );
+  }
+
+  disLikedUserRecipe(recipe: UserRecipe, username: string) {
+    const header = {Authorization: `Bearer ${this.token}`};
+    return this.httpClient.post<UserStateModel>(
+      'http://localhost:3000/users/dislikeduserrecipe',
       {
         recipe,
         username,

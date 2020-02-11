@@ -51,8 +51,6 @@ export class UserState {
 
   @Selector()
   static getUsersRecipes(state: UserStateModel) {
-    console.log('state = ');
-    console.log(state);
     return state.recipes;
   }
 
@@ -163,45 +161,22 @@ export class UserState {
 
   @Action(RecipeThumbsUp)
   setRecipeThumbsUp(ctx: StateContext<UserStateModel>, action: RecipeThumbsUp) {
-    console.log('action.recipe = ');
-    console.log(action.recipe);
     this.userService.likedUserRecipe(action.recipe, action.username).subscribe(data => {
-      console.log('data = ');
-      console.log(data);
       ctx.setState(
         patch(data)
       );
       const state = ctx.getState();
-      console.log('state = ');
-      console.log(state);
     });
   }
 
   @Action(RecipeThumbsDown)
   setRecipeThumbsDown(ctx: StateContext<UserStateModel>, action: RecipeThumbsDown) {
-    // this.userService.disLikedUserRecipe(action.recipe).subscribe(data => {
-    //   ctx.setState(
-    //     patch({
-    //       recipes: updateItem(item => item.uid === action.recipe.uid, action.recipe)
-    //     }));
-      // ctx.dispatch(new LowerIngredientsScore(action.recipe.ingredients));
-    };
+    this.userService.disLikedUserRecipe(action.recipe, action.username).subscribe(data => {
+      ctx.setState(
+        patch(data)
+      );
+      const state = ctx.getState();
+    });
+    }
 
-
-
-  //   @Action(LowerIngredientsScore)
-  //   lowerIngredientsScore(ctx: StateContext<UserStateModel>, action: LowerIngredientsScore) {
-  //     console.log('LOWER RAN');
-  //     action.ingredients.map(ingredient => {
-  //       const newIngredient = Object.assign({}, ingredient);
-  //       newIngredient.score = newIngredient.score - 1;
-  //       ctx.setState(
-  //         patch({
-  //           ingredientPreferences: updateItem(item => item.ingredientId === ingredient.ingredientId, newIngredient)
-  //       }));
-  //     });
-  //     const state = ctx.getState();
-  //     from(this.userService.updateUser(state)).subscribe(data => {
-  //     });
-  //   }
 }
