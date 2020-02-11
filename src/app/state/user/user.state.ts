@@ -75,8 +75,10 @@ export class UserState {
   addUser(ctx: StateContext<UserStateModel>, action: AddUser) {
     return from(this.authService.registerUser(action.payload)).pipe(
       tap(result => {
-        console.log('result = ');
-        console.log(result);
+        this.userService.createNewUserRecipes(action.payload.email).subscribe(data => {
+          console.log('data = ');
+          console.log(data);
+        });
         // ctx.setState(result)
       })
     );

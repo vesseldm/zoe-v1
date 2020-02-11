@@ -157,27 +157,19 @@ export class UserService {
   }
 
   createNewIngredients(user) {
-    console.log('user = ');
-    console.log(user);
-    this.afs.collection('ingredients/').get().subscribe(ingredients => {
-      const ingredientPreferences = [];
-      ingredients.forEach(ingredient => {
-        ingredientPreferences.push(ingredient.data());
-      });
-      this.afs.doc(`users/${user.uid}`).update({ingredientPreferences}).finally(() => {
-      });
-      this.createNewUserRecipes(user);
-    });
+
   }
 
-  createNewUserRecipes(user) {
-    this.afs.collection('recipes/').get().subscribe(recipes => {
-      recipes.forEach(recipe => {
-        console.log('recipe = ');
-        console.log(recipe.data());
-        return this.afs.collection(`users/${user.uid}/recipes`).add(recipe.data()).then(() => {
-      });
-    });
-  });
+  createNewUserRecipes(username) {
+    console.log('username = ');
+    console.log(username);
+    const header = {Authorization: `Bearer ${this.token}`};
+    return this.httpClient.post<UserStateModel>(
+      'http://localhost:3000/users/createuserrecipe',
+      {
+        username
+      },
+      {headers: header},
+    );
   }
 }
