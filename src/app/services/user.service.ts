@@ -120,21 +120,22 @@ export class UserService {
         });
   }
 
-  updateUserRecipe(recipe: UserRecipe) {
-    // this.updateIngredientScores(recipe.uid); 
-    return from(this.afs.doc(`users/${this.userId}/recipes/${recipe.uid}`).update(recipe));
+  likedUserRecipe(recipe: UserRecipe, username: string) {
+    console.log('recipe = ');
+    console.log(recipe);
+    console.log('username = ');
+    console.log(username);
+    const header = {Authorization: `Bearer ${this.token}`};
+    return this.httpClient.post<UserStateModel>(
+      'http://localhost:3000/users/likeduserrecipe',
+      {
+        recipe,
+        username,
+      },
+      {headers: header},
+    );
   }
 
-
-  updateIngredientScores(uid) {
-    this.httpClient.post(
-      'https://us-central1-zoe-v1-19ba3.cloudfunctions.net/updateUserRecipe/api/updateUserReicpe/',
-      {userId: this.userId, uid})
-        .subscribe(data => {
-          console.log('data = ');
-          console.log(data);
-        });
-  }
 
   getUserData(token, email): Observable<UserStateModel> {
     const header = {Authorization: `Bearer ${token}`};

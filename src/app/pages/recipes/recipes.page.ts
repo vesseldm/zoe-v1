@@ -24,7 +24,7 @@ export class RecipesPage implements OnInit, OnDestroy {
   user: any;
 
   slideOpts = {
-    slidesPerView: 1.7,
+    slidesPerView: 1,
     centeredSlides: true,
     loop: true
   };
@@ -37,9 +37,9 @@ export class RecipesPage implements OnInit, OnDestroy {
     this.recipes$
     .pipe(takeUntil(this.ngDestroyed$))
     .subscribe(data => {
-      console.log('recipes data = ');
-      console.log(data);
       this.recipes = data;
+      console.log('this.recipes = ');
+      console.log(this.recipes);
     });
 
     this.recipesBreakfasts = [];
@@ -82,8 +82,6 @@ export class RecipesPage implements OnInit, OnDestroy {
   }
 
   orderByScore() {
-    console.log('this.recipesBreakfasts = ');
-    console.log(this.recipesBreakfasts);
     this.recipesBreakfasts = this.recipesBreakfasts.sort((a, b) => b.score - a.score);
     this.recipesLunchs = this.recipesLunchs.sort((a, b) => b.score - a.score);
     this.recipesDinners = this.recipesDinners.sort((a, b) => b.score - a.score);

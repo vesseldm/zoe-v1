@@ -44,12 +44,12 @@ export class SelectedRecipe {
 
 export class RecipeThumbsDown {
   static readonly type = '[User] Recipe Thumbs Down';
-  constructor(public recipe: UserRecipe) { }
+  constructor(public recipe: UserRecipe, public username: string) { }
 }
 
 export class RecipeThumbsUp {
   static readonly type = '[User] Recipe Thumbs Up';
-  constructor(public recipe: UserRecipe) { }
+  constructor(public recipe: UserRecipe, public username: string) { }
 }
 
 export class RaiseIngredientsScore {
