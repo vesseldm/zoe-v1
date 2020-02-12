@@ -1,4 +1,4 @@
-import { UserIngredientPreference } from './../../state/models/user.state.model';
+import { UserIngredientPreference, UserStateModel } from './../../state/models/user.state.model';
 import { UserState } from './../../state/user/user.state';
 import { Ingredient } from './../../state/models/ingredients.state.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -18,6 +18,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class ProfilePage implements OnInit, OnDestroy {
   @Select(UserState.getIngredientPreferences) getIngredientPreferences$: Observable<UserIngredientPreference[]>;
+  @Select(UserState.getUserState) getUserState$: Observable<UserStateModel>;
   public ngDestroyed$ = new Subject();
   public profileForm = this.formBuilder.group({
     details: this.formBuilder.group({
@@ -55,6 +56,7 @@ export class ProfilePage implements OnInit, OnDestroy {
   mealTimes: any;
   ingredients: Ingredient[];
   allergies: UserIngredientPreference[];
+  userState;
 
   constructor(
     public store: Store,
@@ -410,16 +412,22 @@ export class ProfilePage implements OnInit, OnDestroy {
       console.log('getIngredientPreferences data = ');
       console.log(data);
       this.allergies = data;
-      // this.setUpAllergieForm();
     });
+    this.getUserState$
+    .pipe(takeUntil(this.ngDestroyed$))
+    .subscribe(data => {
+      this.userState = data;
+    });
+    if (this.userState) {
+      this.setFormData(this.userState);
+    }
   }
 
-  setUpAllergieForm() {
-    this.allergies.forEach(food => {
-      console.log('food = ');
-      console.log(food);
-      this.profileForm.patchValue(['allergies', food.allergic]);
-    });
+  setFormData(userState: UserStateModel) {
+    if (userState.email) {
+      this.profileForm.patchValue({details: {email: userState.email}});
+
+    }
   }
 
   onSubmit() {

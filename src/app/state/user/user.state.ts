@@ -59,6 +59,11 @@ export class UserState {
     return state.selectedRecipe;
   }
 
+  @Selector()
+  static getUserState(state: UserStateModel) {
+    return state;
+  }
+
 
   @Action(GetUserData)
   getUserData(ctx: StateContext<UserStateModel>, action: GetUserData) {
@@ -94,44 +99,10 @@ export class UserState {
     );
   }
 
-
-  setRecipeData(recipes, user): UserRecipe[] {
-    const newRecipes = [];
-    recipes.forEach(recipe => {
-      console.log('recipe = ');
-      console.log(recipe);
-      newRecipes.push(this.getIngredientInfo(recipe, user));
-    });
-    return newRecipes;
-  }
-
-  getIngredientInfo(recipe: UserRecipe, user: UserStateModel): UserRecipe {
-    const recipeIngredients: UserIngredientPreference[] = [];
-    if (recipe.ingredients) {
-
-      recipe.ingredients.map(ingredient => {
-        if (!ingredient.name) {
-        } else {
-          recipeIngredients.push(ingredient);
-        }
-      });
-      if (recipeIngredients[0]) {
-        recipe.ingredients = recipeIngredients;
-        return recipe;
-      }
-    } else {
-      return recipe;
-    }
-  }
-
   @Action(SaveProfileUserForm)
   saveProfileUserForm(ctx: StateContext<UserStateModel>, action: SaveProfileUserForm) {
-    return from(this.authService.doUpdateUser(ctx.getState())).pipe(
-      tap(result => {
-        console.log('result = ');
-        console.log(result);
-      })
-    );
+    const state = ctx.getState();
+    return this.userService.updateuserprofile(state);
   }
 
   @Action(IngredientLiked)
