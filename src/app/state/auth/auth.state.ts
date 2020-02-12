@@ -71,8 +71,6 @@ import { tap } from 'rxjs/operators';
             email: action.payload.email
           });
           const state = ctx.getState();
-          console.log('state = ');
-          console.log(state);
         })
       );
     }

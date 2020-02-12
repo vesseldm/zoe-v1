@@ -5,7 +5,7 @@ import { Store, Select } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { takeUntil } from 'rxjs/operators';
 import { UserRecipe } from '../../state/models/user.state.model';
-import { SelectedRecipe } from '../../state/user/user.actions';
+import { SelectedRecipe, GetUserData } from '../../state/user/user.actions';
 
 @Component({
   selector: 'app-today',
@@ -14,6 +14,7 @@ import { SelectedRecipe } from '../../state/user/user.actions';
 })
 export class TodayPage implements OnInit, OnDestroy {
   @Select(UserState.loggedIn) loggedIn$: Observable<string>;
+  @Select(UserState.getUsername) username$: Observable<string>;
   @Select(UserState.getUsersRecipes) recipes$: Observable<UserRecipe[]>;
   public ngDestroyed$ = new Subject();
   slideOpts = {
@@ -30,6 +31,7 @@ export class TodayPage implements OnInit, OnDestroy {
   ingredients: any;
   user: any;
   notification: any;
+  public username;
 
   constructor(
     private store: Store,
@@ -71,6 +73,12 @@ export class TodayPage implements OnInit, OnDestroy {
         this.featuredRecipe = this.recipes[0];
       }
 
+    });
+    this.username$
+    .pipe(takeUntil(this.ngDestroyed$))
+    .subscribe(data => {
+      this.username = data;
+      this.store.dispatch(new GetUserData(this.username));
     });
   }
 

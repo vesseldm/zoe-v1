@@ -145,8 +145,8 @@ export class UserService {
   }
 
 
-  getUserData(token, email): Observable<UserStateModel> {
-    const header = {Authorization: `Bearer ${token}`};
+  getUserData(email): Observable<any> {
+    const header = {Authorization: `Bearer ${this.token}`};
     return this.httpClient.post<UserStateModel>(
       'http://localhost:3000/users/getUserData',
       {

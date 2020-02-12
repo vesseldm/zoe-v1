@@ -64,5 +64,5 @@ export class LowerIngredientsScore {
 
 export class GetUserData {
   static readonly type = '[User] get user data';
-  constructor(public token: string, public email: string) {}
+  constructor(public email: string) {}
 }

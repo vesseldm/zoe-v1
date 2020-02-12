@@ -123,7 +123,7 @@
           <ion-item-sliding *ngFor="let ingredient of recipe.ingredients">
             <ion-item>
               <ion-checkbox color="dark" (ionChange)="shoppingList(ingredient, $event)"></ion-checkbox>
-              <ion-label>{{ ingredient }}</ion-label>
+              <ion-label>{{ingredient.amount}} {{ ingredient.displayName }}</ion-label>
               <!-- <div class="line" *ngIf="food.checked"></div>
               <ion-checkbox color="dark" slot="start" [(ngModel)]="food.checked" (ionChange)="checked(food, $event)">
               </ion-checkbox> -->
