@@ -63,7 +63,7 @@ export class UserState {
   @Action(GetUserData)
   getUserData(ctx: StateContext<UserStateModel>, action: GetUserData) {
     const state = ctx.getState();
-    return this.userService.getUserData(action.token, action.email).pipe(
+    return this.userService.getUserData(action.email).pipe(
       tap(result => {
         ctx.setState(result);
       })

@@ -72,44 +72,12 @@ export class LoginPage implements OnInit, OnDestroy {
       password: value.password
     };
     this.store.dispatch(new Login(auth)).subscribe(data => {
-      console.log('data = ');
-      console.log(data);
-      this.store.dispatch(new GetUserData(data.auth.token, data.auth.email)).subscribe(userData => {
-        console.log('userData = ');
-        console.log(userData);
+      this.store.dispatch(new GetUserData(value.email)).subscribe(() => {
+        this.goHome();
       });
-      console.log('data = ');
-      console.log(data);
-      this.goHome();
     });
   }
 
-  tryFacebookLogin() {
-    // this.authService.doFacebookLogin()
-    // .then((res) => {
-    //   this.router.navigateByUrl('/home');
-    // }, (err) => {
-    //   this.errorMessage = err.message;
-    // });
-  }
-
-  tryGoogleLogin() {
-    // this.authService.doGoogleLogin()
-    // .then((res) => {
-    //   this.router.navigateByUrl('/home');
-    // }, (err) => {
-    //   this.errorMessage = err.message;
-    // });
-  }
-
-  tryTwitterLogin() {
-    // this.authService.doTwitterLogin()
-    // .then((res) => {
-    //   this.router.navigateByUrl('/home');
-    // }, (err) => {
-    //   this.errorMessage = err.message;
-    // });
-  }
   public ngOnDestroy() {
     this.ngDestroyed$.next();
   }
