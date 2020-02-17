@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthState } from '../state/auth/auth.state';
 import { Select } from '@ngxs/store';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -17,6 +18,7 @@ export class UserService {
 
   public userId: any;
   public user: any;
+  public url: string;
 
   constructor(
     private httpClient: HttpClient,
@@ -24,7 +26,7 @@ export class UserService {
     this.token$.subscribe(token => {
       this.token = token;
     });
-
+    this.url = environment.apiUrl;
   }
 
   setUserId(userId: string) {
@@ -34,7 +36,7 @@ export class UserService {
   updateIngredient(ingredient: UserIngredientPreference, username: string) {
     const header = {Authorization: `Bearer ${this.token}`};
     return this.httpClient.post<UserStateModel>(
-      'http://localhost:3000/users/updateuseringredient',
+      this.url + '/users/updateuseringredient',
       {
         ingredient,
         username,
@@ -46,7 +48,7 @@ export class UserService {
   likedUserRecipe(recipe: UserRecipe, username: string) {
     const header = {Authorization: `Bearer ${this.token}`};
     return this.httpClient.post<UserStateModel>(
-      'http://localhost:3000/users/likeduserrecipe',
+      this.url + '/users/likeduserrecipe',
       {
         recipe,
         username,
@@ -58,7 +60,7 @@ export class UserService {
   disLikedUserRecipe(recipe: UserRecipe, username: string) {
     const header = {Authorization: `Bearer ${this.token}`};
     return this.httpClient.post<UserStateModel>(
-      'http://localhost:3000/users/dislikeduserrecipe',
+      this.url + '/users/dislikeduserrecipe',
       {
         recipe,
         username,
@@ -71,7 +73,7 @@ export class UserService {
   getUserData(email): Observable<any> {
     const header = {Authorization: `Bearer ${this.token}`};
     return this.httpClient.post<UserStateModel>(
-      'http://localhost:3000/users/getUserData',
+      this.url + '/users/getUserData',
       {
         email
       },
@@ -82,7 +84,7 @@ export class UserService {
   updateuserprofile(userState: UserStateModel): Observable<any> {
     const header = {Authorization: `Bearer ${this.token}`};
     return this.httpClient.post<UserStateModel>(
-      'http://localhost:3000/users/updateuserprofile',
+      this.url + '/users/updateuserprofile',
       {
         userState
       },
@@ -93,7 +95,7 @@ export class UserService {
   createNewUserRecipes(username) {
     const header = {Authorization: `Bearer ${this.token}`};
     return this.httpClient.post<UserStateModel>(
-      'http://localhost:3000/users/createuserrecipe',
+      this.url + '/users/createuserrecipe',
       {
         username
       },

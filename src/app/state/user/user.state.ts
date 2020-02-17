@@ -91,12 +91,12 @@ export class UserState {
 
   @Action(AddSocialUser)
   addSocialUser(ctx: StateContext<UserStateModel>, action: AddSocialUser) {
-    return from(this.authService.socialLogin(action.payload)).pipe(
-      tap(result => {
-        console.log('result = ');
-        console.log(result);
-      })
-    );
+    // return from(this.authService.socialLogin(action.payload)).pipe(
+    //   tap(result => {
+    //     console.log('result = ');
+    //     console.log(result);
+    //   })
+    // );
   }
 
   @Action(SaveProfileUserForm)

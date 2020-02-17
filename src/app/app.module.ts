@@ -10,9 +10,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 
 import { Facebook } from '@ionic-native/facebook/ngx';
@@ -47,9 +44,6 @@ export const ngxsConfig: NgxsModuleOptions = {
     HttpClientModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ModalPageModule,
     NgxsModule.forRoot([AuthState, UserState, IngredientsState], ngxsConfig),

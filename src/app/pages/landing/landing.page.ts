@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-landing',
@@ -11,7 +10,6 @@ export class LandingPage implements OnInit {
 
   constructor(
     public router: Router,
-    public afAuth: AngularFireAuth
   ) { }
 
   ngOnInit() {

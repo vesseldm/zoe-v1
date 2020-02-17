@@ -3,7 +3,6 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { LoginPage } from './login.page';
 import { of as observableOf} from 'rxjs';
 
@@ -28,7 +27,6 @@ fdescribe('LoginPage', () => {
         { provide: Router, useFactory: routerStub },
         { provide: FormBuilder, useFactory: formBuilderStub },
         { provide: AuthService, useFactory: authServiceStub },
-        { provide: AngularFireAuth, useFactory: angularFireAuthStub }
       ]
     });
     fixture = TestBed.createComponent(LoginPage);
@@ -46,16 +44,7 @@ fdescribe('LoginPage', () => {
     uid: '17WvU2Vj58SnTz8v7EqyYYb0WRc2'
   };
 
-  const mockAngularFireAuth: any = {
-    auth: jasmine.createSpyObj('auth', {
-      'signInAnonymously': Promise.reject({
-        code: 'auth/operation-not-allowed'
-      }),
-      // 'signInWithPopup': Promise.reject(),
-      // 'signOut': Promise.reject()
-    }),
-    authState: observableOf(authState)
-  };
+
       spyOn(component, 'goHome').and.callThrough();
       // spyOn(component, 'generateForm').and.callThrough();
       component.ngOnInit();

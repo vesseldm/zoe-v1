@@ -16,9 +16,9 @@ export class IngredientsState {
   }
   @Action(GetIngredientList)
   getIngredientList(ctx: StateContext<any>) {
-    return this.ingredientsService.getIngredientList().pipe(tap(result => {
-      const state = ctx.getState();
-      ctx.setState({...state, ingredients: result});
-    }));
+    // return this.ingredientsService.getIngredientList().pipe(tap(result => {
+    //   const state = ctx.getState();
+    //   ctx.setState({...state, ingredients: result});
+    // }));
   }
 }

@@ -20,12 +20,7 @@ export class TabsPage implements OnInit {
   }
 
   logout() {
-    this.authService.doLogout()
-      .then((res) => {
-        this.router.navigateByUrl('/');
-      }, (error) => {
-        console.log("Logout error", error);
-      });
+
   }
 
 }
