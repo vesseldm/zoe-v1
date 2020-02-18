@@ -65,7 +65,7 @@ export class DashboardPage implements OnInit {
 
   doUpdateUserBillingInfo() {
     try {
-      this.authService.doUpdateUser(this.user);
+      // this.authService.doUpdateUser(this.user);
       this.userBillingEditable = false
     } catch (e) {
       alert(e.message)

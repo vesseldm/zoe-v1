@@ -1,7 +1,6 @@
-import { AngularFireStorageReference } from '@angular/fire/storage';
 
 export class Media {
-  photo: AngularFireStorageReference;
-  video: AngularFireStorageReference;
+  photo: any;
+  video: any;
   createdAt: Date = new Date();
 }

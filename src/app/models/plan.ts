@@ -1,4 +1,3 @@
-import { DocumentReference } from '@angular/fire/firestore';
 
 export class Plan {
   id: string;
@@ -17,8 +16,8 @@ export class Plan {
 }
 
 export class MealPlan {
-  recipe: DocumentReference;
-  portion: DocumentReference;
+  recipe: any;
+  portion: any;
   servings: number;
   completedAt: Date; // Date user completed the recipe
   currentStep: number; // User's current step while cooking (progress)

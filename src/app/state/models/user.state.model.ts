@@ -1,5 +1,4 @@
 import { Ingredient } from './ingredients.state.model';
-import { DocumentReference } from 'angularfire2/firestore';
 
 export interface UserIngredientPreference {
     name: string;
@@ -51,7 +50,7 @@ export class UserStateModel {
     age?: number;
     goal?: string;
     level?: string;
-    currentPlan?: DocumentReference; // Plan ID
+    currentPlan?: any; // Plan ID
     subscriptionType?: 'week' | 'annual' = 'annual';
     subscriptionId?: string;
     dietType?: string;

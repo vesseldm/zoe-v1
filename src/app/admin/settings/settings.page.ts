@@ -29,7 +29,7 @@ export class SettingsPage implements OnInit {
 
   doUpdateUserBillingInfo() {
     try {
-      this.authService.doUpdateUser(this.user);
+      // this.authService.doUpdateUser(this.user);
       this.userBillingEditable = false
     } catch (e) {
       alert(e.message)
@@ -42,7 +42,7 @@ export class SettingsPage implements OnInit {
 
   doUpdateAboutUsInfo() {
     try {
-      this.authService.doUpdateUser(this.user);
+      // this.authService.doUpdateUser(this.user);
       this.userAboutUsEditable = false
     } catch (e) {
       alert(e.message)

@@ -1,9 +1,8 @@
-import { DocumentReference } from '@angular/fire/firestore';
 import { Media } from './media';
 
 export class Recipe extends Media {
   id: string;
-  ref: DocumentReference;
+  ref: any;
   uid: string;
   name: string = '';
   description: string = '';
@@ -13,7 +12,7 @@ export class Recipe extends Media {
   type: string;
   difficulty: number;
   servings: number;
-  portions: DocumentReference[];
+  portions: any[];
   publicTags: string[];
   privateTags: string[];
   approvedAt?: Date;
