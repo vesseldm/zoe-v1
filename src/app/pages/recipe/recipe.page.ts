@@ -46,6 +46,7 @@ export class RecipePage implements OnInit, OnDestroy {
   }
 
   addRecipe() {
+    console.log('add recipe');
     // this.recipeService.addRecipe(this.recipeId);
   }
 
