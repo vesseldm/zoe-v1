@@ -102,4 +102,16 @@ export class UserService {
       {headers: header},
     );
   }
+
+  addRecipeToList(recipe: UserRecipe, username: string) {
+    const header = {Authorization: `Bearer ${this.token}`};
+    return this.httpClient.post<UserStateModel>(
+      this.url + '/users/addrecipetolist',
+      {
+        username,
+        recipe
+      },
+      {headers: header},
+    );
+  }
 }

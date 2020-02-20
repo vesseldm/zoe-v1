@@ -1,6 +1,7 @@
 import { UserIngredientPreference, UserRecipe } from './../models/user.state.model';
 import { Ingredient } from './../models/ingredients.state.model';
 import { UserStateModel } from '../models/user.state.model';
+import { Recipe } from 'src/app/models/recipe';
 
 export class AddUser {
   static readonly type = '[User] Add user';
@@ -65,4 +66,9 @@ export class LowerIngredientsScore {
 export class GetUserData {
   static readonly type = '[User] get user data';
   constructor(public email: string) {}
+}
+
+export class AddRecipeToList {
+  static readonly type = '[User] Add Recipe to List';
+  constructor(public recipe: UserRecipe) { }
 }

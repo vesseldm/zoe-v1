@@ -65,12 +65,13 @@ export class UserStateModel {
     selectedRecipe?: UserRecipe;
     username: string;
     email: string;
+    chosenRecipes: UserRecipe[];
   }
 
 export interface UserRecipe {
     ingredients: RecipeIngredient[];
     name: string;
-    recipeId: string;
+    _id: string;
     score: number;
     type: string;
     uid: string;

@@ -1,11 +1,10 @@
 <ion-content>
-  <div class="block"
-    *ngIf="(user && !user.email) || (user && !user.firstName) || (user && !user.lastName) || (user && !user.measurements) || (user && !user.mobile) || (user && !user.height) || (user && !user.weight) || (user && !user.sex) || (user && !user.meal_plan) || (user && !user.food_reference) || (user && !user.allergies) || (user && !user.medical_history) || (user && !user.meal_times)">
+  <!-- <div class="block">
     <ion-button class="alert" color="basic" expand="block" size="large">
       <ion-icon slot="start" name="alert"></ion-icon>
       <ion-label>Complete Profile</ion-label>
     </ion-button>
-  </div>
+  </div> -->
   <div class="section recipes">
     <div class="section-header">
       <h2>Ingredients</h2>
@@ -15,7 +14,7 @@
       <ion-list lines="none">
         <ion-item-sliding *ngFor="let food of foods">
           <ion-item>
-            <ion-label>{{food.name}}</ion-label>
+            <ion-label>{{food.displayName}}</ion-label>
             <div class="line" *ngIf="food.checked"></div>
             <ion-checkbox color="dark" slot="start" [(ngModel)]="food.checked" (ionChange)="checked(food, $event)">
             </ion-checkbox>

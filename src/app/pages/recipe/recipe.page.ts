@@ -1,4 +1,4 @@
-import { RecipeThumbsDown, RecipeThumbsUp } from './../../state/user/user.actions';
+import { RecipeThumbsDown, RecipeThumbsUp, AddRecipeToList } from './../../state/user/user.actions';
 import { UserState } from 'src/app/state/user/user.state';
 import { UserRecipe } from './../../state/models/user.state.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -6,6 +6,7 @@ import { NavController } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs/operators';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Component({
   selector: 'app-recipe',
@@ -47,6 +48,14 @@ export class RecipePage implements OnInit, OnDestroy {
 
   addRecipe() {
     console.log('add recipe');
+    console.log('this.recipe = ');
+    console.log(this.recipe);
+    this.store.dispatch(new AddRecipeToList(this.recipe)).subscribe(result => {
+      console.log('result = ');
+      console.log(result);
+      this.store.dispatch(new Navigate(['/mylist']));
+    });
+
     // this.recipeService.addRecipe(this.recipeId);
   }
 

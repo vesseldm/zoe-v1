@@ -17,6 +17,7 @@ import {
   RaiseIngredientsScore,
   LowerIngredientsScore,
   GetUserData,
+  AddRecipeToList,
 } from './user.actions';
 
 
@@ -52,6 +53,11 @@ export class UserState {
   @Selector()
   static getUsersRecipes(state: UserStateModel) {
     return state.recipes;
+  }
+
+  @Selector()
+  static getUsersChosenRecipes(state: UserStateModel) {
+    return state.chosenRecipes;
   }
 
   @Selector()
@@ -148,6 +154,16 @@ export class UserState {
         patch(data)
       );
     });
-    }
+  }
+
+  @Action(AddRecipeToList)
+  addRecipeToList(ctx: StateContext<UserStateModel>, action: AddRecipeToList) {
+    const state = ctx.getState();
+    this.userService.addRecipeToList(action.recipe, state.username).subscribe(result => {
+      ctx.setState(
+        patch(result)
+      );
+    });
+  }
 
 }
