@@ -435,15 +435,7 @@ export class ProfilePage implements OnInit, OnDestroy {
   }
 
   logout() {
-    console.log('logout');
-    // this.authService.doLogout().then(
-    //   res => {
-    //     this.store.dispatch(new Navigate(['/']));
-    //   },
-    //   error => {
-    //     console.log('Logout error', error);
-    //   }
-    // );
+    this.store.dispatch(new Navigate(['/login']));
   }
 
   goToFoodPreferences() {
