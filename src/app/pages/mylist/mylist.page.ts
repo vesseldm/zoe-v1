@@ -1,52 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { Select } from '@ngxs/store';
+import { Observable, Subject } from 'rxjs';
+import { UserState } from 'src/app/state/user/user.state';
+import { UserRecipe } from 'src/app/state/models/user.state.model';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-mylist',
   templateUrl: './mylist.page.html',
   styleUrls: ['./mylist.page.scss'],
 })
-export class MylistPage implements OnInit {
+export class MylistPage implements OnInit, OnDestroy {
+  @Select(UserState.getUsersChosenRecipes) chosenRecipes$: Observable<UserRecipe[]>;
+  public ngDestroyed$ = new Subject();
 
   foods: any[] = [];
   userInfo: any;
   user: any;
 
   constructor(
-    public userService: UserService
-  ) {
-    // let _this = this;
-
-    // this.userService.user$.subscribe(user => {
-    //   this.userInfo = user;
-    //   let docRef = _this.afs.collection("users").doc(user.id);
-
-    //   docRef.get().subscribe(querySnapshot => {
-    //     if (querySnapshot.data().checkedFoods)
-    //       _this.foods = querySnapshot.data().checkedFoods;
-    //     else {
-    //       this.afs.collection('ingredients').get().subscribe(querySnapshot => {
-    //         let data = [];
-    //         querySnapshot.forEach(function (doc) {
-    //           // doc.data() is never undefined for query doc snapshots
-    //           data.push(doc.data());
-    //         });
-
-    //         _this.foods = data;
-    //         _this.foods.forEach((item, index) => {
-    //           item.checked = true;
-    //         });
-    //       });
-    //     }
-    //   });
-    // });
-
-    // this.userService.user$.subscribe(user => {
-    //   if (user) this.user = user;
-    // });
-  }
+  ) {}
 
   ngOnInit() {
+    this.chosenRecipes$
+    .pipe(takeUntil(this.ngDestroyed$))
+    .subscribe(data => {
+      console.log('data = ');
+      console.log(data);
+      data.forEach(recipe => {
+        recipe.ingredients.forEach(ingredient => {
+          this.foods.push(ingredient);
+          console.log('ingredient = ');
+          console.log(ingredient);
+        });
+      });
+    });
 
   }
 
@@ -78,5 +67,9 @@ export class MylistPage implements OnInit {
     // Ref.doc(this.userInfo.id).update({
     //   checkedFoods: this.foods
     // });
+  }
+
+  public ngOnDestroy() {
+    this.ngDestroyed$.next();
   }
 }
