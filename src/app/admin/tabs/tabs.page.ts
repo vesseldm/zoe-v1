@@ -20,7 +20,7 @@ export class TabsPage implements OnInit {
   }
 
   logout() {
-
+    console.log('LOGOUT');
   }
 
 }

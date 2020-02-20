@@ -62,6 +62,8 @@ export class MylistPage implements OnInit {
   }
 
   remove(food) {
+    console.log('food = ');
+    console.log(food);
     // this.foods.forEach((item, index) => {
     //   if (item.id == food.id) {
     //     this.foods.splice(index, 1);
@@ -69,7 +71,9 @@ export class MylistPage implements OnInit {
     // });
   }
 
-  done() {
+  done(food) {
+    console.log('food = ');
+    console.log(food);
     // let Ref = this.afs.collection("users");
     // Ref.doc(this.userInfo.id).update({
     //   checkedFoods: this.foods
