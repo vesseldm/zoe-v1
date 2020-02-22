@@ -6,6 +6,7 @@ export interface Ingredient {
     notAllowed: boolean;
     liked: boolean;
     disliked: boolean;
+    checked?: boolean;
 }
 
 export interface IngredientsStateModel {

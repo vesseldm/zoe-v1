@@ -93,4 +93,5 @@ export interface RecipeIngredient {
       uid: string;
       displayName: string;
       amount: string;
+      checked: boolean;
   }
