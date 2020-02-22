@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthState } from '../state/auth/auth.state';
 import { Select } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
+import { Ingredient } from '../state/models/ingredients.state.model';
 
 
 @Injectable({
@@ -110,6 +111,30 @@ export class UserService {
       {
         username,
         recipe
+      },
+      {headers: header},
+    );
+  }
+
+  ingredientChecked(ingredient: Ingredient, username: string) {
+    const header = {Authorization: `Bearer ${this.token}`};
+    return this.httpClient.post<UserStateModel>(
+      this.url + '/users/ingredientchecked',
+      {
+        username,
+        ingredient
+      },
+      {headers: header},
+    );
+  }
+
+  ingredientUnChecked(ingredient: Ingredient, username: string) {
+    const header = {Authorization: `Bearer ${this.token}`};
+    return this.httpClient.post<UserStateModel>(
+      this.url + '/users/ingredientunchecked',
+      {
+        username,
+        ingredient
       },
       {headers: header},
     );

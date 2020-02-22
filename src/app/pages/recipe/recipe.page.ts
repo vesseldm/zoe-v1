@@ -47,16 +47,9 @@ export class RecipePage implements OnInit, OnDestroy {
   }
 
   addRecipe() {
-    console.log('add recipe');
-    console.log('this.recipe = ');
-    console.log(this.recipe);
     this.store.dispatch(new AddRecipeToList(this.recipe)).subscribe(result => {
-      console.log('result = ');
-      console.log(result);
       this.store.dispatch(new Navigate(['/mylist']));
     });
-
-    // this.recipeService.addRecipe(this.recipeId);
   }
 
   shoppingList(ingredient, e) {

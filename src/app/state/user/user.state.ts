@@ -18,6 +18,8 @@ import {
   LowerIngredientsScore,
   GetUserData,
   AddRecipeToList,
+  IngredientChecked,
+  IngredientUnChecked,
 } from './user.actions';
 
 
@@ -160,6 +162,30 @@ export class UserState {
   addRecipeToList(ctx: StateContext<UserStateModel>, action: AddRecipeToList) {
     const state = ctx.getState();
     this.userService.addRecipeToList(action.recipe, state.username).subscribe(result => {
+      ctx.setState(
+        patch(result)
+      );
+    });
+  }
+
+  @Action(IngredientChecked)
+  ingredientChecked(ctx: StateContext<UserStateModel>, action: IngredientChecked) {
+    const state = ctx.getState();
+    this.userService.ingredientChecked(action.ingredient, state.username).subscribe(result => {
+      console.log('result = ');
+      console.log(result);
+      ctx.setState(
+        patch(result)
+      );
+    });
+  }
+
+  @Action(IngredientUnChecked)
+  ingredientUnChecked(ctx: StateContext<UserStateModel>, action: IngredientUnChecked) {
+    const state = ctx.getState();
+    this.userService.ingredientUnChecked(action.ingredient, state.username).subscribe(result => {
+      console.log('result = ');
+      console.log(result);
       ctx.setState(
         patch(result)
       );

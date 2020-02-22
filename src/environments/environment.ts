@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://zoe-dev-api.herokuapp.com'
-    // apiUrl: 'http://localhost:3000'
+  // apiUrl: 'https://zoe-dev-api.herokuapp.com'
+    apiUrl: 'http://localhost:3000'
 };
 
 /*

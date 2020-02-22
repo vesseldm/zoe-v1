@@ -72,3 +72,13 @@ export class AddRecipeToList {
   static readonly type = '[User] Add Recipe to List';
   constructor(public recipe: UserRecipe) { }
 }
+
+export class IngredientChecked {
+  static readonly type = '[User] Ingredient Checked';
+  constructor(public ingredient: Ingredient) { }
+}
+
+export class IngredientUnChecked {
+  static readonly type = '[User] Ingredient unchecked';
+  constructor(public ingredient: Ingredient) { }
+}

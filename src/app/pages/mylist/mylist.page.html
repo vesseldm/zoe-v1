@@ -16,7 +16,7 @@
           <ion-item>
             <ion-label>{{food.displayName}}</ion-label>
             <div class="line" *ngIf="food.checked"></div>
-            <ion-checkbox color="dark" slot="start" [(ngModel)]="food.checked" (ionChange)="checked(food, $event)">
+            <ion-checkbox color="dark" slot="start" checked="{{food.checked}}" (ionChange)="checked(food)">
             </ion-checkbox>
           </ion-item>
           <ion-item-options>
