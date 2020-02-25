@@ -43,6 +43,14 @@ export class ProfilePage implements OnInit, OnDestroy {
     emailPreferences: this.formBuilder.group({
       newsLetters: [''],
       updates: ['']
+    }),
+    billing: this.formBuilder.group({
+      billName: [''],
+      address_city: [''],
+      address_line1: [''],
+      address_line2: [''],
+      address_state: [''],
+      address_zip: ['']
     })
   });
   user: any;

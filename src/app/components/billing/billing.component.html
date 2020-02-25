@@ -1,0 +1,12 @@
+<stripe-card
+#stripeCard
+(catch) = "onStripeError($event)"
+[(invalid)] = "invalidError"
+(tokenChange) = "setStripeToken($event)"
+(sourceChange) = "setStripeSource($event)"
+></stripe-card>
+<div *ngIf="invalidError" style="color:red">
+  {{ invalidError.message }}
+</div>
+
+<button type="button" (click)="stripeCard.createToken(extraData)">Submit Billing</button>

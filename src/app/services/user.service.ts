@@ -93,10 +93,10 @@ export class UserService {
     );
   }
 
-  createNewUserRecipes(username) {
+  createSubscription(username) {
     const header = {Authorization: `Bearer ${this.token}`};
     return this.httpClient.post<UserStateModel>(
-      this.url + '/users/createuserrecipe',
+      this.url + 'customer/addsubscription',
       {
         username
       },
