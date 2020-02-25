@@ -26,6 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthState } from './state/auth/auth.state';
 import { AuthGuard } from './services/auth.guard';
 import { logoutPlugin } from './state/auth/logout-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+
 
 export const ngxsConfig: NgxsModuleOptions = {
   developmentMode: !environment.production,
@@ -49,6 +51,7 @@ export const ngxsConfig: NgxsModuleOptions = {
     NgxsModule.forRoot([AuthState, UserState, IngredientsState], ngxsConfig),
     NgxsFormPluginModule.forRoot(),
     NgxsRouterPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot({disabled: true})
   ],
   providers: [
     AuthGuard,
