@@ -17,7 +17,7 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { TwitterConnect } from '@ionic-native/twitter-connect/ngx';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ModalPageModule } from './pages/modal/modal.module';
-import { NgxsModule } from '@ngxs/store';
+import { NgxsModule, NGXS_PLUGINS } from '@ngxs/store';
 import { NgxsModuleOptions } from '@ngxs/store';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { IngredientsState } from './state/ingredients/ingredients.state';
@@ -25,8 +25,7 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthState } from './state/auth/auth.state';
 import { AuthGuard } from './services/auth.guard';
-import { StripeModule } from 'stripe-angular';
-
+import { logoutPlugin } from './state/auth/logout-plugin';
 
 export const ngxsConfig: NgxsModuleOptions = {
   developmentMode: !environment.production,
@@ -58,7 +57,12 @@ export const ngxsConfig: NgxsModuleOptions = {
     Facebook,
     GooglePlus,
     TwitterConnect,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide: NGXS_PLUGINS,
+      useValue: logoutPlugin,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

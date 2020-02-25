@@ -27,8 +27,6 @@ export class AuthState {
   login(ctx: StateContext<AuthStateModel>, action: Login) {
     return this.authService.login(action.payload).pipe(
       tap((result: { access_token: string }) => {
-        console.log('result = ');
-        console.log(result);
         ctx.patchState({
           token: result.access_token,
           email: action.payload.email
@@ -36,17 +34,4 @@ export class AuthState {
       })
     );
   }
-
-  // @Action(Logout)
-  // logout(ctx: StateContext<AuthStateModel>) {
-  //   const state = ctx.getState();
-  //   return this.authService.doLogout().pipe(
-  //     tap(() => {
-  //       ctx.setState({
-  //         token: null,
-  //         username: null
-  //       });
-  //     })
-  //   );
-  // }
 }

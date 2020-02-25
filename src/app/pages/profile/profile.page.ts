@@ -10,6 +10,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { SaveProfileUserForm } from '../../state/user/user.actions';
 import { Navigate } from '@ngxs/router-plugin';
 import { takeUntil } from 'rxjs/operators';
+import { Logout } from 'src/app/state/auth/auth.actions';
 
 @Component({
   selector: 'app-profile',
@@ -443,7 +444,8 @@ export class ProfilePage implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.store.dispatch(new Navigate(['/login']));
+    this.store.dispatch(new Navigate(['']));
+    this.store.dispatch(new Logout());
   }
 
   goToFoodPreferences() {
