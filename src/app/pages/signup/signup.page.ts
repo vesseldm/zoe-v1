@@ -5,6 +5,7 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { ModalController } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
 import { Store } from '@ngxs/store';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Component({
   selector: 'app-signup',
@@ -38,12 +39,6 @@ export class SignupPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.afAuth.user.subscribe(user => {
-    //   if (user) {
-    //     this.goHome();
-    //   }
-    // });
-
     this.registerForm = this.formBuilder.group({
       username: new FormControl('', Validators.compose([
         Validators.required
@@ -64,13 +59,11 @@ export class SignupPage implements OnInit {
   }
 
   goHome() {
-    this.router.navigateByUrl('/home');
+    this.store.dispatch(new Navigate(['/home']));
   }
 
   register(value) {
-    this.store.dispatch(new AddUser(value)).subscribe(() =>{
-      this.goHome();
-    });
+    this.store.dispatch(new AddUser(value));
   }
 
   tryFacebookLogin() {

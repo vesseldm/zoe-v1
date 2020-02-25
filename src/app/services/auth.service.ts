@@ -2,7 +2,7 @@ import { UserStateModel } from '../state/models/user.state.model';
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { environment } from '../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -19,7 +19,7 @@ public url: string;
   }
 
   public registerUser(value) {
-    return this.httpClient.post(
+    return this.httpClient.post<any>(
       this.url + '/auth/register',
       {
         username: value.email,
@@ -35,10 +35,6 @@ public url: string;
         username: value.email,
         password: value.password,
       });
-  }
-
-  doLogout() {
-    
   }
 
 }

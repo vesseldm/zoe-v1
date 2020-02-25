@@ -1,7 +1,7 @@
 import { UserStateModel, UserRecipe, UserIngredientPreference } from './../models/user.state.model';
 import { UserService } from './../../services/user.service';
 import { AuthService } from './../../services/auth.service';
-import { State, Action, StateContext, Selector } from '@ngxs/store';
+import { State, Action, StateContext, Selector, Store } from '@ngxs/store';
 import { patch, append, removeItem, insertItem, updateItem } from '@ngxs/store/operators';
 import { from } from 'rxjs';
 import { tap, take } from 'rxjs/operators';
@@ -21,6 +21,8 @@ import {
   IngredientChecked,
   IngredientUnChecked,
 } from './user.actions';
+import { Login } from '../auth/auth.actions';
+import { Navigate } from '@ngxs/router-plugin';
 
 
 @State<UserStateModel>({
@@ -30,6 +32,7 @@ export class UserState {
   constructor(
     private authService: AuthService,
     private userService: UserService,
+    private store: Store
   ) { }
 
   @Selector()
@@ -97,11 +100,16 @@ export class UserState {
 
   @Action(AddUser)
   addUser(ctx: StateContext<UserStateModel>, action: AddUser) {
-    return from(this.authService.registerUser(action.payload)).pipe(
+    return this.authService.registerUser(action.payload).pipe(
       tap(result => {
-        console.log('result = ');
-        console.log(result);
-        // ctx.setState(result)
+        const auth = {
+          email: result.user.email,
+          password: action.payload.password
+        };
+        this.store.dispatch(new Login(auth)).subscribe(data => {
+          this.store.dispatch(new Navigate(['/home']));
+          ctx.setState(result.user);
+        });
       })
     );
   }
