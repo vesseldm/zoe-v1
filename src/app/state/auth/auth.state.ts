@@ -33,7 +33,6 @@ export class AuthState {
           token: result.access_token,
           email: action.payload.email
         });
-        const state = ctx.getState();
       })
     );
   }

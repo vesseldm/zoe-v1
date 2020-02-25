@@ -32,6 +32,7 @@
     "@ngxs/form-plugin": "^3.6.1",
     "@ngxs/router-plugin": "^3.6.1",
     "@ngxs/store": "^3.6.1",
+    "@types/stripe": "^7.13.21",
     "br-mask": "0.0.8",
     "chart.js": "^2.9.3",
     "cordova-plugin-googleplus": "^8.2.0",

@@ -1,20 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserState } from 'src/app/state/user/user.state';
+import { Select, Store } from '@ngxs/store';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { AlertController } from '@ionic/angular';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
-
+export class HomePage implements OnInit, OnDestroy {
+  @Select(UserState.subscriptionActive) subscriptionActive$: Observable<any>;
+  public ngDestroyed$ = new Subject();
   page_title: string;
+  private status;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private alertController: AlertController,
+    private store: Store
   ) { }
 
   ngOnInit() {
+    this.subscriptionActive$
+    .pipe(takeUntil(this.ngDestroyed$))
+    .subscribe(status => {
+      console.log('status = ');
+      console.log(status);
+      if (
+      status === 'incomplete'
+      || status === 'incomplete_expired'
+      || status === 'past_due'
+      || status === 'canceled'
+      || status === 'unpaid'
+      // || status === 'trialing'
+      ) {
+        this.subscriptionInvalid();
+      }
+    });
+  }
+
+  async subscriptionInvalid() {
+    const alert = await this.alertController.create({
+      header: 'Alert',
+      subHeader: 'Subscription is invalid',
+      message: 'Your trial has expired or your payment information is no longer valid. Please update your information',
+      buttons: ['OK']
+    });
+    await alert.present();
+    this.store.dispatch(new Navigate(['/profile']));
+
   }
 
   setTitle() {
@@ -36,6 +74,10 @@ export class HomePage implements OnInit {
         this.page_title = 'Home';
         break;
     }
+  }
+
+  public ngOnDestroy() {
+    this.ngDestroyed$.next();
   }
 
 }

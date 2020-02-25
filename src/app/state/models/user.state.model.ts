@@ -1,5 +1,5 @@
 import { Ingredient } from './ingredients.state.model';
-
+import * as Stripe from 'stripe';
 export interface UserIngredientPreference {
     name: string;
     ingredientId: string;
@@ -66,6 +66,8 @@ export class UserStateModel {
     username: string;
     email: string;
     chosenRecipes: UserRecipe[];
+    subscription: Stripe.subscriptions.ISubscription;
+    customer: Stripe.customers.ICustomer;
   }
 
 export interface UserRecipe {
