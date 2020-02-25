@@ -68,6 +68,11 @@ export class UserState {
   }
 
   @Selector()
+  static getProfileFormData(state: UserStateModel) {
+    return state.profileForm;
+  }
+
+  @Selector()
   static getUserState(state: UserStateModel) {
     return state;
   }
@@ -88,10 +93,8 @@ export class UserState {
   addUser(ctx: StateContext<UserStateModel>, action: AddUser) {
     return from(this.authService.registerUser(action.payload)).pipe(
       tap(result => {
-        this.userService.createNewUserRecipes(action.payload.email).subscribe(data => {
-          console.log('data = ');
-          console.log(data);
-        });
+        console.log('result = ');
+        console.log(result);
         // ctx.setState(result)
       })
     );

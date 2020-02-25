@@ -25,6 +25,7 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthState } from './state/auth/auth.state';
 import { AuthGuard } from './services/auth.guard';
+import { StripeModule } from 'stripe-angular';
 
 
 export const ngxsConfig: NgxsModuleOptions = {

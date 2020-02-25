@@ -1,139 +1,174 @@
 <ion-content>
   <form [formGroup]="profileForm" ngxsForm="user.profileForm" (ngSubmit)="onSubmit()">
-  <div formGroupName="details" class="section">
-    <div class="section-header">
-      <h2>Details</h2>
+    <div formGroupName="details" class="section">
+      <div class="section-header">
+        <h2>Details</h2>
+      </div>
+      <div class="section-content">
+        <ion-list>
+          <ion-item>
+            <ion-label class="label">Email</ion-label>
+            <ion-input formControlName="email" type="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label">Name</ion-label>
+            <ion-input formControlName="name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label">Measurements</ion-label>
+            <ion-select formControlName="measurements">
+              <ion-select-option value="{{item}}" *ngFor="let item of measurements">{{item}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="label" type="tel">Mobile</ion-label>
+            <ion-input formControlName="mobile"></ion-input>
+          </ion-item>
+        </ion-list>
+      </div>
     </div>
-    <div class="section-content">
-      <ion-list>
-        <ion-item>
-          <ion-label class="label">Email</ion-label>
-          <ion-input formControlName="email" type="email"></ion-input>
-        </ion-item>
+    <div formGroupName="aboutMe" class="section">
+      <div class="section-header">
+        <h2>About Me</h2>
+      </div>
+      <div class="section-content">
+        <ion-list>
+          <ion-item>
+            <ion-label class="label">Height</ion-label>
+            <ion-select formControlName="height">
+              <ion-select-option value="{{item}}" *ngFor="let item of height">{{item}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label">Weight</ion-label>
+            <ion-select formControlName="weight">
+              <ion-select-option value="{{item}}" *ngFor="let item of weight">{{item}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label">Sex</ion-label>
+            <ion-select formControlName="sex">
+              <ion-select-option value="{{item}}" *ngFor="let item of sex">{{item}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label">Meal Plan Type</ion-label>
+            <ion-select formControlName="mealPlanType">
+              <ion-select-option value="{{item}}" *ngFor="let item of mealPlan">{{item}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label" (click)="goToFoodPreferences()">Food Preferences</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label">Allergies</ion-label>
+            <ion-select multiple={true} formControlName="allergies">
+              <ion-select-option *ngFor="let item of getIngredientPreferences$ | async">{{item.name}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="label">Medical History</ion-label>
+            <ion-select formControlName="medicalHistory">
+              <ion-select-option value="{{item}}" *ngFor="let item of medicalHistory">{{item}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+    <div formGroupName="alerts" class="section">
+      <div class="section-header">
+        <h2>Alerts & Reminders</h2>
+      </div>
+      <div class="section-content">
+        <ion-list>
+          <ion-item>
+            <ion-label class="label">Meal Times</ion-label>
+            <ion-select formControlName="mealTimes">
+              <ion-select-option value="{{item}}" *ngFor="let item of mealTimes">{{item}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label">Weekly Plan</ion-label>
+            <ion-label class="value">{{ user?.weekly_plan }}</ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="label">Meal Review</ion-label>
+            <ion-toggle color="success" formControlName="mealReview"></ion-toggle>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+    <div formGroupName="emailPreferences" class="section">
+      <div class="section-header">
+        <h2>Emails</h2>
+      </div>
+      <div class="section-content">
+        <ion-list>
+          <ion-item>
+            <ion-label class="label">Newsletters</ion-label>
+            <ion-toggle color="success" formControlName="newsLetters"></ion-toggle>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="label">Updates</ion-label>
+            <ion-toggle color="success" formControlName="updates"></ion-toggle>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+    <div class="section" formGroupName="billing">
+      <div class="section-header">
+        <h2>Billing</h2>
+      </div>
+      <div class="section-content">
         <ion-item>
           <ion-label class="label">Name</ion-label>
-          <ion-input formControlName="name"></ion-input>
+          <ion-input formControlName="billName" type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label class="label">Measurements</ion-label>
-          <ion-select formControlName="measurements">
-            <ion-select-option value="{{item}}" *ngFor="let item of measurements">{{item}}</ion-select-option>
-          </ion-select>
+          <ion-label class="label">City</ion-label>
+          <ion-input formControlName="address_city" type="text"></ion-input>
         </ion-item>
-        <ion-item lines="none">
-          <ion-label class="label" type="tel">Mobile</ion-label>
-          <ion-input formControlName="mobile"></ion-input>
+        <ion-item>
+          <ion-label class="label">Address Line 1</ion-label>
+          <ion-input formControlName="address_line1" type="text"></ion-input>
         </ion-item>
-      </ion-list>
+        <ion-item>
+          <ion-label class="label">Address Line 2</ion-label>
+          <ion-input formControlName="address_line2" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="label">State</ion-label>
+          <ion-input formControlName="address_state" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="label">Zip</ion-label>
+          <ion-input formControlName="address_zip" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <app-billing></app-billing>
+        </ion-item>
+      </div>
     </div>
-  </div>
-  <div formGroupName="aboutMe" class="section">
-    <div class="section-header">
-      <h2>About Me</h2>
+    <div class="section">
+      <div class="section-header">
+        <h2>Legal</h2>
+      </div>
+      <div class="section-content">
+        <ion-list>
+          <ion-item href>
+            <ion-label class="label">Privacy Policy</ion-label>
+          </ion-item>
+          <ion-item href>
+            <ion-label class="label">Terms & Conditions</ion-label>
+          </ion-item>
+          <ion-item href lines="none">
+            <ion-label class="label">Accessibility</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
     </div>
-    <div class="section-content">
-      <ion-list>
-        <ion-item>
-          <ion-label class="label">Height</ion-label>
-          <ion-select formControlName="height">
-            <ion-select-option value="{{item}}" *ngFor="let item of height">{{item}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label class="label">Weight</ion-label>
-          <ion-select formControlName="weight">
-            <ion-select-option value="{{item}}" *ngFor="let item of weight">{{item}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label class="label">Sex</ion-label>
-          <ion-select formControlName="sex">
-            <ion-select-option value="{{item}}" *ngFor="let item of sex">{{item}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label class="label">Meal Plan Type</ion-label>
-          <ion-select formControlName="mealPlanType">
-            <ion-select-option value="{{item}}" *ngFor="let item of mealPlan">{{item}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label class="label" (click)="goToFoodPreferences()">Food Preferences</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label class="label">Allergies</ion-label>
-          <ion-select multiple={true} formControlName="allergies">
-          <ion-select-option *ngFor="let item of getIngredientPreferences$ | async">{{item.name}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="label">Medical History</ion-label>
-          <ion-select formControlName="medicalHistory">
-            <ion-select-option value="{{item}}" *ngFor="let item of medicalHistory">{{item}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
-    </div>
-  </div>
-  <div formGroupName="alerts" class="section">
-    <div class="section-header">
-      <h2>Alerts & Reminders</h2>
-    </div>
-    <div class="section-content">
-      <ion-list>
-        <ion-item>
-          <ion-label class="label">Meal Times</ion-label>
-          <ion-select formControlName="mealTimes">
-            <ion-select-option value="{{item}}" *ngFor="let item of mealTimes">{{item}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label class="label">Weekly Plan</ion-label>
-          <ion-label class="value">{{ user?.weekly_plan }}</ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="label">Meal Review</ion-label>
-          <ion-toggle color="success" formControlName="mealReview"></ion-toggle>
-        </ion-item>
-      </ion-list>
-    </div>
-  </div>
-  <div formGroupName="emailPreferences" class="section">
-    <div class="section-header">
-      <h2>Emails</h2>
-    </div>
-    <div class="section-content">
-      <ion-list>
-        <ion-item>
-          <ion-label class="label">Newsletters</ion-label>
-          <ion-toggle color="success" formControlName="newsLetters"></ion-toggle>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="label">Updates</ion-label>
-          <ion-toggle color="success" formControlName="updates"></ion-toggle>
-        </ion-item>
-      </ion-list>
-    </div>
-  </div>
-  <div class="section">
-    <div class="section-header">
-      <h2>Legal</h2>
-    </div>
-    <div class="section-content">
-      <ion-list>
-        <ion-item href>
-          <ion-label class="label">Privacy Policy</ion-label>
-        </ion-item>
-        <ion-item href>
-          <ion-label class="label">Terms & Conditions</ion-label>
-        </ion-item>
-        <ion-item href lines="none">
-          <ion-label class="label">Accessibility</ion-label>
-        </ion-item>
-      </ion-list>
-    </div>
-  </div>
-  <ion-button type="submit" class="btn-basic" color="basic" expand="block" shape="round">Save</ion-button>
-  <ion-button (click)="logout()" class="btn-basic" color="basic" expand="block" shape="round">Log Out</ion-button>
-</form>
+    <ion-button type="submit" class="btn-basic" color="basic" expand="block" shape="round">Save</ion-button>
+    <ion-button (click)="logout()" class="btn-basic" color="basic" expand="block" shape="round">Log Out</ion-button>
+  </form>
 </ion-content>
