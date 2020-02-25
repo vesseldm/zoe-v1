@@ -78,6 +78,12 @@ export class UserState {
   }
 
 
+
+  @Selector()
+  static subscriptionActive(state: UserStateModel) {
+    return state.subscription.status;
+  }
+
   @Action(GetUserData)
   getUserData(ctx: StateContext<UserStateModel>, action: GetUserData) {
     const state = ctx.getState();

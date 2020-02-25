@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-public url: string
+public url: string;
   constructor(
     public platform: Platform,
     private httpClient: HttpClient
