@@ -4,7 +4,7 @@ import { AuthService } from './../../services/auth.service';
 import { State, Action, StateContext, Selector, Store } from '@ngxs/store';
 import { patch, append, removeItem, insertItem, updateItem } from '@ngxs/store/operators';
 import { from } from 'rxjs';
-import { tap, take } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import {
   AddUser,
   AddSocialUser,
