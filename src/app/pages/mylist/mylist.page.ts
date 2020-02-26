@@ -4,8 +4,9 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
 import { UserState } from 'src/app/state/user/user.state';
 import { UserRecipe, RecipeIngredient } from 'src/app/state/models/user.state.model';
-import { takeUntil } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { IngredientChecked, IngredientUnChecked } from 'src/app/state/user/user.actions';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Component({
   selector: 'app-mylist',
@@ -26,7 +27,7 @@ export class MylistPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.chosenRecipes$
-    .pipe(takeUntil(this.ngDestroyed$))
+    .pipe(take(1))
     .subscribe(data => {
       data.forEach(recipe => {
         recipe.ingredients.forEach(ingredient => {
@@ -38,12 +39,13 @@ export class MylistPage implements OnInit, OnDestroy {
   }
 
   checked(food) {
-    food.checked ? this.store.dispatch(new IngredientChecked(food)) : this.store.dispatch(new IngredientUnChecked(food));
+    food.checked ? this.store.dispatch(new IngredientUnChecked(food)) : this.store.dispatch(new IngredientChecked(food));
   }
 
   remove(food) {
     console.log('food = ');
     console.log(food);
+
     // this.foods.forEach((item, index) => {
     //   if (item.id == food.id) {
     //     this.foods.splice(index, 1);
@@ -51,13 +53,8 @@ export class MylistPage implements OnInit, OnDestroy {
     // });
   }
 
-  done(food) {
-    console.log('food = ');
-    console.log(food);
-    // let Ref = this.afs.collection("users");
-    // Ref.doc(this.userInfo.id).update({
-    //   checkedFoods: this.foods
-    // });
+  done() {
+    this.store.dispatch(new Navigate(['/home']));
   }
 
   public ngOnDestroy() {
