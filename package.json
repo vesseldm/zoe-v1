@@ -35,7 +35,7 @@
     "@ngxs/store": "^3.6.1",
     "@types/stripe": "^7.13.21",
     "br-mask": "0.0.8",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "cordova-plugin-googleplus": "^8.2.0",
     "core-js": "^2.5.4",
     "ng-zorro-antd-mobile": "^1.0.1",
